@@ -3,4 +3,5 @@
 
 ## Documentation
 
-[Product Backlog](https://docs.google.com/spreadsheets/d/1mJlabSWnpCrgyVOKPa34vqNtYNF_JvlXrHQ4NPKWA3c/edit#gid=0)
+- [Product Backlog](https://docs.google.com/spreadsheets/d/1mJlabSWnpCrgyVOKPa34vqNtYNF_JvlXrHQ4NPKWA3c/edit#gid=0)
+- [Definition of done](./documentation/definition_of_done.md)

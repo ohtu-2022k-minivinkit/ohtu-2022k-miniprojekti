@@ -7,3 +7,4 @@ __pycache__/
 /log.html
 /output.xml
 database.sqlite
+test-database.sqlite

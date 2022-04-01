@@ -13,7 +13,7 @@ class BookmarkService():
 
     def get_all_bookmarks(self):
         # return self._bookmark_repository.find_all()
-        print('BookmarkService.get_all_bookmarks()')
+        pass
 
 
 bookmark_service = BookmarkService()

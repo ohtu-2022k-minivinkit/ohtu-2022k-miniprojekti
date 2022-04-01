@@ -9,13 +9,14 @@ class ConsoleIO:
 
 COMMANDS = {
     "x": "x lopeta",
-    "1": "1 lisää vinkki"
+    "1": "1 lisää vinkki",
+    "2": "2 tulosta vinkit"
 }
 
 class UI:
     def __init__(self, service, io=ConsoleIO()):
         self._io = io
-        self._bookmarks_service = service
+        self._service = service
 
     def start(self):
         self._io.write("")
@@ -34,6 +35,8 @@ class UI:
                 break
             if command == "1":
                 self._add_bookmark()
+            elif command == "2":
+                self._list_bookmarks()
 
     def _print_info(self):
         # pylint: disable=expression-not-assigned
@@ -47,3 +50,10 @@ class UI:
         print(title, link)
         #tähän logiikan metodiin kutsu, esim. self._service._add_bookmark(title, link)?
         #ja tarvitaan vielä myös virheviesti
+
+    def _list_bookmarks(self):
+        bookmark_list = self._service.get_all_bookmarks()
+
+        if bookmark_list:
+            for bookmark in bookmark_list:
+                print(f'{bookmark}\n')

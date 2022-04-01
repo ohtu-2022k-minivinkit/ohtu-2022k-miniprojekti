@@ -1,3 +1,4 @@
+# pylint: disable=invalid-name, no-self-use
 class ConsoleIO:
     def write(self, text):
         print(text)
@@ -5,8 +6,7 @@ class ConsoleIO:
     def read(self, text):
         text = input(text)
         return text
-        
-        
+
 COMMANDS = {
     "x": "x lopeta",
     "1": "1 lisää vinkki"
@@ -32,16 +32,18 @@ class UI:
 
             if command == "x":
                 break
-            elif command == "1":
+            if command == "1":
                 self._add_bookmark()
 
     def _print_info(self):
-        [self._io.write(command) for command in COMMANDS.values()]
+        # pylint: disable=expression-not-assigned
+        [ self._io.write(command) for command in COMMANDS.values() ]
 
     def _add_bookmark(self):
         self._io.write("Lisätään uusi vinkki")
         title = self._io.read("title: ")
         link = self._io.read("link:")
+
+        print(title, link)
         #tähän logiikan metodiin kutsu, esim. self._service._add_bookmark(title, link)?
         #ja tarvitaan vielä myös virheviesti
-        

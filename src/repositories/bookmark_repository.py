@@ -13,17 +13,16 @@ class BookmarkRepository:
         try:
             cursor = self._connection.cursor()
             cursor.execute(sql)
-        except Error as e:
-            print(e)
+        except Error as err:
+            print(err)
 
     def create(self, bookmark: Bookmark):
         try:
             cursor = self._connection.cursor()
-            cursor.execute("INSERT INTO bookmarks (headline, url) VALUES (?,?)", 
+            cursor.execute("INSERT INTO bookmarks (headline, url) VALUES (?,?)",
                 [bookmark.headline, bookmark.url])
             self._connection.commit()
-        except Error as e:
-            print(e)
-
+        except Error as err:
+            print(err)
 
 bookmark_repository = BookmarkRepository(get_database_connection())

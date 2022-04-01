@@ -1,10 +1,11 @@
+# pylint: disable=invalid-name
 class BookmarksLibrary:
     def __init__(self):
         pass
 
     def ui_start(self):
         pass
-    
+
     def ui_close(self):
         pass
 
@@ -28,7 +29,3 @@ class BookmarksLibrary:
 
     def bookmarks_table_should_be_empty(self):
         pass
-
-
-    
-

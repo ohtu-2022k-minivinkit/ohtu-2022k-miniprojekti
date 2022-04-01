@@ -1,13 +1,9 @@
 from ui.ui import UI
-
-#tämä koko viritelmä UI suoritusta varten :D saa poistaa
-class BookmarkService():
-    def __init__(self):
-        self.service = []
+from services.bookmark_service import bookmark_service
 
 def main():
     # pylint: disable=invalid-name
-    ui = UI(BookmarkService())
+    ui = UI(bookmark_service)
     ui.start()
 
 if __name__ == '__main__':

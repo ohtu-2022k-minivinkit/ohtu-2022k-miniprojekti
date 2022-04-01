@@ -25,4 +25,19 @@ class BookmarkRepository:
         except Error as err:
             print(err)
 
+    def get_all(self) -> list:
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT headline, url FROM bookmarks")
+        data = cursor.fetchall()
+        bookmarks = []
+        for row in data:
+            bookmarks.append(Bookmark(row[0], row[1]))
+
+        return bookmarks
+
+    def delete_all(self):
+        cursor = self._connection.cursor()
+        cursor.execute("DELETE FROM bookmarks")
+        self._connection.commit()
+
 bookmark_repository = BookmarkRepository(get_database_connection())

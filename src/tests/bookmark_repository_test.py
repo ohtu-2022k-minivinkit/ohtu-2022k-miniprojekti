@@ -17,4 +17,3 @@ class TestBookmarkRepository(unittest.TestCase):
         self.assertEqual(len(bookmarks), 2)
         self.assertEqual(bookmarks[0].headline, "Testausta")
         self.assertEqual(bookmarks[1].url, "www.lisaatestausta.fi")
-

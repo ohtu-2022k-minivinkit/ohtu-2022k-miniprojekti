@@ -5,6 +5,7 @@ By done we mean in general that a requirement has been analyzed, designed, progr
 - Code has been written in maintainable manner:
     - Architecture is clear and sensible.
     - Code follows style guidelines laid out in PEP 8 (https://peps.python.org/pep-0008/).
-    - Pylint gives at least a score of 7 (IS THIS ENOUGH?).
+    - Pylint gives score of 10.
 - Branch coverage of the tests has to be at least 70% (IS THIS ENOUGH?) for everything else except trivial code (e.g. getters and setters).
 - Client is able to see the status of the code and tests ... HOW?
+- All public methods have been documented with docstrings according to Google guideline (https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings).

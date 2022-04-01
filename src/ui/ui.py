@@ -67,7 +67,7 @@ class UI:
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 
-    def _list_bookmarks(self):
+    def list_bookmarks(self):
         bookmark_list = self._bookmark_service.get_all_bookmarks()
         if bookmark_list:
             for bookmark in bookmark_list:

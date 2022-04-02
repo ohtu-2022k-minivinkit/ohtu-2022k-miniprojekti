@@ -8,12 +8,10 @@ class BookmarkService():
         self._bookmark_repository = bookmark_repository
 
     def create_bookmark(self, bookmark):
-        # Menisikö tämä näin: self._bookmark_repository.create(bookmark)?
-        pass
+        self._bookmark_repository.create(bookmark)
 
     def get_all_bookmarks(self):
-        # return self._bookmark_repository.find_all()
-        pass
+        return self._bookmark_repository.get_all()
 
 
 bookmark_service = BookmarkService()

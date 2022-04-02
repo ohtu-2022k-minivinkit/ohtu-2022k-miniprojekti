@@ -7,8 +7,8 @@ class BookmarkService():
     def __init__(self, bookmark_repository=default_bookmark_repository):
         self._bookmark_repository = bookmark_repository
 
-    def create_bookmark(self, bookmark):
-        # Menisikö tämä näin: self._bookmark_repository.create(bookmark)?
+    def create_bookmark(self, title, link):
+        # Menisikö tämä näin: self._bookmark_repository.create(Bookmark(title, link))?
         pass
 
     def get_all_bookmarks(self):

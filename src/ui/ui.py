@@ -35,6 +35,9 @@ class UI:
             if command == "1":
                 self._add_bookmark()
 
+            if command == "2":
+                self.list_bookmarks()
+
     def _print_info(self):
         for command in COMMANDS.values():
             self._io.write(command)
@@ -63,7 +66,7 @@ class UI:
 
         # ? ehkä parempia ehtoja? nyt katsoo että alussa http ja väh 10 merkkiä pitkä
     def check_link(self, link):
-        if len(link.strip()) < 10 and link[:4] != "http":
+        if len(link.strip()) < 10 or link[:4] != "http":
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 

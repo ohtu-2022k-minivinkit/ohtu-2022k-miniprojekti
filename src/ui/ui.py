@@ -1,13 +1,13 @@
 from ui.console_io import (
     console_io as default_console_io
 )
-from entities.bookmark import Bookmark
 
 COMMANDS = {
     "x": "x lopeta",
     "1": "1 lisää vinkki",
     "2": "2 tulosta vinkit"
     }
+
 
 class UI:
     def __init__(self, service, input_output=default_console_io):
@@ -55,7 +55,7 @@ class UI:
         if self._error:
             return
 
-        self._bookmark_service.create_bookmark(Bookmark(title, link))
+        self._bookmark_service.create_bookmark(title, link)
 
     def check_title(self, title):
         title = title.strip()
@@ -71,6 +71,8 @@ class UI:
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 
     def list_bookmarks(self):
+        """Outputs listing of all bookmarks stored into the system.
+        """
         bookmark_list = self._bookmark_service.get_all_bookmarks()
         if bookmark_list:
             for bookmark in bookmark_list:

@@ -36,7 +36,7 @@ class UI:
                 self._add_bookmark()
 
             if command == "2":
-                self.list_bookmarks()
+                self._list_bookmarks()
 
     def _print_info(self):
         for command in COMMANDS.values():
@@ -46,33 +46,31 @@ class UI:
         self._io.write("Lisätään uusi vinkki")
 
         title = self._io.read("otsikko: ")
-        self.check_title(title)
+        self._check_title(title)
         if self._error:
             return
 
         link = self._io.read("linkki: ")
-        self.check_link(link)
+        self._check_link(link)
         if self._error:
             return
 
         self._bookmark_service.create_bookmark(title, link)
 
-    def check_title(self, title):
+    def _check_title(self, title):
         title = title.strip()
         # ehkä lisää ehtoja? nyt katsoo ettei title tyhjä tai yli 100 merkkiä
         if not title or len(title) > 100:
             self._error = True
             self._io.write("otsikko puuttui tai oli liian pitkä (yli 100 merkkiä)")
 
+    def _check_link(self, link):
         # ? ehkä parempia ehtoja? nyt katsoo että alussa http ja väh 10 merkkiä pitkä
-    def check_link(self, link):
         if len(link.strip()) < 10 or link[:4] != "http":
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 
-    def list_bookmarks(self):
-        """Outputs listing of all bookmarks stored into the system.
-        """
+    def _list_bookmarks(self):
         bookmark_list = self._bookmark_service.get_all_bookmarks()
         if bookmark_list:
             for bookmark in bookmark_list:

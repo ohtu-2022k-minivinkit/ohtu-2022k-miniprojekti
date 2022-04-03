@@ -16,3 +16,15 @@ class TestBookmarkService(unittest.TestCase):
     def test_create_method_of_repository_is_called_with_correct_parameters(self):
         self.bookmark_service.create_bookmark("otsikko", "http://linkki.fi")
         self.assertTrue(isinstance(self.repository_mock.create.call_args.args[0], Bookmark))
+
+    def test_when_list_of_bookmarks_contains_two_bookmark_delivered_list_length_is_two(self):
+        bookmark = Bookmark("headline","link")
+        self.repository_mock.get_all.return_value = [bookmark, bookmark]
+        bookmarks = self.bookmark_service.get_all_bookmarks()
+        self.assertEqual(len(bookmarks),2)
+
+    def test_method_get_all_bookmarks_delivers_bookmarks(self):
+        bookmark = Bookmark("headline","link")
+        self.repository_mock.get_all.return_value = [bookmark, bookmark]
+        bookmarks = self.bookmark_service.get_all_bookmarks()
+        self.assertEqual(bookmarks[1].headline,"headline")

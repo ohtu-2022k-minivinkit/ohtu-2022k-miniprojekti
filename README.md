@@ -9,57 +9,22 @@
 ## Asennus- ja käyttöohje
 
 Asennusohje
-1.	Kloonaa projekti tietokoneellesi navigoimalla komentorivillä haluamaasi hakemistoon ja syöttämällä komento: git clone git@github.com:ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti.git
+- Kloonaa projekti tietokoneellesi navigoimalla komentorivillä haluamaasi hakemistoon ja syöttämällä komento: git clone git@github.com:ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti.git
 
-2.	Hakemistosta tulisi nyt löytyä kansio nimeltä ’ohtu-2022k-miniprojekti’ – navigoi sinne
+- Hakemistosta tulisi nyt löytyä kansio nimeltä ’ohtu-2022k-miniprojekti’ – navigoi sinne
 
-3.	Asenna projektin riippuvuudet komennolla: poetry install
-
-Seuraavien riippuvuuksien tulisi asentua: 
-  • pyparsing
-  • attrs
-  • iniconfig
-  • lazy-object-proxy
-  • packaging
-  • pluggy
-  • py
-  • tomli
-  • typing-extensions
-  • wrapt 
-  • astroid 
-  • dill 
-  • isort 
-  • mccabe 
-  • platformdirs
-  • pytest 
-  • python-dotenv 
-  • coverage 
-  • invoke 
-  • pylint
-  • pytest-dotenv 
-  • robotframework 
-  • robotframework-databaselibrary
+- Asenna projektin riippuvuudet komennolla: poetry install (jos et ole asentanut Poetrya, asenna se ensin: https://python-poetry.org/docs/)
 
 Käyttöohje
-1.	Käynnistä sovellus komennolla: poetry run python3 src/index.py 
-a.	Voit pysäyttää sovelluksen milloin tahansa painamalla control + c
-2.	Sovellus tarjoaa seuraavat vaihtoehdot:
+- Käynnistä sovellus komennolla: poetry run python3 src/index.py 
 
-i.	x lopeta
+- Voit pysäyttää sovelluksen milloin tahansa painamalla control + c
 
-ii.	1 lisää vinkki
+- Sovellus tarjoaa seuraavat vaihtoehdot: x lopeta, 1 lisää vinkki, 2 tulosta vinkit
 
-iii.	2 tulosta vinkit
+- Paina 1 + enter jos haluat lisätä vinkin. Toimi sovelluksen ohjeiden mukaan. (Huomaa, että linkin täytyy olla sopivassa muodossa – Jos lisäät linkin väärässä muodossa, lisääminen keskeytyy ja joudut aloittamaan lisäämisen alusta)
 
-3.	Paina 1 + enter jos haluat lisätä vinkin:
+- Paina 2 + enter jos haluat, että tallennetut linkit tulostuvat
 
-a.	Sovellus pyytää sinua kirjoittamaan otsikon ja linkin.
- 
-i.	Kirjoita otsikko ja paina enter
- 
-ii.	Kirjoita linkki ja paina enter
-
-iii.	Huomaa, että linkin täytyy olla sopivassa muodossa!(Jos lisäät linkin väärässä muodossa, lisääminen keskeytyy ja joudut aloittamaan lisäämisen alusta)
-4.	Paina 2 + enter jos haluat, että tallennetut linkit tulostuvat
-5.	Paina x + enter kun haluat lopettaa
+- Paina x + enter kun haluat lopettaa
 

@@ -1,3 +1,4 @@
+# pylint: disable=invalid-name
 from ui.ui import UI
 from tests.ui_test import StubIO
 from services.bookmark_service import BookmarkService

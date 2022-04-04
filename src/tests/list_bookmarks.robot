@@ -1,6 +1,7 @@
 *** Settings ***
 Resource  resource.robot
 Test Setup  Run Application And Empty Bookmarks Table And Clear Inputs And Clear Outputs
+Suite Teardown  Empty Bookmarks Table And Bookmarks Table Should Be Empty
 
 *** Test Cases ***
 List Bookmarks With No Bookmarks
@@ -32,4 +33,7 @@ Run Application And Empty Bookmarks Table And Clear Inputs And Clear Outputs
     Bookmarks Table Should Be Empty
     Clear Inputs
     Clear Outputs
-    
+
+Empty Bookmarks Table And Bookmarks Table Should Be Empty
+    Empty Bookmarks Table
+    Bookmarks Table Should Be Empty

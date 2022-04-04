@@ -1,6 +1,7 @@
 *** Settings ***
 Resource  resource.robot
 Test Setup  Run Application And Empty Bookmarks Table And Go To Bookmark Input
+Suite Teardown  Empty Bookmarks Table And Bookmarks Table Should Be Empty
 
 *** Test Cases ***
 Add Bookmark With Empty Title And Valid Url
@@ -42,4 +43,8 @@ Run Application And Empty Bookmarks Table And Go To Bookmark Input
     Empty Bookmarks Table
     Bookmarks Table Should Be Empty
     Go To Bookmark Input
+
+Empty Bookmarks Table And Bookmarks Table Should Be Empty
+    Empty Bookmarks Table
+    Bookmarks Table Should Be Empty
 

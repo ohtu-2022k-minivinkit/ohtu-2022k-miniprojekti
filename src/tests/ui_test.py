@@ -113,4 +113,4 @@ class TestUI(unittest.TestCase):
         self.service_mock.get_all_bookmarks.return_value = [bookmark, bookmark]
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
-        self.assertIn("title link\n", in_out.outputs)
+        self.assertIn("title link", in_out.outputs)

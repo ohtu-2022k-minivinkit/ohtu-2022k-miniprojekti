@@ -5,7 +5,9 @@ Library  OperatingSystem
 
 *** Variables ***
 ${database_name}  database.sqlite
-${standard_output}  ['', 'Bookmarks komennot:', 'x lopeta', '1 lisää vinkki', '2 tulosta vinkit', '', '']
+${standard_output}  ['', 'Bookmarks komennot:', 'x lopeta', '1 lisää vinkki', '2 tulosta vinkit', ''
+${standard_output_ending}  ]
+${empty_output_line}  , ''
 
 *** Keywords ***
 Connect To Test Database
@@ -82,14 +84,17 @@ Clear Inputs
 
 Output Should Contain Bookmark
     [Arguments]  ${headline}  ${url}
-    Command Line Output Should Contain  ${headline} ${url}\n
+    Command Line Output Should Contain  ${headline} ${url}
 
 Output Should Not Contain Bookmark
     [Arguments]  ${headline}  ${url}
-    Command Line Output Should Not Contain  ${headline} ${url}\n
+    Command Line Output Should Not Contain  ${headline} ${url}
 
 Output Should Be Standard Output
-    Command Line Output Should Be  ${standard_output}
+    Command Line Output Should Be  ${standard_output}${standard_output_ending}
+
+Output Should Be Standard Output And Empty Output Line
+    Command Line Output Should Be  ${standard_output}${empty_output_line}${standard_output_ending}
 
 Input Command
     [Arguments]  ${text}

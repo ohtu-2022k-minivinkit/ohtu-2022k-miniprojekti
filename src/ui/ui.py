@@ -74,5 +74,5 @@ class UI:
         bookmark_list = self._bookmark_service.get_all_bookmarks()
         if bookmark_list:
             for bookmark in bookmark_list:
-                self._io.write(f'{bookmark}\n')
+                self._io.write(f'{bookmark}')
  

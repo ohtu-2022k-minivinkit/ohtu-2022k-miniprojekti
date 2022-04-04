@@ -3,6 +3,13 @@ Resource  resource.robot
 Test Setup  Run Application And Empty Bookmarks Table And Clear Inputs And Clear Outputs
 
 *** Test Cases ***
+List Bookmarks With No Bookmarks
+    List Bookmarks
+    Run Application
+    Output Should Not Contain Bookmark  Netti  http://www.netti.fi
+    Output Should Not Contain Bookmark  Vinkki  http://www.vinkki.fi
+    Output Should Be Standard Output And Empty Output Line
+
 Create One Bookmark Into Database And List Bookmarks
     Create Bookmark In Bookmarks Table  Netti  http://www.netti.fi
     List Bookmarks
@@ -17,13 +24,6 @@ Create Two Bookmarks Into Database And List Bookmarks
     Run Application
     Output Should Contain Bookmark  Netti  http://www.netti.fi
     Output Should Contain Bookmark  Vinkki  http://www.vinkki.fi
-
-List Bookmarks
-    List Bookmarks
-    Run Application
-    Output Should Not Contain Bookmark  Netti  http://www.netti.fi
-    Output Should Not Contain Bookmark  Vinkki  http://www.vinkki.fi
-    Output Should Be Standard Output
 
 *** Keywords ***
 Run Application And Empty Bookmarks Table And Clear Inputs And Clear Outputs

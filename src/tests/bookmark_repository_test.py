@@ -17,3 +17,15 @@ class TestBookmarkRepository(unittest.TestCase):
         self.assertEqual(len(bookmarks), 2)
         self.assertEqual(bookmarks[0].headline, "Testausta")
         self.assertEqual(bookmarks[1].url, "www.lisaatestausta.fi")
+
+    def test_get_all(self):
+        bookmark_repository.create(self.bookmark_1)
+        bookmark_repository.create(self.bookmark_2)
+
+        bookmarks = bookmark_repository.get_all()
+
+        self.assertEqual(len(bookmarks), 2)
+        self.assertEqual(bookmarks[0].headline, "Testausta")
+        self.assertEqual(bookmarks[0].url, "www.testausta.fi")
+        self.assertEqual(bookmarks[1].headline, "Lisää testausta")
+        self.assertEqual(bookmarks[1].url, "www.lisaatestausta.fi")

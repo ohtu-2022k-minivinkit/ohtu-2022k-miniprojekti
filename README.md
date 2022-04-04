@@ -42,15 +42,23 @@ Seuraavien riippuvuuksien tulisi asentua:
 
 Käyttöohje
 1.	Käynnistä sovellus komennolla: poetry run python3 src/index.py 
-a.	Voit pysäyttää sovelluksen milloin tahansa painamalla control + c2
+a.	Voit pysäyttää sovelluksen milloin tahansa painamalla control + c
 2.	Sovellus tarjoaa seuraavat vaihtoehdot:
+
 i.	x lopeta
+
 ii.	1 lisää vinkki
+
 iii.	2 tulosta vinkit
+
 3.	Paina 1 + enter jos haluat lisätä vinkin:
-a.	Sovellus pyytää sinua kirjoittamaan otsikon ja linkin. 
-i.	Kirjoita otsikko ja paina enter 
+
+a.	Sovellus pyytää sinua kirjoittamaan otsikon ja linkin.
+ 
+i.	Kirjoita otsikko ja paina enter
+ 
 ii.	Kirjoita linkki ja paina enter
+
 iii.	Huomaa, että linkin täytyy olla sopivassa muodossa!(Jos lisäät linkin väärässä muodossa, lisääminen keskeytyy ja joudut aloittamaan lisäämisen alusta)
 4.	Paina 2 + enter jos haluat, että tallennetut linkit tulostuvat
 5.	Paina x + enter kun haluat lopettaa

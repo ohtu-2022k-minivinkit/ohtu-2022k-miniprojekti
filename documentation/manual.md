@@ -1,11 +1,12 @@
 # Manual
 
 Installation
-– CLone the project to your computer by first navigating to a desired directory and then giving a command: git clone git@github.com:ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti.git
 
-– There should now be a new directory called ’ohtu-2022k-miniprojekti’ – navigate there
+- Clone the project to your computer by first navigating to a desired directory and then giving a command: git clone git@github.com:ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti.git
 
-– Install dependencies with a command: poetry install (install Poetry first if you haven't done so already: https://python-poetry.org/docs/)
+- There should now be a new directory called ’ohtu-2022k-miniprojekti’ – navigate there
+
+- Install dependencies with a command: poetry install (install Poetry first if you haven't done so already: https://python-poetry.org/docs/)
 
 How to use the program
 - Launch the program with command: poetry run python3 src/index.py

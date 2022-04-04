@@ -16,7 +16,7 @@ class BookmarksLibrary:
 
     def command_line_clear_output(self):
         self._io.outputs.clear()
-    
+
     def command_line_clear_input(self):
         self._io.inputs.clear()
 
@@ -33,7 +33,7 @@ class BookmarksLibrary:
             raise AssertionError(
                 f"\"{value}\" is in {str(outputs)}"
             )
-    
+
     def command_line_output_should_be(self, value):
         outputs = self._io.outputs
         if value != str(outputs):

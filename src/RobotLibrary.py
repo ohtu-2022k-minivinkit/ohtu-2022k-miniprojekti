@@ -3,7 +3,7 @@ from ui.ui import UI
 from tests.ui_test import StubIO
 from services.bookmark_service import BookmarkService
 
-class BookmarksLibrary:
+class RobotLibrary:
     def __init__(self):
         self._io = StubIO()
         self._bookmark_service = BookmarkService()

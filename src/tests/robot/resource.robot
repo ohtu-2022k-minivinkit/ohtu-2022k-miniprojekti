@@ -1,5 +1,5 @@
 *** Settings ***
-Library  ../BookmarksLibrary.py
+Library  ../../RobotLibrary.py
 Library  DatabaseLibrary
 Library  OperatingSystem
 

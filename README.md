@@ -14,6 +14,7 @@ Asennusohje
 2.	Hakemistosta tulisi nyt löytyä kansio nimeltä ’ohtu-2022k-miniprojekti’ – navigoi sinne
 
 3.	Asenna projektin riippuvuudet komennolla: poetry install
+
 Seuraavien riippuvuuksien tulisi asentua: 
   • pyparsing
   • attrs

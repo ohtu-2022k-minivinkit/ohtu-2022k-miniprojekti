@@ -63,11 +63,16 @@ Go To Bookmark Input
 
 List Bookmarks
     Input Command  2
+    Run Application
 
 Add Bookmark
     [Arguments]  ${headline}  ${url}
+    Clear Inputs
+    Clear Outputs
+    Go To Bookmark Input
     Input Command  ${headline}
     Input Command  ${url}
+    Run Application
 
 Run Application
     Add Close Application Command

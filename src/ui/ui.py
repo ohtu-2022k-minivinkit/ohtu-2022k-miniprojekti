@@ -17,6 +17,7 @@ class UI:
 
     def start(self):
         """Start the program"""
+
         self._io.write("")
         self._io.write("Bookmarks komennot:")
         self._print_info()
@@ -40,10 +41,21 @@ class UI:
                 self._list_bookmarks()
 
     def _print_info(self):
+        """Prints all UI -commands to user to see"""
+
         for command in COMMANDS.values():
             self._io.write(command)
 
     def _add_bookmark(self):
+        """Asks for title and link inputs from user.
+
+        If user's input is valid,
+        calls Bookmark_service class to create bookmark and add
+        it into the repository.
+
+        If input is not valid, executing will return to the
+        while -loop in the method start.
+        """
         self._io.write("Lisätään uusi vinkki")
 
         title = self._io.read("otsikko: ")
@@ -59,21 +71,36 @@ class UI:
         self._bookmark_service.create_bookmark(title, link)
 
     def _check_title(self, title):
+        """Validates user input for title.
+
+        if user's input is not valid, prints an error message
+        and places True in the variable self._error.
+
+        Args:
+            title (string): user's input for title
+        """
         title = title.strip()
-        # ehkä lisää ehtoja? nyt katsoo ettei title tyhjä tai yli 100 merkkiä
         if not title or len(title) > 100:
             self._error = True
             self._io.write("otsikko puuttui tai oli liian pitkä (yli 100 merkkiä)")
 
     def _check_link(self, link):
-        # ? ehkä parempia ehtoja? nyt katsoo että alussa http ja väh 10 merkkiä pitkä
-        if len(link.strip()) < 10 or link[:4] != "http":
+        """Validates user input for link.
+
+        if user's input is not valid, prints an error message
+        and places True in the variable self._error.
+
+        Args:
+            link (string): user's input for link
+        """
+        if len(link.strip()) < 12 or link[:4] != "http":
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 
     def _list_bookmarks(self):
+        """Prints all bookmarks stored in the repository."""
+
         bookmark_list = self._bookmark_service.get_all_bookmarks()
         if bookmark_list:
             for bookmark in bookmark_list:
                 self._io.write(f'{bookmark}')
- 

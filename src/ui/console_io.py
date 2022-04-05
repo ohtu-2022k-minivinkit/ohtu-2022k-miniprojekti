@@ -1,11 +1,11 @@
 class ConsoleIO:
-    '''class, moves input and output between class UI and os.
+    """class, moves input and output between class UI and os.
+    Use write similar as print and read similar as input.
 
     Attributes:
         output: output to user
-        input_command: input command to ask input from user
         __text: users answer to input command
-    '''
+    """
 
     def __init__(self):
         self.__text = None

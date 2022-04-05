@@ -1,7 +1,7 @@
 *** Settings ***
 Resource  resource.robot
-Test Setup  Run Application And Empty Bookmarks Table And Clear Inputs And Clear Outputs
-Suite Teardown  Empty Bookmarks Table And Bookmarks Table Should Be Empty
+Test Setup  Empty Bookmarks Table And Clear IO
+Suite Teardown  Empty Bookmarks Table
 
 *** Test Cases ***
 List Bookmarks With No Bookmarks
@@ -24,13 +24,7 @@ Create Two Bookmarks Into Database And List Bookmarks
     Output Should Contain Bookmark  Vinkki  http://www.vinkki.fi
 
 *** Keywords ***
-Run Application And Empty Bookmarks Table And Clear Inputs And Clear Outputs
-    Run Application
+Empty Bookmarks Table And Clear IO
     Empty Bookmarks Table
-    Bookmarks Table Should Be Empty
     Clear Inputs
     Clear Outputs
-
-Empty Bookmarks Table And Bookmarks Table Should Be Empty
-    Empty Bookmarks Table
-    Bookmarks Table Should Be Empty

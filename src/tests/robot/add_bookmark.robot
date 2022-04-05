@@ -1,7 +1,7 @@
 *** Settings ***
 Resource  resource.robot
-Test Setup  Run Application And Empty Bookmarks Table And Go To Bookmark Input
-Suite Teardown  Empty Bookmarks Table And Bookmarks Table Should Be Empty
+Test Setup  Empty Bookmarks Table
+Suite Teardown  Empty Bookmarks Table
 
 *** Test Cases ***
 Add Bookmark With Empty Title And Valid Url
@@ -23,15 +23,3 @@ Add Two Valid Bookmarks With Different Data
     Bookmarks Table Should Contain  Vinkki  http://www.vinkki.fi
     Bookmarks Table Should Contain  Netti  http://www.netti.fi
     Bookmarks Table Should Contain X Items  2
-
-*** Keywords ***
-Run Application And Empty Bookmarks Table And Go To Bookmark Input
-    Run Application
-    Empty Bookmarks Table
-    Bookmarks Table Should Be Empty
-    Go To Bookmark Input
-
-Empty Bookmarks Table And Bookmarks Table Should Be Empty
-    Empty Bookmarks Table
-    Bookmarks Table Should Be Empty
-

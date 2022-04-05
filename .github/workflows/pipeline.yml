@@ -27,4 +27,4 @@ jobs:
         run: poetry run pytest src/tests
 
       - name: Robot Test
-        run: poetry run robot src/tests
+        run: export ENV="test" && poetry run robot src/tests && unset ENV

@@ -1,3 +1,4 @@
+import os
 from invoke import task
 
 @task
@@ -8,7 +9,12 @@ def coverage(ctx):
 def coverage_report(ctx):
     ctx.run("coverage html", pty=True)
 
-@task(coverage_report)
+@task
+def robot(ctx):
+    os.environ["ENV"] = "test"
+    ctx.run("robot src/tests", pty=True)
+    del os.environ["ENV"]
+
+@task(coverage_report, robot)
 def tests(ctx):
     ctx.run("pylint src", pty=True)
-    ctx.run("robot src/tests", pty=True)

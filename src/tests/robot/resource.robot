@@ -4,7 +4,7 @@ Library  DatabaseLibrary
 Library  OperatingSystem
 
 *** Variables ***
-${database_name}  database.sqlite
+${database_name}  test-database.sqlite
 ${standard_output}  ['', 'Bookmarks komennot:', 'x lopeta', '1 lisää vinkki', '2 tulosta vinkit', ''
 ${standard_output_ending}  ]
 ${empty_output_line}  , ''

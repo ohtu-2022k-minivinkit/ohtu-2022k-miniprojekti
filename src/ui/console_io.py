@@ -12,10 +12,12 @@ class ConsoleIO:
         self.output = None
 
     def write(self, output):
+        """Write output to user"""
         self.output = output
         print(self.output)
 
     def read(self, input_command):
+        """Read input from user"""
         self.__text = input(input_command)
         return self.__text
 

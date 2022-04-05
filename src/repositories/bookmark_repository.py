@@ -17,6 +17,7 @@ class BookmarkRepository:
             print(err)
 
     def create(self, bookmark: Bookmark):
+        """Create a new bookmark"""
         try:
             cursor = self._connection.cursor()
             cursor.execute("INSERT INTO bookmarks (headline, url) VALUES (?,?)",
@@ -26,6 +27,7 @@ class BookmarkRepository:
             print(err)
 
     def get_all(self) -> list:
+        """Get all bookmarks"""
         cursor = self._connection.cursor()
         cursor.execute("SELECT headline, url FROM bookmarks")
         data = cursor.fetchall()
@@ -36,6 +38,7 @@ class BookmarkRepository:
         return bookmarks
 
     def delete_all(self):
+        """Delete all bookmarks"""
         cursor = self._connection.cursor()
         cursor.execute("DELETE FROM bookmarks")
         self._connection.commit()

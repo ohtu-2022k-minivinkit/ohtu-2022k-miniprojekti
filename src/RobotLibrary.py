@@ -1,4 +1,4 @@
-# pylint: disable=invalid-name
+# pylint: skip-file
 from ui.ui import UI
 from tests.ui_test import StubIO
 from services.bookmark_service import BookmarkService

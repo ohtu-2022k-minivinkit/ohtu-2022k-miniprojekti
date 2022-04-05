@@ -16,6 +16,7 @@ class UI:
         self._error = False
 
     def start(self):
+        """Start the program"""
         self._io.write("")
         self._io.write("Bookmarks komennot:")
         self._print_info()

@@ -90,7 +90,7 @@ class TestUI(unittest.TestCase):
         self.assertIn("linkki oli virheellinen, anna otsikko ja linkki uudelleen", in_out.outputs)
 
     def test_correct_link_checks_correct(self):
-        in_out = StubIO(["1", "title", "http_5-6./", "x"])
+        in_out = StubIO(["1", "title", "http:_5-6./?", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki: ", in_out.inputs)

@@ -93,7 +93,7 @@ class UI:
         Args:
             link (string): user's input for link
         """
-        if len(link.strip()) < 12 or link[:4] != "http":
+        if len(link.strip()) < 12 or link[:4] != "http" or " " in link.strip():
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 

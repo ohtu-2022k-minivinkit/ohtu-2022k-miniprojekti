@@ -4,9 +4,7 @@ from invoke import task
 @task
 def coverage(ctx):
     ctx.run("coverage run --branch -m pytest", pty=True)
-
-@task(coverage)
-def coverage_report(ctx):
+    ctx.run("coverage report", pty=True)
     ctx.run("coverage html", pty=True)
 
 @task
@@ -15,6 +13,6 @@ def robot(ctx):
     ctx.run("robot src/tests", pty=True)
     del os.environ["ENV"]
 
-@task(coverage_report, robot)
+@task(coverage, robot)
 def tests(ctx):
     ctx.run("pylint src", pty=True)

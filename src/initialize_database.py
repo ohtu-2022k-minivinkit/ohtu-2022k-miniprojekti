@@ -1,12 +1,13 @@
 from database_connection import get_database_connection
 
+
 def drop_tables(connection):
     """Drop all tables in the database"""
     cursor = connection.cursor()
 
-    cursor.execute('''
+    cursor.execute("""
         DROP TABLE IF EXISTS bookmarks;
-    ''')
+    """)
 
     connection.commit()
 
@@ -15,13 +16,13 @@ def create_tables(connection):
     """Create bookmark table in db"""
     cursor = connection.cursor()
 
-    cursor.execute('''
-        CREATE TABLE bookmarks (
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS bookmarks (
             id INTEGER PRIMARY KEY,
             headline TEXT,
             url text
         );
-    ''')
+    """)
 
     connection.commit()
 

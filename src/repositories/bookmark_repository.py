@@ -1,20 +1,13 @@
 from sqlite3 import Error
 from entities.bookmark import Bookmark
 from database_connection import get_database_connection
+import initialize_database
+
 
 class BookmarkRepository:
     def __init__(self, connection):
         self._connection = connection
-        self.__create_table()
-
-    def __create_table(self):
-        sql = """CREATE TABLE IF NOT EXISTS bookmarks (
-            id INTEGER PRIMARY KEY, headline TEXT, url TEXT)"""
-        try:
-            cursor = self._connection.cursor()
-            cursor.execute(sql)
-        except Error as err:
-            print(err)
+        initialize_database.initialize_database()
 
     def create(self, bookmark: Bookmark):
         """Create a new bookmark"""
@@ -42,5 +35,6 @@ class BookmarkRepository:
         cursor = self._connection.cursor()
         cursor.execute("DELETE FROM bookmarks")
         self._connection.commit()
+
 
 bookmark_repository = BookmarkRepository(get_database_connection())

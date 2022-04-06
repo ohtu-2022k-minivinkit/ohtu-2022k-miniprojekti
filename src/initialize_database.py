@@ -16,11 +16,16 @@ def create_tables(connection):
     """Create bookmark table in db"""
     cursor = connection.cursor()
 
+    # Checked column is intended to be used like a boolean. Since SQLite does
+    # not have a separate boolean datatype, integer is used instead. Column
+    # defaults to FALSE (= 0) and when bookmark has been checked the value
+    # is supposed to be TRUE (= 1).
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS bookmarks (
             id INTEGER PRIMARY KEY,
             headline TEXT,
-            url text
+            url TEXT,
+            checked INTEGER DEFAULT FALSE
         );
     """)
 

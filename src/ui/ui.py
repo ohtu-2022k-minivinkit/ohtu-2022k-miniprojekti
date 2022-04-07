@@ -115,7 +115,7 @@ class UI:
     def _list_bookmarks_with_range(self, choice):
         """Prints chosen range of bookmarks stored in the repository."""
 
-        bookmark_list = self._bookmark_service.get_bookmarks(choice)
+        bookmark_list = self._bookmark_service.get_bookmarks_with_range(choice)
         if bookmark_list:
             for bookmark in bookmark_list:
                 self._io.write(f'{bookmark}')

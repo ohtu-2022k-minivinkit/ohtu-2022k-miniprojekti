@@ -5,7 +5,8 @@ from ui.console_io import (
 COMMANDS = {
     "x": "x lopeta",
     "1": "1 lisää vinkki",
-    "2": "2 tulosta vinkit"
+    "2": "2 näytä kaikki vinkit",
+    "3": "3 näytä luetut vinkit"
     }
 
 
@@ -17,6 +18,10 @@ class UI:
 
     def start(self):
         """Start the program"""
+
+        self._io.write("")
+        self._io.write("Lukemattomat vinkit:")
+        self._list_bookmarks("not readed")
 
         self._io.write("")
         self._io.write("Bookmarks komennot:")
@@ -38,7 +43,10 @@ class UI:
                 self._add_bookmark()
 
             if command == "2":
-                self._list_bookmarks()
+                self._list_bookmarks("all")
+
+            if command == "3":
+                self._list_bookmarks("readed")
 
     def _print_info(self):
         """Prints all UI -commands to user to see"""
@@ -97,10 +105,10 @@ class UI:
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 
-    def _list_bookmarks(self):
-        """Prints all bookmarks stored in the repository."""
+    def _list_bookmarks(self, choice):
+        """Prints chosen range of bookmarks stored in the repository."""
 
-        bookmark_list = self._bookmark_service.get_all_bookmarks()
+        bookmark_list = self._bookmark_service.get_bookmarks(choice)
         if bookmark_list:
             for bookmark in bookmark_list:
                 self._io.write(f'{bookmark}')

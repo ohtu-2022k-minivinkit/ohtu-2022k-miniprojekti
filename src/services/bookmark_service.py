@@ -31,16 +31,16 @@ class BookmarkService():
 
         Args:
             range (string): selected range of bookmarks
-                            values: all, not readed or readed
+                            values: all, not read or read
 
         Returns:
             list: List of Bookmark objects.
         """
         if choice == "all":
             return self._bookmark_repository.get_all()
-        if choice == "not readed":
+        if choice == "not read":
             return self._bookmark_repository.get_choice(0)
-        if choice == "readed":
+        if choice == "read":
             return self._bookmark_repository.get_choice(1)
 
 bookmark_service = BookmarkService()

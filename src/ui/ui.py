@@ -1,6 +1,9 @@
 from ui.console_io import (
     console_io as default_console_io
 )
+from services.bookmark_service import (
+    bookmark_service as default_bookmark_service
+)
 
 COMMANDS = {
     "x": "x lopeta",
@@ -11,9 +14,12 @@ COMMANDS = {
 
 
 class UI:
-    def __init__(self, service, input_output=default_console_io):
+    def __init__(self,
+            bookmark_service=default_bookmark_service,
+            input_output=default_console_io):
+
         self._io = input_output
-        self._bookmark_service = service
+        self._bookmark_service = bookmark_service
         self._error = False
 
     def start(self):

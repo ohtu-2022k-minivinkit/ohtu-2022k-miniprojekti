@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock
 from entities.bookmark import Bookmark
+from services.bookmark_service import BookmarkService
 from ui.ui import UI
 
 
@@ -19,7 +20,7 @@ class StubIO:
 
 class TestUI(unittest.TestCase):
     def setUp(self):
-        self.service_mock = Mock()
+        self.service_mock = Mock(wraps=BookmarkService())
 
     def test_info_is_printed_when_started(self):
         in_out = StubIO(["x"])
@@ -110,7 +111,7 @@ class TestUI(unittest.TestCase):
     def test_creates_list_of_bookmarks(self):
         in_out = StubIO(["2", "x"])
         bookmark = Bookmark("title", "link")
-        self.service_mock.get_all_bookmarks.return_value = [bookmark, bookmark]
+        self.service_mock.get_bookmarks_with_range.return_value = [bookmark, bookmark]
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("title: link, False", in_out.outputs)

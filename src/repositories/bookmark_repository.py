@@ -30,6 +30,27 @@ class BookmarkRepository:
 
         return bookmarks
 
+
+    def get_choice(self, checked) -> list:
+        """Gets readed or not readed bookmarks as chosen
+
+            Args:
+                checked (integer): selected range of bookmarks
+                                    0 = not readed
+                                    1 = readed
+            """
+        cursor = self._connection.cursor()
+        cursor.execute("""SELECT headline, url, checked
+                        FROM bookmarks
+                        WHERE checked=?
+                        """, [checked])
+        data = cursor.fetchall()
+        bookmarks = []
+        for row in data:
+            bookmarks.append(Bookmark(row[0], row[1], row[2]))
+
+        return bookmarks
+
     def get_bookmarks(self, keyword: str) -> list:
         """Get all bookmarks where headline contains keyword"""
         cursor = self._connection.cursor()

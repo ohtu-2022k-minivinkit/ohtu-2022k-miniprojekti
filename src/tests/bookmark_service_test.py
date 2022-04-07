@@ -20,13 +20,13 @@ class TestBookmarkService(unittest.TestCase):
     def test_when_list_of_bookmarks_contains_two_bookmark_delivered_list_length_is_two(self):
         bookmark = Bookmark("headline","link")
         self.repository_mock.get_all.return_value = [bookmark, bookmark]
-        bookmarks = self.bookmark_service.get_all_bookmarks()
+        bookmarks = self.bookmark_service.get_bookmarks_with_range("all")
         self.assertEqual(len(bookmarks),2)
 
     def test_method_get_all_bookmarks_delivers_bookmarks(self):
         bookmark = Bookmark("headline","link")
         self.repository_mock.get_all.return_value = [bookmark, bookmark]
-        bookmarks = self.bookmark_service.get_all_bookmarks()
+        bookmarks = self.bookmark_service.get_bookmarks_with_range("all")
         self.assertEqual(bookmarks[1].headline,"headline")
 
     def test_get_bookmarks_called_with_correct_params(self):

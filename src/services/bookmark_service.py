@@ -24,14 +24,22 @@ class BookmarkService():
         """
         self._bookmark_repository.create(Bookmark(title, link))
 
-    def get_all_bookmarks(self):
-        """Returns all bookmarks stored in the repository.
+    def get_bookmarks_with_range(self, choice):
+        """Returns chosen range of bookmarks stored in the repository.
 
-        Returns all bookmarks stored in the repository as a list of Bookmark objects.
+        Returns chosen range of bookmarks stored in the repository as a list of Bookmark objects.
+
+        Args:
+            choice (string): selected range of bookmarks
+                            values: all, not read or read
 
         Returns:
             list: List of Bookmark objects.
         """
+        if choice == "not_checked":
+            return self._bookmark_repository.get_choice(0)
+        if choice == "checked":
+            return self._bookmark_repository.get_choice(1)
         return self._bookmark_repository.get_all()
 
     def get_bookmarks(self, keyword):

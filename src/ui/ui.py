@@ -1,24 +1,35 @@
 from ui.console_io import (
     console_io as default_console_io
 )
+from services.bookmark_service import (
+    bookmark_service as default_bookmark_service
+)
 
 from rich import print
 
 COMMANDS = {
     "x": "x lopeta",
     "1": "1 lisää vinkki",
-    "2": "2 tulosta vinkit"
+    "2": "2 näytä kaikki vinkit",
+    "3": "3 näytä luetut vinkit"
     }
 
 
 class UI:
-    def __init__(self, service, input_output=default_console_io):
+    def __init__(self,
+            bookmark_service=default_bookmark_service,
+            input_output=default_console_io
+            ):
         self._io = input_output
-        self._bookmark_service = service
+        self._bookmark_service = bookmark_service
         self._error = False
 
     def start(self):
         """Start the program"""
+
+        self._io.write("")
+        self._io.write("Lukemattomat vinkit:")
+        self._list_bookmarks_with_range("not checked")
 
         self._io.write("")
         self._io.write("Bookmarks komennot:")
@@ -40,7 +51,10 @@ class UI:
                 self._add_bookmark()
 
             if command == "2":
-                self._list_bookmarks()
+                self._list_bookmarks_with_range("all")
+
+            if command == "3":
+                self._list_bookmarks_with_range("checked")
 
     def _print_info(self):
         """Prints all UI -commands to user to see"""
@@ -99,10 +113,10 @@ class UI:
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 
-    def _list_bookmarks(self):
-        """Prints all bookmarks stored in the repository."""
+    def _list_bookmarks_with_range(self, choice):
+        """Prints chosen range of bookmarks stored in the repository."""
 
-        bookmark_list = self._bookmark_service.get_all_bookmarks()
+        bookmark_list = self._bookmark_service.get_bookmarks_with_range(choice)
         if bookmark_list:
             self._io.write_table(bookmark_list)
         # if bookmark_list:

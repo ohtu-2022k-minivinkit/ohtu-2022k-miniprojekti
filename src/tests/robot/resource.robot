@@ -5,7 +5,7 @@ Library  OperatingSystem
 
 *** Variables ***
 ${database_name}  test-database.sqlite
-${standard_output}  ['', 'Bookmarks komennot:', 'x lopeta', '1 lisää vinkki', '2 tulosta vinkit', ''
+${standard_output}  ['', 'Lukemattomat vinkit:', '', 'Bookmarks komennot:', 'x lopeta', '1 lisää vinkki', '2 näytä kaikki vinkit', '3 näytä luetut vinkit', ''
 ${standard_output_ending}  ]
 ${empty_output_line}  , ''
 

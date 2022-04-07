@@ -28,3 +28,9 @@ class TestBookmarkService(unittest.TestCase):
         self.repository_mock.get_all.return_value = [bookmark, bookmark]
         bookmarks = self.bookmark_service.get_all_bookmarks()
         self.assertEqual(bookmarks[1].headline,"headline")
+
+    def test_get_bookmarks_called_with_correct_params(self):
+        self.bookmark_service.create_bookmark("headline", "link")
+        self.bookmark_service.get_bookmarks("ead")
+
+        self.repository_mock.get_bookmarks.assert_called_with("ead")

@@ -34,5 +34,11 @@ class BookmarkService():
         """
         return self._bookmark_repository.get_all()
 
+    def get_bookmarks(self, keyword):
+        """Returns all bookmarks where headline contains keyword
+        Returns:
+            list: List of Bookmark objects
+        """
+        return self._bookmark_repository.get_bookmarks(keyword)
 
 bookmark_service = BookmarkService()

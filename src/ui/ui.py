@@ -21,7 +21,7 @@ class UI:
 
         self._io.write("")
         self._io.write("Lukemattomat vinkit:")
-        self._list_bookmarks("not readed")
+        self._list_bookmarks_with_range("not read")
 
         self._io.write("")
         self._io.write("Bookmarks komennot:")
@@ -43,10 +43,10 @@ class UI:
                 self._add_bookmark()
 
             if command == "2":
-                self._list_bookmarks("all")
+                self._list_bookmarks_with_range("all")
 
             if command == "3":
-                self._list_bookmarks("readed")
+                self._list_bookmarks_with_range("read")
 
     def _print_info(self):
         """Prints all UI -commands to user to see"""
@@ -105,7 +105,7 @@ class UI:
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 
-    def _list_bookmarks(self, choice):
+    def _list_bookmarks_with_range(self, choice):
         """Prints chosen range of bookmarks stored in the repository."""
 
         bookmark_list = self._bookmark_service.get_bookmarks(choice)

@@ -7,7 +7,7 @@ import initialize_database
 class BookmarkRepository:
     def __init__(self, connection):
         self._connection = connection
-        initialize_database.initialize_database()
+        initialize_database.create_tables(connection)
 
     def create(self, bookmark: Bookmark):
         """Create a new bookmark"""
@@ -22,11 +22,11 @@ class BookmarkRepository:
     def get_all(self) -> list:
         """Get all bookmarks"""
         cursor = self._connection.cursor()
-        cursor.execute("SELECT headline, url FROM bookmarks")
+        cursor.execute("SELECT headline, url, checked FROM bookmarks")
         data = cursor.fetchall()
         bookmarks = []
         for row in data:
-            bookmarks.append(Bookmark(row[0], row[1]))
+            bookmarks.append(Bookmark(row[0], row[1], row[2]))
 
         return bookmarks
 

@@ -36,12 +36,11 @@ class BookmarkService():
         Returns:
             list: List of Bookmark objects.
         """
-        if choice == "all":
-            return self._bookmark_repository.get_all()
-        if choice == "not read":
+        if choice == "not_checked":
             return self._bookmark_repository.get_choice(0)
-        if choice == "read":
+        if choice == "checked":
             return self._bookmark_repository.get_choice(1)
+        return self._bookmark_repository.get_all()
 
     def get_bookmarks(self, keyword):
         """Returns all bookmarks where headline contains keyword

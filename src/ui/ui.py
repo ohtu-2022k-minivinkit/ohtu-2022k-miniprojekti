@@ -1,4 +1,3 @@
-from entities.bookmark import Bookmark
 from ui.console_io import (
     console_io as default_console_io
 )
@@ -28,7 +27,7 @@ class UI:
 
         self._io.write("")
         self._io.write("Lukemattomat vinkit:")
-        self._list_bookmarks_with_range("not read")
+        self._list_bookmarks_with_range("not checked")
 
         self._io.write("")
         self._io.write("Bookmarks komennot:")
@@ -53,7 +52,7 @@ class UI:
                 self._list_bookmarks_with_range("all")
 
             if command == "3":
-                self._list_bookmarks_with_range("read")
+                self._list_bookmarks_with_range("checked")
 
     def _print_info(self):
         """Prints all UI -commands to user to see"""

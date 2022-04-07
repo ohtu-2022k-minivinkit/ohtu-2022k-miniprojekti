@@ -88,12 +88,12 @@ Clear Inputs
     Command Line Clear Input
 
 Output Should Contain Bookmark
-    [Arguments]  ${headline}  ${url}
-    Command Line Output Should Contain  ${headline} ${url}
+    [Arguments]  ${headline}  ${url}  ${checked}
+    Command Line Output Should Contain  ${headline}: ${url}, ${checked}
 
 Output Should Not Contain Bookmark
-    [Arguments]  ${headline}  ${url}
-    Command Line Output Should Not Contain  ${headline} ${url}
+    [Arguments]  ${headline}  ${url}  ${checked}
+    Command Line Output Should Not Contain  ${headline}: ${url}, ${checked}
 
 Output Should Be Standard Output
     Command Line Output Should Be  ${standard_output}${standard_output_ending}

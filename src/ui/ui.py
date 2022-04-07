@@ -2,6 +2,8 @@ from ui.console_io import (
     console_io as default_console_io
 )
 
+from rich import print
+
 COMMANDS = {
     "x": "x lopeta",
     "1": "1 lisää vinkki",
@@ -102,5 +104,7 @@ class UI:
 
         bookmark_list = self._bookmark_service.get_all_bookmarks()
         if bookmark_list:
-            for bookmark in bookmark_list:
-                self._io.write(f'{bookmark}')
+            self._io.write_table(bookmark_list)
+        # if bookmark_list:
+        #     for bookmark in bookmark_list:
+        #         self._io.write_table(f'{bookmark}')

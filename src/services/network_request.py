@@ -2,6 +2,7 @@ import requests
 
 def get_url_title(url):
     """Returns the title of the webpage at the given url.
+        If the url is invalid or no title is found, returns None.
 
     Args:
         url (string): URL of the webpage.
@@ -12,12 +13,12 @@ def get_url_title(url):
     try:
         html = requests.get(url).text
     except requests.exceptions.RequestException:
-        return ""
+        return None
 
     title_start = html.find('<title>') + 7
     title_end = html.find('</title>')
 
     if title_start == -1 or title_end == -1:
-        return ""
+        return None
 
     return html[title_start:title_end]

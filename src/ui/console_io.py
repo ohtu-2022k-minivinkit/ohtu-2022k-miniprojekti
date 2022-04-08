@@ -11,13 +11,14 @@ class ConsoleIO:
     """
 
     def __init__(self):
-        self.__text = None
-        self.output = None
+        self._input = None
+        self._output = None
+        self._console = Console()
 
     def write(self, output):
         """Write output to user"""
-        self.output = output
-        print(self.output)
+        self._output = output
+        print(self._output)
 
     def write_table(self, bookmarks):
         """Write table to user"""
@@ -29,13 +30,12 @@ class ConsoleIO:
         for i, bookmark in enumerate(bookmarks):
             table.add_row(str(i+1), bookmark.headline, bookmark.url)
 
-        console = Console()
-        console.print(table)
+        self._console.print(table)
 
     def read(self, input_command):
         """Read input from user"""
-        self.__text = input(input_command)
-        return self.__text
+        self._input = input(input_command)
+        return self._input
 
 
 console_io = ConsoleIO()

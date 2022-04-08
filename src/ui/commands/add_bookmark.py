@@ -27,9 +27,11 @@ class AddBookmark:
         title = self._io.read("otsikko: ")
         if not self._validator.check_title(title):
             self.execute()
+            return
 
         link = self._io.read("linkki: ")
         if not self._validator.check_link(link):
             self.execute()
+            return
 
         self._bookmark_service.create_bookmark(title, link)

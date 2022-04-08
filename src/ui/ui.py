@@ -58,7 +58,7 @@ class UI:
             command_object.execute()
 
     def _print_info(self):
-        self._io.write("\nKomennot:\nx lopeta\n")
+        self._io.write("\nKomennot:\nx lopeta")
         for key in self._commands.keys():
             self._io.write(f"{key} {self._commands[key]}")
 

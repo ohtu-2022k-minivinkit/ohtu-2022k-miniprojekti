@@ -85,6 +85,15 @@ class UI:
 
         self._bookmark_service.create_bookmark(title, link)
 
+    def _list_bookmarks_with_range(self, choice):
+        """Prints chosen bookmarks; all, allready read or not read.
+
+        Args:
+            choice (string): values "all", "checked", "not checked"
+        """
+        bookmark_list = self._bookmark_service.get_bookmarks_with_range(choice)
+        self._list_bookmarks(bookmark_list)
+
     def _check_title(self, title):
         """Validates user input for title.
 
@@ -112,12 +121,11 @@ class UI:
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 
-    def _list_bookmarks_with_range(self, choice):
-        """Prints chosen range of bookmarks stored in the repository."""
+    def _list_bookmarks(self, bookmark_list):
+        """Prints bookmarks from the list given as a parameter.
 
-        bookmark_list = self._bookmark_service.get_bookmarks_with_range(choice)
+        Args:
+            bookmark_list (list):   contains bookmarks
+        """
         if bookmark_list:
             self._io.write_table(bookmark_list)
-        # if bookmark_list:
-        #     for bookmark in bookmark_list:
-        #         self._io.write_table(f'{bookmark}')

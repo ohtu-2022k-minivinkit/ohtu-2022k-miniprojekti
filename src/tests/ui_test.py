@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import Mock
 from entities.bookmark import Bookmark
+from services.bookmark_service import BookmarkService
 from ui.ui import UI
 
 
@@ -16,10 +17,15 @@ class StubIO:
         self.inputs += [input_command]
         return self.inputs.pop(0) if self.inputs else ""
 
+    def write_table(self, bookmarks):
+        for i, bookmark in enumerate(bookmarks):
+            self.outputs.append(
+                f"{str(i+1)}: {bookmark.headline}, {bookmark.url}")
+
 
 class TestUI(unittest.TestCase):
     def setUp(self):
-        self.service_mock = Mock()
+        self.service_mock = Mock(wraps=BookmarkService())
 
     def test_info_is_printed_when_started(self):
         in_out = StubIO(["x"])
@@ -49,7 +55,7 @@ class TestUI(unittest.TestCase):
         in_out = StubIO(["1", "", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
-        self.assertIn("Lisätään uusi vinkki", in_out.outputs)
+        self.assertIn("\nLisätään uusi vinkki", in_out.outputs)
 
     def test_asks_title_when_adding_bookmark(self):
         in_out = StubIO(["1", "", "x"])
@@ -110,7 +116,7 @@ class TestUI(unittest.TestCase):
     def test_creates_list_of_bookmarks(self):
         in_out = StubIO(["2", "x"])
         bookmark = Bookmark("title", "link")
-        self.service_mock.get_all_bookmarks.return_value = [bookmark, bookmark]
+        self.service_mock.get_bookmarks_with_range.return_value = [bookmark, bookmark]
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
-        self.assertIn("title: link, False", in_out.outputs)
+        self.assertIn("1: title, link", in_out.outputs)

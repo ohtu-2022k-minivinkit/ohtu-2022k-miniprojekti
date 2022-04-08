@@ -5,7 +5,7 @@ Library  OperatingSystem
 
 *** Variables ***
 ${database_name}  test-database.sqlite
-${standard_output}  ['', 'Bookmarks komennot:', 'x lopeta', '1 lisää vinkki', '2 tulosta vinkit', ''
+${standard_output}  ['', 'Lukemattomat vinkit:', '', 'Bookmarks komennot:', 'x lopeta', '1 lisää vinkki', '2 näytä kaikki vinkit', '3 näytä luetut vinkit', ''
 ${standard_output_ending}  ]
 ${empty_output_line}  , ''
 
@@ -88,12 +88,12 @@ Clear Inputs
     Command Line Clear Input
 
 Output Should Contain Bookmark
-    [Arguments]  ${headline}  ${url}  ${checked}
-    Command Line Output Should Contain  ${headline}: ${url}, ${checked}
+    [Arguments]  ${index}  ${headline}  ${url}  ${checked}
+    Command Line Output Should Contain  ${index}: ${headline}, ${url}
 
 Output Should Not Contain Bookmark
-    [Arguments]  ${headline}  ${url}  ${checked}
-    Command Line Output Should Not Contain  ${headline}: ${url}, ${checked}
+    [Arguments]  ${index}  ${headline}  ${url}  ${checked}
+    Command Line Output Should Not Contain  ${index}: ${headline}, ${url}
 
 Output Should Be Standard Output
     Command Line Output Should Be  ${standard_output}${standard_output_ending}

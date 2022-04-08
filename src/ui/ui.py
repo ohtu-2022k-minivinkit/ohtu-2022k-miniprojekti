@@ -44,7 +44,6 @@ class UI:
                 self._io.write("virheellinen komento")
                 self._print_all_info()
                 continue
-
             if command == "x":
                 break
 

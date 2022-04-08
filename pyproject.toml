@@ -8,6 +8,7 @@ authors = ["Maunaator <78967619+Maunaator@users.noreply.github.com>"]
 python = "^3.8"
 python-dotenv = "^0.20.0"
 requests = "^2.27.1"
+rich = "^12.2.0"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.13.4"

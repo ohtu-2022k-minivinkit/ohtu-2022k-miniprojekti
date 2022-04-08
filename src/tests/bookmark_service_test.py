@@ -34,3 +34,15 @@ class TestBookmarkService(unittest.TestCase):
         self.bookmark_service.get_bookmarks("ead")
 
         self.repository_mock.get_bookmarks.assert_called_with("ead")
+
+    def test_when_asked_not_checked_bookmarks_calls_for_not_checked_from_repository(self):
+        self.bookmark_service.get_bookmarks_with_range("not checked")
+        self.repository_mock.get_bookmarks_checked_status.assert_called_with(0)
+
+    def test_when_asked_checked_bookmarks_calls_for_checked_from_repository(self):
+        self.bookmark_service.get_bookmarks_with_range("checked")
+        self.repository_mock.get_bookmarks_checked_status.assert_called_with(1)
+
+    def test_when_asked_all_bookmarks_calls_for_all_from_repository(self):
+        self.bookmark_service.get_bookmarks_with_range("all")
+        self.repository_mock.get_all.assert_called_with()

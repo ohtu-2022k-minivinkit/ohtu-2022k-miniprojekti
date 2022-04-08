@@ -6,7 +6,7 @@ Suite Teardown  Empty Bookmarks Table
 *** Test Cases ***
 List Bookmarks With No Bookmarks
     List Bookmarks
-    Output Should Be Standard Output And Empty Output Line
+    Command Line Output Should Contain  Kirjastossa ei ole vinkkejä
 
 Create One Bookmark Into Database And List Bookmarks
     Create Bookmark In Bookmarks Table  Netti  http://www.netti.fi

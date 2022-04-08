@@ -15,23 +15,27 @@ COMMANDS = {
 
 
 class UI:
-    def __init__(self,
-            bookmark_service=default_bookmark_service,
-            input_output=default_console_io
-            ):
+    def __init__(
+            self, bookmark_service=default_bookmark_service,
+            input_output=default_console_io):
+        """Initializes UI with service class and ConsoleIO object.
+
+        Args:
+            bookmark_service (BookmarkService, optional):
+                Service class containing the busines logic used through the UI.
+                Defaults to default_bookmark_service.
+            input_output (class, optional):
+                Object providing IO methods (read() and write()). Defaults to
+                default_console_io.
+        """
         self._io = input_output
         self._bookmark_service = bookmark_service
         self._error = False
 
     def start(self):
-        """Start the program"""
-
-        self._io.write("")
-        self._io.write("Lukemattomat vinkit:")
-        self._list_bookmarks_with_range("not checked")
-
-        self._io.write("")
-        self._io.write("Bookmarks komennot:")
+        """Starts the user interface."""
+        self._io.write("** Lukuvinkkikirjasto **\n")
+        self._list_unread_bookmarks()
         self._print_info()
 
         while True:
@@ -42,36 +46,22 @@ class UI:
                 self._io.write("virheellinen komento")
                 self._print_info()
                 continue
-
             if command == "x":
                 break
-
             if command == "1":
                 self._add_bookmark()
-
             if command == "2":
-                self._list_bookmarks_with_range("all")
-
+                self._list_all_bookmarks()
             if command == "3":
-                self._list_bookmarks_with_range("checked")
+                self._list_checked_bookmarks()
 
     def _print_info(self):
-        """Prints all UI -commands to user to see"""
-
+        self._io.write("\nKomennot:")
         for command in COMMANDS.values():
             self._io.write(command)
 
     def _add_bookmark(self):
-        """Asks for title and link inputs from user.
-
-        If user's input is valid,
-        calls Bookmark_service class to create bookmark and add
-        it into the repository.
-
-        If input is not valid, executing will return to the
-        while -loop in the method start.
-        """
-        self._io.write("Lisätään uusi vinkki")
+        self._io.write("\nLisätään uusi vinkki")
 
         title = self._io.read("otsikko: ")
         self._check_title(title)
@@ -95,37 +85,36 @@ class UI:
         self._list_bookmarks(bookmark_list)
 
     def _check_title(self, title):
-        """Validates user input for title.
-
-        if user's input is not valid, prints an error message
-        and places True in the variable self._error.
-
-        Args:
-            title (string): user's input for title
-        """
         title = title.strip()
         if not title or len(title) > 100:
             self._error = True
             self._io.write("otsikko puuttui tai oli liian pitkä (yli 100 merkkiä)")
 
     def _check_link(self, link):
-        """Validates user input for link.
-
-        if user's input is not valid, prints an error message
-        and places True in the variable self._error.
-
-        Args:
-            link (string): user's input for link
-        """
         if len(link.strip()) < 12 or link[:4] != "http" or " " in link.strip():
             self._error = True
             self._io.write("linkki oli virheellinen, anna otsikko ja linkki uudelleen")
 
-    def _list_bookmarks(self, bookmark_list):
-        """Prints bookmarks from the list given as a parameter.
-
-        Args:
-            bookmark_list (list):   contains bookmarks
-        """
+    def _list_all_bookmarks(self):
+        bookmark_list = self._bookmark_service.get_bookmarks_with_range("all")
         if bookmark_list:
+            self._io.write("Kaikki vinkit:")
             self._io.write_table(bookmark_list)
+        else:
+            self._io.write("Kirjastossa ei ole vinkkejä")
+
+    def _list_unread_bookmarks(self):
+        bookmark_list = self._bookmark_service.get_bookmarks_with_range("not checked")
+        if bookmark_list:
+            self._io.write("Lukemattomat vinkit:")
+            self._io.write_table(bookmark_list)
+        else:
+            self._io.write("Olet lukenut kaikki vinkit")
+
+    def _list_checked_bookmarks(self):
+        bookmark_list = self._bookmark_service.get_bookmarks_with_range("checked")
+        if bookmark_list:
+            self._io.write("Luetut vinkit:")
+            self._io.write_table(bookmark_list)
+        else:
+            self._io.write("Kirjastossa ei ole luettuja vinkkejä")

@@ -57,8 +57,9 @@ class BookmarkService():
         """Sets bookmark with given id as checked.
 
         Args:
-            bookmark_id (integer): Database id of the 
+            bookmark_id (integer): Database id of the
         """
+        # pylint: disable=unnecessary-pass
         pass
 
 

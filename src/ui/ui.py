@@ -60,5 +60,6 @@ class UI:
 
     def _print_info(self):
         self._io.write("\nKomennot:\nx lopeta")
-        for key in self._commands.keys():
+        # pylint: disable=consider-using-dict-items
+        for key in self._commands:
             self._io.write(f"{key} {self._commands[key]}")

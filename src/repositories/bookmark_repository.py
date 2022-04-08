@@ -47,7 +47,6 @@ class BookmarkRepository:
         data = cursor.fetchall()
         bookmarks = []
         for row in data:
-            print(row)
             bookmarks.append(Bookmark(row[0], row[1], row[2]))
 
         return bookmarks

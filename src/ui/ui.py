@@ -5,6 +5,7 @@ from ui.commands.add_bookmark import AddBookmark
 from ui.commands.list_bookmarks import (
     ListAllBookmarks, ListUnreadBookmarks, ListCheckedBookmarks
 )
+from ui.commands.mark_bookmark_checked import MarkBookmarkChecked
 from ui.bookmark_validation import BookmarkValidation
 from services.bookmark_service import (
     bookmark_service as default_bookmark_service
@@ -34,7 +35,8 @@ class UI:
             "1": AddBookmark(
                 self._io, self._bookmark_service, BookmarkValidation(self._io)),
             "2": ListAllBookmarks(self._io, self._bookmark_service),
-            "3": ListCheckedBookmarks(self._io, self._bookmark_service)
+            "3": ListCheckedBookmarks(self._io, self._bookmark_service),
+            "4": MarkBookmarkChecked(self._io, self._bookmark_service)
         }
 
     def start(self):

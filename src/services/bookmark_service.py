@@ -28,8 +28,9 @@ class BookmarkService():
         """Returns the list of the chosen range of bookmarks stored in the repository.
 
         Args:
-            choice (string): selected range of bookmarks
-                             values: 'all', 'checked' or 'not checked'
+            choice (string):
+                Selected range of bookmarks. Accepts values 'all', 'checked'
+                and 'not checked'.
 
         Returns:
             list: List of Bookmark objects.
@@ -40,11 +41,25 @@ class BookmarkService():
             return self._bookmark_repository.get_bookmarks_checked_status(1)
         return self._bookmark_repository.get_all()
 
-    def get_bookmarks(self, keyword):
-        """Returns all bookmarks where headline contains keyword
+    def get_bookmarks(self, keyword) -> list:
+        """Returns all bookmarks where headline contains keyword.
+
+        Args:
+            keyword (string):
+                Keyword to be looked for from bookmark headlines.
+
         Returns:
-            list: List of Bookmark objects
+            list: List of Bookmark objects.
         """
         return self._bookmark_repository.get_bookmarks(keyword)
+
+    def set_bookmark_checked(self, bookmark_id):
+        """Sets bookmark with given id as checked.
+
+        Args:
+            bookmark_id (integer): Database id of the 
+        """
+        pass
+
 
 bookmark_service = BookmarkService()

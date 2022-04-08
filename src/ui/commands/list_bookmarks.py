@@ -15,13 +15,18 @@ class ListAllBookmarks():
         return "näytä kaikki vinkit"
 
     def execute(self):
-        """Executes command."""
+        """Executes command.
+
+        Returns:
+            Returns True if bookmarks were found, False otherwise.
+        """
         bookmark_list = self._bookmark_service.get_bookmarks_with_range("all")
         if bookmark_list:
             self._io.write("Kaikki vinkit:")
             self._io.write_table(bookmark_list)
-        else:
-            self._io.write("Kirjastossa ei ole vinkkejä")
+            return True
+        self._io.write("Kirjastossa ei ole vinkkejä")
+        return False
 
 
 class ListUnreadBookmarks():
@@ -41,13 +46,18 @@ class ListUnreadBookmarks():
         return "näytä lukemattomat vinkit"
 
     def execute(self):
-        """Executes command."""
+        """Executes command.
+
+        Returns:
+            Returns True if bookmarks were found, False otherwise.
+        """
         bookmark_list = self._bookmark_service.get_bookmarks_with_range("not checked")
         if bookmark_list:
             self._io.write("Lukemattomat vinkit:")
             self._io.write_table(bookmark_list)
-        else:
-            self._io.write("Olet lukenut kaikki vinkit")
+            return True
+        self._io.write("Olet lukenut kaikki vinkit")
+        return False
 
 
 class ListCheckedBookmarks():
@@ -67,10 +77,15 @@ class ListCheckedBookmarks():
         return "näytä luetut vinkit"
 
     def execute(self):
-        """Executes command."""
+        """Executes command.
+
+        Returns:
+            Returns True if bookmarks were found, False otherwise.
+        """
         bookmark_list = self._bookmark_service.get_bookmarks_with_range("checked")
         if bookmark_list:
             self._io.write("Luetut vinkit:")
             self._io.write_table(bookmark_list)
-        else:
-            self._io.write("Kirjastossa ei ole luettuja vinkkejä")
+            return True
+        self._io.write("Kirjastossa ei ole luettuja vinkkejä")
+        return False

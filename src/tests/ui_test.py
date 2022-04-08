@@ -31,7 +31,7 @@ class TestUI(unittest.TestCase):
         in_out = StubIO(["x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
-        self.assertIn("x lopeta", in_out.outputs)
+        self.assertIn("\nKomennot:\nx lopeta", in_out.outputs)
 
     def test_asks_command_after_start(self):
         in_out = StubIO(["x"])
@@ -52,45 +52,45 @@ class TestUI(unittest.TestCase):
         self.assertNotIn("virheellinen komento", in_out.outputs)
 
     def test_command_1_moves_to_add_new_bookmark(self):
-        in_out = StubIO(["1", "", "x"])
+        in_out = StubIO(["1", "otsikko", "http://linkki", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("\nLisätään uusi vinkki", in_out.outputs)
 
     def test_asks_title_when_adding_bookmark(self):
-        in_out = StubIO(["1", "", "x"])
+        in_out = StubIO(["1", "otsikko", "http://linkki", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("otsikko: ", in_out.inputs)
 
     def test_asks_link_when_adding_bookmark(self):
-        in_out = StubIO(["1", "title", "", "x"])
+        in_out = StubIO(["1", "otsikko", "http://linkki", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki: ", in_out.inputs)
 
-    def test_not_title_given_gives_error_message(self):
-        in_out = StubIO(["1", "", "x"])
+    def test_no_title_given_gives_error_message(self):
+        in_out = StubIO(["1", "", "otsikko", "http://linkki", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("otsikko puuttui tai oli liian pitkä (yli 100 merkkiä)", in_out.outputs)
 
-    def test_title_too_long_gives_error_message(self):
+    def test_too_long_title_gives_error_message(self):
         title = "t"*101
-        in_out = StubIO(["1", title, "x"])
+        in_out = StubIO(["1", title, "otsikko", "http://linkki", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("otsikko puuttui tai oli liian pitkä (yli 100 merkkiä)", in_out.outputs)
 
     def test_correct_title_checks_correct(self):
         title = "t"*100
-        in_out = StubIO(["1", title, "", "x"])
+        in_out = StubIO(["1", title, "http://linkki", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("otsikko: ", in_out.inputs)
 
-    def test_not_link_given_gives_error_message(self):
-        in_out = StubIO(["1", "title", "", "x"])
+    def test_no_link_given_gives_error_message(self):
+        in_out = StubIO(["1", "otsikko", "", "otsikko", "http://linkki", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki oli virheellinen, anna otsikko ja linkki uudelleen", in_out.outputs)
@@ -102,13 +102,13 @@ class TestUI(unittest.TestCase):
         self.assertIn("linkki: ", in_out.inputs)
 
     def test_url_starting_incorrectly_gives_error_message(self):
-        in_out = StubIO(["1", "title", "ttp_5-6./1", "x"])
+        in_out = StubIO(["1", "otsikko", "ttp_5-6./1", "otsikko", "http://linkki", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki: ", in_out.inputs)
 
     def test_too_short_url_gives_error_message(self):
-        in_out = StubIO(["1", "title", "http56789", "x"])
+        in_out = StubIO(["1", "otsikko", "http56789", "otsikko", "http://linkki", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki: ", in_out.inputs)

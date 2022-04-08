@@ -1,6 +1,7 @@
 from rich.console import Console
 from rich.table import Table
 
+
 class ConsoleIO:
     def __init__(self):
         self._console = Console()

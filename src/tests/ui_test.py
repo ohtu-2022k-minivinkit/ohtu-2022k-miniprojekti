@@ -55,7 +55,7 @@ class TestUI(unittest.TestCase):
         in_out = StubIO(["1", "", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
-        self.assertIn("Lisätään uusi vinkki", in_out.outputs)
+        self.assertIn("\nLisätään uusi vinkki", in_out.outputs)
 
     def test_asks_title_when_adding_bookmark(self):
         in_out = StubIO(["1", "", "x"])

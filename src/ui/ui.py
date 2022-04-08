@@ -1,15 +1,14 @@
 from ui.console_io import (
     console_io as default_console_io
 )
-from services.bookmark_service import (
-    bookmark_service as default_bookmark_service
-)
-
 from ui.commands.add_bookmark import AddBookmark
 from ui.commands.list_bookmarks import (
     ListAllBookmarks, ListUnreadBookmarks, ListCheckedBookmarks
 )
 from ui.bookmark_validation import BookmarkValidation
+from services.bookmark_service import (
+    bookmark_service as default_bookmark_service
+)
 
 
 class UI:
@@ -28,6 +27,8 @@ class UI:
         """
         self._io = input_output
         self._bookmark_service = bookmark_service
+        self._list_unread_bookmarks = ListUnreadBookmarks(
+            self._io, self._bookmark_service)
 
         self._commands = {
             "1": AddBookmark(
@@ -40,13 +41,13 @@ class UI:
         """Starts the user interface."""
 
         self._io.write("** Lukuvinkkikirjasto **\n")
-        self._list_unread_bookmarks()
+        self._list_unread_bookmarks.execute()
         self._print_info()
 
         while True:
             self._io.write("")
             command = self._io.read("komento: ")
-            
+
             if command == "x":
                 break
             if not command in self._commands:
@@ -61,11 +62,3 @@ class UI:
         self._io.write("\nKomennot:\nx lopeta")
         for key in self._commands.keys():
             self._io.write(f"{key} {self._commands[key]}")
-
-    def _list_unread_bookmarks(self):
-        bookmark_list = self._bookmark_service.get_bookmarks_with_range("not checked")
-        if bookmark_list:
-            self._io.write("Lukemattomat vinkit:")
-            self._io.write_table(bookmark_list)
-        else:
-            self._io.write("Olet lukenut kaikki vinkit")

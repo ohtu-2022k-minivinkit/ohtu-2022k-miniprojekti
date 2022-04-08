@@ -1,19 +1,16 @@
-from ui.bookmark_validation import BookmarkValidation
-
-
 class AddBookmark:
-    def __init__(self, io, bookmark_service, validator):
+    def __init__(self, i_o, bookmark_service, validator):
         """Initializes command with IO, BookmarkService and validator object.
 
         Args:
-            io (class, optional):
+            i_o (class, optional):
                 Object providing IO methods (read() and write()).
             bookmark_service (class, optional):
                 Service class containing business logic.
             validator (BookmarkValidation):
                 Object with methods to validate user input.
         """
-        self._io = io
+        self._io = i_o
         self._bookmark_service = bookmark_service
         self._validator = validator
 

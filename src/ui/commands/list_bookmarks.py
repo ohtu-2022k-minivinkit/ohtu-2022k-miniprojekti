@@ -1,14 +1,14 @@
 class ListAllBookmarks():
-    def __init__(self, io, bookmark_service):
+    def __init__(self, i_o, bookmark_service):
         """Initializes command with IO and BookmarkService objects.
 
         Args:
-            io (class, optional):
+            i_o (class, optional):
                 Object providing IO methods (read() and write()).
             bookmark_service (class, optional):
                 Service class containing business logic.
         """
-        self._io = io
+        self._io = i_o
         self._bookmark_service = bookmark_service
 
     def __str__(self):
@@ -25,16 +25,16 @@ class ListAllBookmarks():
 
 
 class ListUnreadBookmarks():
-    def __init__(self, io, bookmark_service):
+    def __init__(self, i_o, bookmark_service):
         """Initializes command with IO and BookmarkService objects.
 
         Args:
-            io (class, optional):
+            i_o (class, optional):
                 Object providing IO methods (read() and write()).
             bookmark_service (class, optional):
                 Service class containing business logic.
         """
-        self._io = io
+        self._io = i_o
         self._bookmark_service = bookmark_service
 
     def __str__(self):
@@ -51,16 +51,16 @@ class ListUnreadBookmarks():
 
 
 class ListCheckedBookmarks():
-    def __init__(self, io, bookmark_service):
+    def __init__(self, i_o, bookmark_service):
         """Initializes command with IO and BookmarkService objects.
 
         Args:
-            io (class, optional):
+            i_o (class, optional):
                 Object providing IO methods (read() and write()).
             bookmark_service (class, optional):
                 Service class containing business logic.
         """
-        self._io = io
+        self._io = i_o
         self._bookmark_service = bookmark_service
 
     def __str__(self):

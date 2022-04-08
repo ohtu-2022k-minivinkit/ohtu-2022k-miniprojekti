@@ -20,17 +20,14 @@ class ConsoleIO:
         print(self.output)
 
     def write_table(self, bookmarks):
-        id = 0
         """Write table to user"""
-        self.bookmarks = bookmarks
         table = Table(title="Bookmarks")
-        table.add_column("id", style="green")
+        table.add_column("#", style="green")
         table.add_column("title", style="cyan")
         table.add_column("link", style="magenta")
 
-        for bookmark in self.bookmarks:
-            id += 1
-            table.add_row(str(id), bookmark.headline, bookmark.url)
+        for i, bookmark in enumerate(bookmarks):
+            table.add_row(str(i+1), bookmark.headline, bookmark.url)
 
         console = Console()
         console.print(table)

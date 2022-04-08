@@ -17,6 +17,11 @@ class StubIO:
         self.inputs += [input_command]
         return self.inputs.pop(0) if self.inputs else ""
 
+    def write_table(self, bookmarks):
+        for i, bookmark in enumerate(bookmarks):
+            self.outputs.append(
+                f"{str(i+1)}: {bookmark.headline}, {bookmark.url}")
+
 
 class TestUI(unittest.TestCase):
     def setUp(self):
@@ -114,4 +119,4 @@ class TestUI(unittest.TestCase):
         self.service_mock.get_bookmarks_with_range.return_value = [bookmark, bookmark]
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
-        self.assertIn("title: link, False", in_out.outputs)
+        self.assertIn("1: title, link", in_out.outputs)

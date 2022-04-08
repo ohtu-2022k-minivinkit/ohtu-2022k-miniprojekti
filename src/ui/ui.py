@@ -5,7 +5,6 @@ from services.bookmark_service import (
     bookmark_service as default_bookmark_service
 )
 
-from rich import print
 
 COMMANDS = {
     "x": "x lopeta",

@@ -31,22 +31,23 @@ class BookmarkRepository:
         return bookmarks
 
 
-    def get_choice(self, checked) -> list:
-        """Gets readed or not readed bookmarks as chosen
+    def get_bookmarks_checked_status(self, status) -> list:
+        """Gets already read or not read bookmarks as chosen.
 
             Args:
-                checked (integer): selected range of bookmarks
-                                    0 = not readed
-                                    1 = readed
+                status (integer): selected status of bookmarks to get from repository
+                                    0 = not checked
+                                    1 = checked
             """
         cursor = self._connection.cursor()
         cursor.execute("""SELECT headline, url, checked
                         FROM bookmarks
                         WHERE checked=?
-                        """, [checked])
+                        """, [status])
         data = cursor.fetchall()
         bookmarks = []
         for row in data:
+            print(row)
             bookmarks.append(Bookmark(row[0], row[1], row[2]))
 
         return bookmarks

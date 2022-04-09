@@ -1,3 +1,5 @@
+from services.network_request import get_url_title
+
 class AddBookmark:
     def __init__(self, i_o, bookmark_service, validator):
         """Initializes command with IO, BookmarkService and validator object.
@@ -21,13 +23,24 @@ class AddBookmark:
         """Executes command."""
         self._io.write("\nLisätään uusi vinkki")
 
-        title = self._io.read("otsikko: ")
-        if not self._validator.check_title(title):
+        link = self._io.read("linkki: ")
+        if not self._validator.check_link(link):
             self.execute()
             return
 
-        link = self._io.read("linkki: ")
-        if not self._validator.check_link(link):
+        title = get_url_title(link)
+        print(title)
+
+        if not title:
+            title = self._io.read("otsikko: ")
+        else:
+            self._io.write(f"otsikko: {title}")
+            edit = self._io.read("Muokkaa otsikkoa? (k/e): ")
+
+            if edit == "k":
+                title = self._io.read("otsikko: ")
+
+        if not self._validator.check_title(title):
             self.execute()
             return
 

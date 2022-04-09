@@ -29,7 +29,6 @@ class AddBookmark:
             return
 
         title = get_url_title(link)
-        print(title)
 
         if not title:
             title = self._io.read("otsikko: ")

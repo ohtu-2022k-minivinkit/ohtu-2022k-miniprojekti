@@ -1,6 +1,6 @@
 # pylint: skip-file
 from ui.ui import UI
-from tests.ui_test import StubIO
+from tests.stub_io import StubIO
 from services.bookmark_service import BookmarkService
 
 

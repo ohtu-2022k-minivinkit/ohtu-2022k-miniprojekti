@@ -21,26 +21,28 @@ class AddBookmark:
 
     def execute(self):
         """Executes command."""
-        self._io.write("\nLisätään uusi vinkki")
+        self._io.write("\nLisätään uusi vinkki, jos haluat palata valikkoon syötä x")
 
         link = self._io.read("linkki: ")
-        if not self._validator.check_link(link):
-            self.execute()
-            return
 
-        title = get_url_title(link)
+        if link != "x":
+            if not self._validator.check_link(link):
+                self.execute()
+                return
 
-        if not title:
-            title = self._io.read("otsikko: ")
-        else:
-            self._io.write(f"otsikko: {title}")
-            edit = self._io.read("Muokkaa otsikkoa? (k/e): ")
+            title = get_url_title(link)
 
-            if edit == "k":
+            if not title:
                 title = self._io.read("otsikko: ")
+            else:
+                self._io.write(f"otsikko: {title}")
+                edit = self._io.read("Muokkaa otsikkoa? (k/e): ")
 
-        if not self._validator.check_title(title):
-            self.execute()
-            return
+                if edit == "k":
+                    title = self._io.read("otsikko: ")
 
-        self._bookmark_service.create_bookmark(title, link)
+            if not self._validator.check_title(title):
+                self.execute()
+                return
+
+            self._bookmark_service.create_bookmark(title, link)

@@ -3,24 +3,7 @@ from unittest.mock import Mock
 from entities.bookmark import Bookmark
 from services.bookmark_service import BookmarkService
 from ui.ui import UI
-
-
-class StubIO:
-    def __init__(self, inputs=None):
-        self.inputs = inputs or []
-        self.outputs = []
-
-    def write(self, value):
-        self.outputs.append(value)
-
-    def read(self, input_command):
-        self.inputs += [input_command]
-        return self.inputs.pop(0) if self.inputs else ""
-
-    def write_table(self, bookmarks):
-        for i, bookmark in enumerate(bookmarks):
-            self.outputs.append(
-                f"{str(i+1)}: {bookmark.headline}, {bookmark.url}")
+from tests.stub_io import StubIO
 
 
 class TestUI(unittest.TestCase):
@@ -55,7 +38,7 @@ class TestUI(unittest.TestCase):
         in_out = StubIO(["1", "https://helsinki.fi", "e", "x"])
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
-        self.assertIn("\nLisätään uusi vinkki", in_out.outputs)
+        self.assertIn("\nLisätään uusi vinkki, jos haluat palata valikkoon syötä x", in_out.outputs)
 
     def test_asks_title_when_adding_bookmark(self):
         in_out = StubIO(["1", "http://not_working_link", "otsikko", "x"])

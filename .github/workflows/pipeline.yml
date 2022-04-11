@@ -26,5 +26,5 @@ jobs:
       - name: Unit Test
         run: poetry run pytest src/tests
 
-#      - name: Robot Test
-#        run: export ENV="test" && poetry run robot src/tests && unset ENV
+      - name: Robot Test
+        run: export ENV="test" && poetry run robot src/tests && unset ENV

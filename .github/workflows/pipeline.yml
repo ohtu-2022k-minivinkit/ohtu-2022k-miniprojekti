@@ -28,3 +28,11 @@ jobs:
 
       - name: Robot Test
         run: export ENV="test" && poetry run robot src/tests && unset ENV
+        
+      - name: Coverage report
+        run: poetry run coverage xml
+        
+      - name: Coverage report to Codecov
+        uses: codecov/codecov-action@v2
+
+        

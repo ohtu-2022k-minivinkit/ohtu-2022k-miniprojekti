@@ -1,4 +1,5 @@
 ![GitHub Actions](https://github.com/ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti/workflows/Pipeline/badge.svg)
+[![codecov](https://codecov.io/gh/ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti/branch/main/graph/badge.svg?token=1PIYL9RC3W)](https://codecov.io/gh/ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti)
 # Software Engineering 2022-Spring Miniproject
 
 ## Documentation

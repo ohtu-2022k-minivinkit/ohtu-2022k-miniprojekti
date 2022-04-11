@@ -10,31 +10,39 @@ from ui.bookmark_validation import BookmarkValidation
 from services.bookmark_service import (
     bookmark_service as default_bookmark_service
 )
+from services.network_service import (
+    network_service as default_network_service
+)
 
 
 class UI:
     def __init__(
             self, bookmark_service=default_bookmark_service,
+            network_service=default_network_service,
             input_output=default_console_io):
-        """Initialize UI with BookmarkService and IO objects.
+        """Initialize UI with BookmarkService, NetworkService and IO objects.
 
         Args:
             bookmark_service (class, optional):
                 Service class containing business logic. Defaults to
                 default_bookmark_service.
+            network_service (class, optional):
+                Service class containing network logic. Defaults to
+                default_network_service.
             input_output (class, optional):
                 Object providing IO methods (read() and write()). Defaults to
                 default_console_io.
         """
         self._console_io = input_output
         self._bookmark_service = bookmark_service
+        self._network_service = network_service
         self._list_unread_bookmarks = ListUnreadBookmarks(
             self._console_io, self._bookmark_service)
 
         self._commands = {
             "1": AddBookmark(
-                self._console_io, self._bookmark_service, BookmarkValidation(
-                    self._console_io)),
+                self._console_io, self._bookmark_service, self._network_service,
+                BookmarkValidation(self._console_io)),
             "2": ListAllBookmarks(self._console_io, self._bookmark_service),
             "3": ListCheckedBookmarks(self._console_io, self._bookmark_service),
             "4": MarkBookmarkChecked(self._console_io, self._bookmark_service, self)

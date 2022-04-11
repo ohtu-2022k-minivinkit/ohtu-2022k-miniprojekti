@@ -1,19 +1,20 @@
-from services.network_request import get_url_title
-
 class AddBookmark:
-    def __init__(self, i_o, bookmark_service, validator):
-        """Initializes command with IO, BookmarkService and validator object.
+    def __init__(self, i_o, bookmark_service, network_service, validator):
+        """Initializes command with IO, BookmarkService, NetworkService and validator object.
 
         Args:
             i_o (class, optional):
                 Object providing IO methods (read() and write()).
             bookmark_service (class, optional):
                 Service class containing business logic.
+            network_service (class, optional):
+                Service class containing network logic.
             validator (BookmarkValidation):
                 Object with methods to validate user input.
         """
         self._io = i_o
         self._bookmark_service = bookmark_service
+        self._network_service = network_service
         self._validator = validator
 
     def __str__(self):
@@ -30,7 +31,7 @@ class AddBookmark:
                 self.execute()
                 return
 
-            title = get_url_title(link)
+            title = self._network_service.get_url_title(link)
 
             if not title:
                 title = self._io.read("otsikko: ")

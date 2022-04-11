@@ -1,14 +1,23 @@
 # pylint: skip-file
 from ui.ui import UI
 from tests.stub_io import StubIO
+from tests.stub_network_service import StubNetworkService
 from services.bookmark_service import BookmarkService
+from services.network_service import NetworkService
 
 
 class RobotLibrary:
-    def __init__(self):
+    def __init__(self, network_setting="stub"):
         self._io = StubIO()
         self._bookmark_service = BookmarkService()
-        self._ui = UI(self._bookmark_service, self._io)
+
+        if network_setting == "network":
+            self._ui = UI(self._bookmark_service, NetworkService(), self._io)
+        else:
+            returning_urls = {}
+            returning_urls["http://www.returning.com"] = "Returning"
+
+            self._ui = UI(self._bookmark_service, StubNetworkService(returning_urls), self._io)
 
     def ui_start(self):
         self._ui.start()

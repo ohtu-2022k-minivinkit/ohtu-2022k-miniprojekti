@@ -1,6 +1,5 @@
 *** Settings ***
 Resource  database_resource.robot
-Library  ../../RobotLibrary.py
 
 *** Variables ***
 ${standard_output}  ['', 'Lukemattomat vinkit:', '', 'Bookmarks komennot:', 'x lopeta', '1 lisää vinkki', '2 näytä kaikki vinkit', '3 näytä luetut vinkit', ''
@@ -8,24 +7,6 @@ ${standard_output_ending}  ]
 ${empty_output_line}  , ''
 
 *** Keywords ***
-Go To Bookmark Input
-    Input Command  1
-
-List Bookmarks
-    Input Command  2
-    Input Command  x
-    Run Commands
-
-Add Bookmark
-    [Arguments]  ${headline}  ${url}
-    Clear Inputs
-    Clear Outputs
-    Go To Bookmark Input
-    Input Command  ${url}
-    Input Command  ${headline}
-    Input Command  x
-    Run Commands
-
 Run Commands
     Ui Start
 

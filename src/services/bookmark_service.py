@@ -33,7 +33,7 @@ class BookmarkService():
         """Returns a list of bookmarks by predefined ranges.
 
         Args:
-            bookmark_range (string):
+            bookmark_range (integer):
                 Selected range of bookmarks. Accepts values BOOKMARK_RANGE__ALL,
                 BOOKMARK_RANGE__CHECKED and BOOKMARK_RANGE__UNCHECKED.
 

@@ -28,7 +28,7 @@ class ConsoleIO:
         table.add_column("linkki", style="magenta")
 
         for i, bookmark in enumerate(bookmarks):
-            table.add_row(str(i+1), bookmark.headline, bookmark.url)
+            table.add_row(str(i+1), str(bookmark.headline), str(bookmark.url))
 
         self._console.print(table)
 

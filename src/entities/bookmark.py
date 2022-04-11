@@ -1,5 +1,5 @@
 class Bookmark:
-    def __init__(self, headline, url, checked=False):
+    def __init__(self, headline, url, checked=False, database_id=None):
         """Initializes Bookmark with headline, url and checked.
 
         Args:
@@ -13,6 +13,7 @@ class Bookmark:
         self.headline = headline
         self.url = url
         self.checked = checked
+        self.database_id = database_id
 
     def __str__(self):
         """Returns string representation of the object.

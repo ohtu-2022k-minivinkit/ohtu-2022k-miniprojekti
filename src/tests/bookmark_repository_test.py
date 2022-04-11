@@ -34,21 +34,21 @@ class TestBookmarkRepository(unittest.TestCase):
         bookmark_repository.create(self.bookmark_1)
         bookmark_repository.create(self.bookmark_2)
 
-        bookmarks = bookmark_repository.get_bookmarks("Tes")
+        bookmarks = bookmark_repository.get_by_keyword("Tes")
         self.assertEqual(len(bookmarks), 2)
 
     def test_get_bookmarks_ignore_case(self):
         bookmark_repository.create(self.bookmark_1)
         bookmark_repository.create(self.bookmark_2)
 
-        bookmarks = bookmark_repository.get_bookmarks("ES")
+        bookmarks = bookmark_repository.get_by_keyword("ES")
         self.assertEqual(len(bookmarks), 2)
 
     def test_get_bookmarks_checked_with_param_0_as_not_checked_gets_not_checked_bookmarks(self):
         bookmark_repository.create(Bookmark("headline", "url", False))
         bookmark_repository.create(Bookmark("headline", "url", False))
         bookmark_repository.create(Bookmark("headline", "url", True))
-        bookmarks = bookmark_repository.get_bookmarks_checked_status(0)
+        bookmarks = bookmark_repository.get_by_checked(0)
 
         self.assertEqual(len(bookmarks), 2)
         self.assertEqual(bookmarks[0].checked, 0)
@@ -57,7 +57,7 @@ class TestBookmarkRepository(unittest.TestCase):
         bookmark_repository.create(Bookmark("headline", "url", False))
         bookmark_repository.create(Bookmark("headline", "url", False))
         bookmark_repository.create(Bookmark("headline", "url", True))
-        bookmarks = bookmark_repository.get_bookmarks_checked_status(1)
+        bookmarks = bookmark_repository.get_by_checked(1)
 
         self.assertEqual(len(bookmarks), 1)
         self.assertEqual(bookmarks[0].checked, 1)

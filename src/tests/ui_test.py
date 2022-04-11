@@ -96,10 +96,10 @@ class TestUI(unittest.TestCase):
         user_interface.start()
         self.assertIn("linkki: ", in_out.inputs)
 
-    def test_creates_list_of_bookmarks(self):
+    def test_shows_list_of_bookmarks(self):
         in_out = StubIO(["2", "x"])
         bookmark = Bookmark("title", "link")
-        self.service_mock.get_bookmarks_with_range.return_value = [bookmark, bookmark]
+        self.service_mock.get_bookmarks_by_range.return_value = [bookmark, bookmark]
         user_interface = UI(self.service_mock, in_out)
         user_interface.start()
         self.assertIn("1: title, link", in_out.outputs)

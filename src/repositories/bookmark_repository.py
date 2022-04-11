@@ -20,48 +20,51 @@ class BookmarkRepository:
             print(err)
 
     def get_all(self) -> list:
-        """Get all bookmarks"""
+        """Returns all bookmarks as a list of Bookmark objects."""
         cursor = self._connection.cursor()
-        cursor.execute("SELECT headline, url, checked FROM bookmarks")
+        cursor.execute("SELECT headline, url, checked, id FROM bookmarks")
         data = cursor.fetchall()
         bookmarks = []
         for row in data:
-            bookmarks.append(Bookmark(row[0], row[1], row[2]))
+            bookmarks.append(Bookmark(row[0], row[1], row[2], row[3]))
 
         return bookmarks
 
+    def get_by_checked(self, checked) -> list:
+        """Returns read or unread bookmarks as a list of Bookmark objects.
 
-    def get_bookmarks_checked_status(self, status) -> list:
-        """Gets already read or not read bookmarks as chosen.
-
-            Args:
-                status (integer): selected status of bookmarks to get from repository
-                                    0 = not checked
-                                    1 = checked
-            """
+        Args:
+            status (integer): Is bookmark checked or not (0 or 1).
+        """
         cursor = self._connection.cursor()
-        cursor.execute("""SELECT headline, url, checked
+        cursor.execute("""SELECT headline, url, checked, id
                         FROM bookmarks
                         WHERE checked=?
-                        """, [status])
+                        """, [checked])
         data = cursor.fetchall()
         bookmarks = []
         for row in data:
-            bookmarks.append(Bookmark(row[0], row[1], row[2]))
+            bookmarks.append(Bookmark(row[0], row[1], row[2], row[3]))
 
         return bookmarks
 
-    def get_bookmarks(self, keyword: str) -> list:
-        """Get all bookmarks where headline contains keyword"""
+    def get_by_keyword(self, keyword: str) -> list:
+        """Returns list of bookmarks where headline contains keyword."""
         cursor = self._connection.cursor()
-        cursor.execute("SELECT headline, url, checked FROM bookmarks " \
+        cursor.execute("SELECT headline, url, checked, id FROM bookmarks " \
             "WHERE headline LIKE ?", ['%' + keyword + '%'])
         data = cursor.fetchall()
         bookmarks = []
         for row in data:
-            bookmarks.append(Bookmark(row[0], row[1], row[2]))
+            bookmarks.append(Bookmark(row[0], row[1], row[2], row[3]))
 
         return bookmarks
+
+    def set_as_checked(self, bookmark_id: int):
+        """Sets bookmark with given database id as checked."""
+        cursor = self._connection.cursor()
+        cursor.execute(
+            "UPDATE bookmarks SET checked=TRUE WHERE id=?", [bookmark_id])
 
     def delete_all(self):
         """Delete all bookmarks"""

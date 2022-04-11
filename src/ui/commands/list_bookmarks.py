@@ -1,3 +1,8 @@
+from services.bookmark_service import (
+    BOOKMARK_RANGE__ALL, BOOKMARK_RANGE__UNCHECKED
+)
+
+
 class ListAllBookmarks():
     def __init__(self, i_o, bookmark_service):
         """Initializes command with IO and BookmarkService objects.
@@ -20,7 +25,8 @@ class ListAllBookmarks():
         Returns:
             Returns True if bookmarks were found, False otherwise.
         """
-        bookmark_list = self._bookmark_service.get_bookmarks_with_range("all")
+        bookmark_list = self._bookmark_service.get_bookmarks_by_range(
+            BOOKMARK_RANGE__ALL)
         if bookmark_list:
             self._io.write("Kaikki vinkit:")
             self._io.write_table(bookmark_list)
@@ -51,7 +57,8 @@ class ListUnreadBookmarks():
         Returns:
             Returns True if bookmarks were found, False otherwise.
         """
-        bookmark_list = self._bookmark_service.get_bookmarks_with_range("not checked")
+        bookmark_list = self._bookmark_service.get_bookmarks_by_range(
+            BOOKMARK_RANGE__UNCHECKED)
         if bookmark_list:
             self._io.write("Lukemattomat vinkit:")
             self._io.write_table(bookmark_list)
@@ -82,7 +89,9 @@ class ListCheckedBookmarks():
         Returns:
             Returns True if bookmarks were found, False otherwise.
         """
-        bookmark_list = self._bookmark_service.get_bookmarks_with_range("checked")
+        bookmark_list = self._bookmark_service.get_bookmarks_by_range(
+            BOOKMARK_RANGE__UNCHECKED
+        )
         if bookmark_list:
             self._io.write("Luetut vinkit:")
             self._io.write_table(bookmark_list)

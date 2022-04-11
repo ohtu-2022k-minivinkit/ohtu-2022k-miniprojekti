@@ -1,6 +1,6 @@
 import requests
 
-
+# pylint: disable=no-self-use
 class NetworkService():
     def __init__(self):
         """Creates new NetworkService object.

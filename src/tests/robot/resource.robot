@@ -53,10 +53,6 @@ Input Command
     [Arguments]  ${text}
     Command Line Input  ${text}
 
-
-
-
-
-
-
-
+Amount Of Bookmarks In Output Should Be
+    [Arguments]  ${amount}
+    Command Line Output Count Of Bookmarks  ${amount}

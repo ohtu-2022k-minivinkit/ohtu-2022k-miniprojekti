@@ -42,3 +42,13 @@ class RobotLibrary:
             raise AssertionError(
                 f"\"{value}\" is not {str(outputs)}"
             )
+
+    def command_line_output_count_of_bookmarks(self, value):
+        outputs = self._io.outputs
+        bookmarks_count = 0
+        for output_line in outputs:
+            bookmarks_count += output_line.count("http")
+        if int(value) != bookmarks_count:
+            raise AssertionError(
+                f"\"{value}\" is not {bookmarks_count}"
+            )

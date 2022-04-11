@@ -53,3 +53,9 @@ Create Bookmark Into Database
     Connect To Test Database
     Execute Sql String  INSERT INTO bookmarks (headline, url) VALUES ("${headline}", "${url}");
     Disconnect From Database
+
+Create Bookmark Into Database With Status
+    [Arguments]  ${headline}  ${url}  ${status}
+    Connect To Test Database
+    Execute Sql String  INSERT INTO bookmarks (headline, url, checked) VALUES ("${headline}", "${url}", ${status});
+    Disconnect From Database

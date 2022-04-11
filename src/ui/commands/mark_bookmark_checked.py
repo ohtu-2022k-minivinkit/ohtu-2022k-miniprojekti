@@ -2,20 +2,21 @@ from ui.commands.list_bookmarks import ListUnreadBookmarks
 
 
 class MarkBookmarkChecked:
-    def __init__(self, i_o, bookmark_service):
-        """Initializes command with IO and BookmarkService objects.
+    def __init__(self, console_io, bookmark_service, user_interface):
+        """Initializes command with IO, BookmarkService and UI objects.
 
         Args:
-            i_o (class, optional):
+            in_out (class, optional):
                 Object providing IO methods (read() and write()).
             bookmark_service (class, optional):
                 Service class containing business logic.
         """
-        self._io = i_o
+        self._console_io = console_io
         self._bookmark_service = bookmark_service
         self._list_unread_bookmarks = ListUnreadBookmarks(
-            self._io, self._bookmark_service
+            self._console_io, self._bookmark_service
         )
+        self._user_interface = user_interface
 
     def __str__(self):
         return "merkitse vinkki luetuksi"
@@ -23,12 +24,34 @@ class MarkBookmarkChecked:
     def execute(self):
         """Executes command."""
         self._list_unread_bookmarks.execute()
-        bookmark_id = self._io.read(
-            "\nMerkitse vinkki luetuksi antamalla vinkin numero: ")
+        ui_number = self._console_io.read(
+            "\nMerkitse vinkki luetuksi antamalla vinkin numero (tai 'x' "\
+            "keskeyttääksesi): ")
 
-        self._io.write(bookmark_id)
-        #if not self._validator.check_title(title):
-        #    self.execute()
-        #    return
+        if ui_number == "x":
+            return
 
-        #self._bookmark_service.set_bookmark_checked(bookmark_id)
+        if not self._validate_ui_number(ui_number):
+            self.execute()
+            return
+
+        bookmark = self._list_unread_bookmarks.bookmark_list[int(ui_number)-1]
+        self._bookmark_service.set_bookmark_as_checked(bookmark.database_id)
+        self._console_io.write(
+            f"Merkittiin vinkki {ui_number} ({bookmark.headline}) luetuksi")
+
+    def _validate_ui_number(self, ui_number):
+        try:
+            ui_number = int(ui_number)
+        except ValueError:
+            self._user_interface.print_error(
+                f"Virheellinen syöte ({ui_number})!")
+            return False
+
+        if ui_number < 1 or ui_number > len(
+                self._list_unread_bookmarks.bookmark_list):
+            self._user_interface.print_error(
+                f"Vinkkiä {ui_number} ei ole!")
+            return False
+
+        return True

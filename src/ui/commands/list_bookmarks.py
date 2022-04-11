@@ -1,5 +1,5 @@
 from services.bookmark_service import (
-    BOOKMARK_RANGE__ALL, BOOKMARK_RANGE__UNCHECKED
+    BOOKMARK_RANGE__ALL, BOOKMARK_RANGE__CHECKED, BOOKMARK_RANGE__UNCHECKED
 )
 
 
@@ -47,6 +47,7 @@ class ListUnreadBookmarks():
         """
         self._io = i_o
         self._bookmark_service = bookmark_service
+        self.bookmark_list = None
 
     def __str__(self):
         return "näytä lukemattomat vinkit"
@@ -57,11 +58,11 @@ class ListUnreadBookmarks():
         Returns:
             Returns True if bookmarks were found, False otherwise.
         """
-        bookmark_list = self._bookmark_service.get_bookmarks_by_range(
+        self.bookmark_list = self._bookmark_service.get_bookmarks_by_range(
             BOOKMARK_RANGE__UNCHECKED)
-        if bookmark_list:
+        if self.bookmark_list:
             self._io.write("Lukemattomat vinkit:")
-            self._io.write_table(bookmark_list)
+            self._io.write_table(self.bookmark_list)
             return True
         self._io.write("Olet lukenut kaikki vinkit")
         return False
@@ -90,7 +91,7 @@ class ListCheckedBookmarks():
             Returns True if bookmarks were found, False otherwise.
         """
         bookmark_list = self._bookmark_service.get_bookmarks_by_range(
-            BOOKMARK_RANGE__UNCHECKED
+            BOOKMARK_RANGE__CHECKED
         )
         if bookmark_list:
             self._io.write("Luetut vinkit:")

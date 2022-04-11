@@ -65,6 +65,7 @@ class BookmarkRepository:
         cursor = self._connection.cursor()
         cursor.execute(
             "UPDATE bookmarks SET checked=TRUE WHERE id=?", [bookmark_id])
+        self._connection.commit()
 
     def delete_all(self):
         """Delete all bookmarks"""

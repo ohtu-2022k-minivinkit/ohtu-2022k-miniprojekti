@@ -43,9 +43,9 @@ class BookmarkService():
         if bookmark_range == BOOKMARK_RANGE__ALL:
             return self._bookmark_repository.get_all()
         if bookmark_range == BOOKMARK_RANGE__UNCHECKED:
-            return self._bookmark_repository.get_by_checked(0)
+            return self._bookmark_repository.get_by_checked(False)
         if bookmark_range == BOOKMARK_RANGE__CHECKED:
-            return self._bookmark_repository.get_by_checked(1)
+            return self._bookmark_repository.get_by_checked(True)
         raise ValueError(f"Unknown range ({range})!")
 
     def get_bookmarks_by_keyword(self, keyword) -> list:
@@ -62,7 +62,7 @@ class BookmarkService():
 
     def set_bookmark_as_checked(self, bookmark_id):
         """Sets bookmark with given id as checked."""
-        self._bookmark_repository.set_bookmark_as_checked(bookmark_id)
+        self._bookmark_repository.set_as_checked(bookmark_id)
 
 
 bookmark_service = BookmarkService()

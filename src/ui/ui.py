@@ -26,42 +26,48 @@ class UI:
                 Object providing IO methods (read() and write()). Defaults to
                 default_console_io.
         """
-        self._io = input_output
+        self._console_io = input_output
         self._bookmark_service = bookmark_service
         self._list_unread_bookmarks = ListUnreadBookmarks(
-            self._io, self._bookmark_service)
+            self._console_io, self._bookmark_service)
 
         self._commands = {
             "1": AddBookmark(
-                self._io, self._bookmark_service, BookmarkValidation(self._io)),
-            "2": ListAllBookmarks(self._io, self._bookmark_service),
-            "3": ListCheckedBookmarks(self._io, self._bookmark_service),
-            "4": MarkBookmarkChecked(self._io, self._bookmark_service)
+                self._console_io, self._bookmark_service, BookmarkValidation(
+                    self._console_io)),
+            "2": ListAllBookmarks(self._console_io, self._bookmark_service),
+            "3": ListCheckedBookmarks(self._console_io, self._bookmark_service),
+            "4": MarkBookmarkChecked(self._console_io, self._bookmark_service, self)
         }
 
     def start(self):
         """Starts the user interface."""
 
-        self._io.write("** Lukuvinkkikirjasto **\n")
+        self._console_io.write("** Lukuvinkkikirjasto **\n")
         self._list_unread_bookmarks.execute()
-        self._print_info()
+        self.print_info()
 
         while True:
-            self._io.write("")
-            command = self._io.read("komento: ")
+            self._console_io.write("")
+            command = self._console_io.read("komento: ")
 
             if command == "x":
                 break
             if not command in self._commands:
-                self._io.write("virheellinen komento")
-                self._print_info()
+                self._console_io.write("virheellinen komento")
+                self.print_info()
                 continue
 
             command_object = self._commands[command]
             command_object.execute()
 
-    def _print_info(self):
-        self._io.write("\nKomennot:\nx lopeta")
+    def print_info(self):
+        """Prints command menu to console."""
+        self._console_io.write("\nKomennot:\nx lopeta")
         # pylint: disable=consider-using-dict-items
         for key in self._commands:
-            self._io.write(f"{key} {self._commands[key]}")
+            self._console_io.write(f"{key} {self._commands[key]}")
+
+    def print_error(self, error_msg):
+        """Prints error message to console."""
+        self._console_io.write(f"\nVIRHE: {error_msg}\n")

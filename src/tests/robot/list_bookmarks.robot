@@ -1,4 +1,5 @@
 *** Settings ***
+Library  ../../RobotLibrary.py
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
 Suite Teardown  Empty Bookmarks Table

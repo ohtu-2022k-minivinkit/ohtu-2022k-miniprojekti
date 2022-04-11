@@ -2,7 +2,7 @@
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
 Suite Teardown  Empty Bookmarks Table
-Test Timeout  1 second
+Test Timeout  5 second
 
 *** Test Cases ***
 Add Valid Bookmark With Working Url

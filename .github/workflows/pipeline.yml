@@ -29,6 +29,9 @@ jobs:
       - name: Robot Test
         run: export ENV="test" && poetry run robot src/tests && unset ENV
         
+      - name: Coverage collection
+        run: poetry run coverage run --branch -m pytest
+        
       - name: Coverage report
         run: poetry run coverage xml
         

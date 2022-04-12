@@ -44,20 +44,30 @@ class TestBookmarkRepository(unittest.TestCase):
         bookmarks = bookmark_repository.get_by_keyword("ES")
         self.assertEqual(len(bookmarks), 2)
 
-    def test_get_bookmarks_checked_with_param_0_as_not_checked_gets_not_checked_bookmarks(self):
+    def test_get_bookmarks_checked_with_param_0_as_not_checked__gets_not_checked_bookmarks(self):
         bookmark_repository.create(Bookmark("headline", "url", False))
         bookmark_repository.create(Bookmark("headline", "url", False))
         bookmark_repository.create(Bookmark("headline", "url", True))
-        bookmarks = bookmark_repository.get_by_checked(0)
 
+        bookmarks = bookmark_repository.get_by_checked(0)
         self.assertEqual(len(bookmarks), 2)
         self.assertEqual(bookmarks[0].checked, 0)
 
-    def test_get_bookmarks_checked_with_param_1_as_checked_gets_checked_bookmarks(self):
+    def test_get_bookmarks_checked_with_param_1_as_checked__gets_checked_bookmarks(self):
         bookmark_repository.create(Bookmark("headline", "url", False))
         bookmark_repository.create(Bookmark("headline", "url", False))
         bookmark_repository.create(Bookmark("headline", "url", True))
-        bookmarks = bookmark_repository.get_by_checked(1)
 
+        bookmarks = bookmark_repository.get_by_checked(1)
         self.assertEqual(len(bookmarks), 1)
         self.assertEqual(bookmarks[0].checked, 1)
+
+    def test_set_as_checked(self):
+        bookmark_repository.create(Bookmark("1, headline", "url", False))
+        bookmark_repository.create(Bookmark("2, headline", "url", False))
+
+        bookmark_repository.set_as_checked(bookmark_id=2)
+
+        bookmarks = bookmark_repository.get_by_checked(1)
+        self.assertEqual(len(bookmarks), 1)
+        self.assertEqual(bookmarks[0].database_id, 2)

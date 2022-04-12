@@ -49,3 +49,7 @@ class TestBookmarkService(unittest.TestCase):
     def test_when_asked_all_bookmarks_calls_for_all_from_repository(self):
         self.bookmark_service.get_bookmarks_by_range(BOOKMARK_RANGE__ALL)
         self.repository_mock.get_all.assert_called_with()
+
+    def test_calls_bookmark_repository_to_check_bookmark(self):
+        self.bookmark_service.set_bookmark_as_checked(2)
+        self.repository_mock.set_as_checked.assert_called_with(2)

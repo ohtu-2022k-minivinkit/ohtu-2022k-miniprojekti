@@ -5,8 +5,8 @@ from services.bookmark_service import (
         BOOKMARK_RANGE__CHECKED, BookmarkService
 )
 from tests.stub_network_service import StubNetworkService
-from ui.ui import UI
 from tests.stub_io import StubIO, STUBIO__CLEAR_OUTPUTS
+from ui.ui import UI
 
 
 class TestUI(unittest.TestCase):
@@ -148,7 +148,7 @@ class TestUI(unittest.TestCase):
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("Vinkit, jotka sisälsivät hakusanan 'title':", in_out.outputs)
-        
+
     def test_set_bookmark_checked__too_small_number_gives_error_message(self):
         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "0", "x", "x"])
         bookmark1 = Bookmark("title1", "link1")
@@ -179,7 +179,9 @@ class TestUI(unittest.TestCase):
         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
-        self.bookmark_service_mock.get_bookmarks_by_range.assert_called_with(BOOKMARK_RANGE__CHECKED)
+        self.bookmark_service_mock.get_bookmarks_by_range.assert_called_with(
+            BOOKMARK_RANGE__CHECKED
+            )
 
     def test_command_get_checked_bookmarks__lists_checked_bookmarks(self):
         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
@@ -191,7 +193,7 @@ class TestUI(unittest.TestCase):
         self.assertIn("1: title1, link1", in_out.outputs)
         self.assertIn("2: title2, link2", in_out.outputs)
 
-    def test_gives_message_when_asked_checked_bookmarks__without_checked_bookmarks_in_repository(self):
+    def test_gives_message_when_asked_checked_bookmarks__if_not_bookmarks_in_repository(self):
         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = []
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)

@@ -36,7 +36,7 @@ class TestBookmarkService(unittest.TestCase):
         self.bookmark_service.create_bookmark("headline", "link")
         self.bookmark_service.get_bookmarks_by_keyword("ead")
 
-        self.repository_mock.get_bookmarks.assert_called_with("ead")
+        self.repository_mock.get_by_keyword.assert_called_with("ead")
 
     def test_when_asked_not_checked_bookmarks_calls_for_not_checked_from_repository(self):
         self.bookmark_service.get_bookmarks_by_range(BOOKMARK_RANGE__UNCHECKED)

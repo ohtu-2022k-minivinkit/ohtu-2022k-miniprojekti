@@ -1,9 +1,14 @@
 *** Settings ***
-Library  ../../RobotLibrary.py
+Library  ../../RobotLibrary.py  no_network  ${title_returning_urls}
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
 Suite Teardown  Empty Bookmarks Table
 Test Timeout  1 second
+
+*** Variables ***
+${type}  url_title_pairs
+${title_returning_url}  http://www.returning.com  Returning
+${title_returning_urls}  ${type}  ${title_returning_url}
 
 *** Test Cases ***
 Add Bookmark With Valid Non Title Returning Url And Empty Title
@@ -67,4 +72,4 @@ Add One Valid Title Returning Bookmark And Edit Name
 Empty Bookmarks Table And Clear IO
     Empty Bookmarks Table
     Clear Inputs
-    Clear Outputs
+    Clear Outputs 

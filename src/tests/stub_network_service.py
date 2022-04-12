@@ -1,10 +1,10 @@
 # pylint: skip-file
 class StubNetworkService():
-    def __init__(self, returning_urls=None):
-        self._returning_urls = returning_urls or {}
+    def __init__(self, title_returning_urls=None):
+        self._title_returning_urls = title_returning_urls or {}
 
     def get_url_title(self, url):
-        if not self._returning_urls.get(url, False):
+        if not self._title_returning_urls.get(url, False):
             return None
         else:
-            return self._returning_urls.get(url)
+            return self._title_returning_urls.get(url)

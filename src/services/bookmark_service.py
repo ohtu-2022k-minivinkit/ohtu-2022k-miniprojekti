@@ -58,7 +58,7 @@ class BookmarkService():
         Returns:
             list: List of Bookmark objects.
         """
-        return self._bookmark_repository.get_bookmarks(keyword)
+        return self._bookmark_repository.get_by_keyword(keyword)
 
     def set_bookmark_as_checked(self, bookmark_id):
         """Sets bookmark with given id as checked."""

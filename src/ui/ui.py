@@ -3,7 +3,7 @@ from ui.console_io import (
 )
 from ui.commands.add_bookmark import AddBookmark
 from ui.commands.list_bookmarks import (
-    ListAllBookmarks, ListUnreadBookmarks, ListCheckedBookmarks
+    ListAllBookmarks, ListBookmarksByKeyword, ListUnreadBookmarks, ListCheckedBookmarks
 )
 from ui.commands.mark_bookmark_checked import MarkBookmarkChecked
 from ui.bookmark_validation import BookmarkValidation
@@ -45,7 +45,8 @@ class UI:
                 BookmarkValidation(self._console_io)),
             "2": ListAllBookmarks(self._console_io, self._bookmark_service),
             "3": ListCheckedBookmarks(self._console_io, self._bookmark_service),
-            "4": MarkBookmarkChecked(self._console_io, self._bookmark_service, self)
+            "4": MarkBookmarkChecked(self._console_io, self._bookmark_service, self),
+            "5": ListBookmarksByKeyword(self._console_io, self._bookmark_service)
         }
 
     def start(self):

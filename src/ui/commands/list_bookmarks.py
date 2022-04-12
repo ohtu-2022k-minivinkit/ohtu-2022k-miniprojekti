@@ -115,7 +115,7 @@ class ListBookmarksByKeyword:
         self._bookmark_service = bookmark_service
 
     def __str__(self):
-        return "hakutoiminto"
+        return "hae otsikolla"
 
     def execute(self):
         """Executes command."""

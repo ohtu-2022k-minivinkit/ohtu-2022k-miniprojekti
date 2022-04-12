@@ -4,7 +4,7 @@ from entities.bookmark import Bookmark
 from services.bookmark_service import (
         BOOKMARK_RANGE__CHECKED, BookmarkService
 )
-from services.network_service import NetworkService
+from tests.stub_network_service import StubNetworkService
 from ui.ui import UI
 from tests.stub_io import StubIO, STUBIO__CLEAR_OUTPUTS
 
@@ -12,7 +12,7 @@ from tests.stub_io import StubIO, STUBIO__CLEAR_OUTPUTS
 class TestUI(unittest.TestCase):
     def setUp(self):
         self.bookmark_service_mock = Mock(wraps=BookmarkService())
-        self.network_service_mock = Mock(wraps=NetworkService())
+        self.network_service_mock = Mock(wraps=StubNetworkService({"https://stub_url.fi": "otsikko"}))
 
     def test_info_is_printed_when_started(self):
         in_out = StubIO(["x"])
@@ -39,7 +39,7 @@ class TestUI(unittest.TestCase):
         self.assertNotIn("virheellinen komento", in_out.outputs)
 
     def test_add_bookmark__command_1_moves_to_add_new_bookmark(self):
-        in_out = StubIO(["1", "https://helsinki.fi", "e", "x"])
+        in_out = StubIO(["1", "https://stub_url.fi", "e", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("\nLisätään uusi vinkki, jos haluat palata valikkoon syötä x", in_out.outputs)
@@ -51,51 +51,51 @@ class TestUI(unittest.TestCase):
         self.assertIn("otsikko: ", in_out.outputs)
 
     def test_add_bookmark__asks_link_when_adding_bookmark(self):
-        in_out = StubIO(["1", "https://helsinki.fi", "e", "x"])
+        in_out = StubIO(["1", "https://stub_url.fi", "e", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki: ", in_out.outputs)
 
     def test_add_bookmark__no_title_given_gives_error_message(self):
-        in_out = StubIO(["1", "https://helsinki.fi", "k", "", "https://helsinki.fi", "e", "x"])
+        in_out = StubIO(["1", "https://stub_url.fi", "k", "", "https://stub_url.fi", "e", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("otsikko puuttui tai oli liian pitkä (yli 100 merkkiä)", in_out.outputs)
 
     def test_add_bookmark__too_long_title_gives_error_message(self):
         title = "t"*101
-        in_out = StubIO(["1", "https://helsinki.fi", "k", title, "https://helsinki.fi", "e", "x"])
+        in_out = StubIO(["1", "https://stub_url.fi", "k", title, "https://stub_url.fi", "e", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("otsikko puuttui tai oli liian pitkä (yli 100 merkkiä)", in_out.outputs)
 
     def test_add_bookmark__correct_title_checks_correct(self):
         title = "t"*100
-        in_out = StubIO(["1", "https://helsinki.fi", "k", title, "x"])
+        in_out = StubIO(["1", "https://stub_url.fi", "k", title, "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("otsikko: ", in_out.outputs)
 
     def test_add_bookmark__no_link_given_gives_error_message(self):
-        in_out = StubIO(["1", "", "https://helsinki.fi", "e", "x"])
+        in_out = StubIO(["1", "", "https://stub_url.fi", "e", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki oli virheellinen, anna otsikko ja linkki uudelleen", in_out.outputs)
 
     def test_add_bookmark__correct_link_checks_correct(self):
-        in_out = StubIO(["1", "https://helsinki.fi", "e", "x"])
+        in_out = StubIO(["1", "https://stub_url.fi", "e", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki: ", in_out.outputs)
 
     def test_add_bookmark__url_starting_incorrectly_gives_error_message(self):
-        in_out = StubIO(["1", "ttps://helsinki.fi", "https://helsinki.fi", "e", "x"])
+        in_out = StubIO(["1", "ttps://stub_url.fi", "https://stub_url.fi", "e", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki: ", in_out.outputs)
 
     def test_too_short_url_gives_error_message(self):
-        in_out = StubIO(["1", "http56789", "https://helsinki.fi", "e", "x"])
+        in_out = StubIO(["1", "http56789", "https://stub_url.fi", "e", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("linkki: ", in_out.outputs)

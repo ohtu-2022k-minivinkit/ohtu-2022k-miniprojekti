@@ -99,3 +99,30 @@ class ListCheckedBookmarks():
             return True
         self._io.write("Kirjastossa ei ole luettuja vinkkejä")
         return False
+
+
+class ListBookmarksByKeyword:
+    def __init__(self, i_o, bookmark_service):
+        """Initializes command with IO and BookmarkService objects.
+
+        Args:
+            i_o (class, optional):
+                Object providing IO methods (read() and write()).
+            bookmark_service (class, optional):
+                Service class containing business logic.
+        """
+        self._io = i_o
+        self._bookmark_service = bookmark_service
+
+    def __str__(self):
+        return "hakutoiminto"
+
+    def execute(self):
+        """Executes command."""
+        keyword = self._io.read("Anna hakusana: ")
+        bookmarks = self._bookmark_service.get_bookmarks_by_keyword(keyword)
+        if bookmarks:
+            self._io.write(f"Vinkit, jotka sisälsivät hakusanan '{keyword}':")
+            self._io.write_table(bookmarks)
+        else:
+            self._io.write(f"Hakusanalla '{keyword}' ei löytynyt yhtään vinkkiä")

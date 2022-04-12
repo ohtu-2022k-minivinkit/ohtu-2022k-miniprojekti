@@ -12,9 +12,11 @@ Method 1
 
 Method 2
 
-- Download the newest release from [Releases](https://github.com/ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti/releases)
+- Download the newest [release](https://github.com/ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti/archive/refs/tags/sprint2_test_realease.zip).
 
-- Todo
+- Unzip the file and navigate to the folder.
+
+- Install dependencies with a command: poetry install (install Poetry first if you haven't done so already: https://python-poetry.org/docs/)
 
 ## How to use the program
 

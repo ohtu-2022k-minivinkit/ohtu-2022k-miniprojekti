@@ -17,7 +17,7 @@ Create One Bookmark Into Database And List Bookmarks
     Input Command  2
     Input Command  x
     Run Commands
-    Output Should Contain Bookmark  1  Netti  http://www.netti.testi  False
+    Command Line Output Should Contain  \ # \ otsikko \ linkki \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \n 1 \ Netti \ \ \ http://www.netti.testi \n
 
 Create Two Bookmarks Into Database And List Bookmarks
     Create Bookmark Into Database  Netti  http://www.netti.testi
@@ -25,8 +25,7 @@ Create Two Bookmarks Into Database And List Bookmarks
     Input Command  2
     Input Command  x
     Run Commands
-    Output Should Contain Bookmark  1  Netti  http://www.netti.testi  False
-    Output Should Contain Bookmark  2  Vinkki  http://www.vinkki.testi  False
+    Command Line Output Should Contain  \ # \ otsikko \ linkki \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \n 1 \ Netti \ \ \ http://www.netti.testi \ \n 2 \ Vinkki \ \ http://www.vinkki.testi \n
 
 Lists Not Checked Bookmarks Initially
     Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False

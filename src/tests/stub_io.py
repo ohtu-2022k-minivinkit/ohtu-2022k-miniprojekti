@@ -1,7 +1,13 @@
+from io import StringIO
+from rich.console import Console
+from rich.table import Table
+from ui.console_io import ConsoleIO
+
+
 STUBIO__CLEAR_OUTPUTS = "__clear_outputs"
 
 
-class StubIO:
+class StubIO(ConsoleIO):
     """Stub class to be used instead of ConsoleIO in tests.
 
     See ConsoleIO for more information.
@@ -12,9 +18,15 @@ class StubIO:
     """
 
     def __init__(self, inputs=None):
-        """Initializes StubIO with fake input."""
+        """Initializes StubIO with fake input.
+
+        Initializes object with list of fake input strings and Rich library
+        console object self._console with StringIO. Latter makes rich console
+        output readable as plain strings.
+        """
         self.inputs = inputs or []
         self.outputs = []
+        self._console = Console(file=StringIO())
 
     def write(self, value):
         """Captures output from program under test to self.outputs.
@@ -54,6 +66,8 @@ class StubIO:
 
         See ConsoleIO.write_table().
         """
-        for i, bookmark in enumerate(bookmarks):
-            self.outputs.append(
-                f"{str(i+1)}: {bookmark.headline}, {bookmark.url}")
+        #for i, bookmark in enumerate(bookmarks):
+        #    self.outputs.append(
+        #        f"{str(i+1)}: {bookmark.headline}, {bookmark.url}")
+        super().write_table(bookmarks)
+        self.outputs.append(self._console.file.getvalue())

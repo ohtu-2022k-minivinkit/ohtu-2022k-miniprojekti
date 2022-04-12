@@ -146,3 +146,29 @@ class TestUI(unittest.TestCase):
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("Vinkit, jotka sisälsivät hakusanan 'title':", in_out.outputs)
+        
+    def test_set_bookmark_checked__too_small_number_gives_error_message(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "0", "x", "x"])
+        bookmark1 = Bookmark("title1", "link1")
+        bookmark2 = Bookmark("title2", "link2")
+        self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("\nVIRHE: Vinkkiä 0 ei ole!\n", in_out.outputs)
+
+    def test_set_bookmark_checked__too_big_number_gives_error_message(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "3", "x", "x"])
+        bookmark1 = Bookmark("title1", "link1")
+        bookmark2 = Bookmark("title2", "link2")
+        self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("\nVIRHE: Vinkkiä 3 ei ole!\n", in_out.outputs)
+
+    def test_set_bookmark_checked__calls_bookmark_service_function_with_correct_id(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "1", "x", "x"])
+        bookmark1 = Bookmark("title1", "link1", False, database_id=5)
+        self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1]
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.bookmark_service_mock.set_bookmark_as_checked.assert_called_once_with(5)

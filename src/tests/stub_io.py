@@ -10,6 +10,7 @@ class StubIO:
         inputs: Strings faking to be input from user.
         outputs: Output strings from the program under test.
     """
+
     def __init__(self, inputs=None):
         """Initializes StubIO with fake input."""
         self.inputs = inputs or []
@@ -28,7 +29,7 @@ class StubIO:
     def read(self, prompt) -> str:
         """Returns fake input from self.inputs.
 
-        Returns fake input from self.inputs. Adds prompt string to
+        Returns fake input from self.inputs and adds prompt string to
         self.outputs. See ConsoleIO.read().
 
         Output list (self.outputs) can be cleared by adding command
@@ -51,8 +52,7 @@ class StubIO:
     def write_table(self, bookmarks: list):
         """Appends table rows to self.outputs as strings.
 
-        Appends table rows to self.outputs as strings. See
-        ConsoleIO.write_table().
+        See ConsoleIO.write_table().
         """
         for i, bookmark in enumerate(bookmarks):
             self.outputs.append(

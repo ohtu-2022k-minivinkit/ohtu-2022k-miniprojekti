@@ -10,6 +10,7 @@ class StubIO:
         inputs: Strings faking to be input from user.
         outputs: Output strings from the program under test.
     """
+
     def __init__(self, inputs=None):
         """Initializes StubIO with fake input."""
         self.inputs = inputs or []

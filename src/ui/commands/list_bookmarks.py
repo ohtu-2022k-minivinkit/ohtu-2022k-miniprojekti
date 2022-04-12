@@ -3,7 +3,7 @@ from services.bookmark_service import (
 )
 
 
-class ListAllBookmarks():
+class ListAllBookmarks:
     def __init__(self, i_o, bookmark_service):
         """Initializes command with IO and BookmarkService objects.
 
@@ -35,7 +35,7 @@ class ListAllBookmarks():
         return False
 
 
-class ListUnreadBookmarks():
+class ListUnreadBookmarks:
     def __init__(self, i_o, bookmark_service):
         """Initializes command with IO and BookmarkService objects.
 
@@ -68,7 +68,7 @@ class ListUnreadBookmarks():
         return False
 
 
-class ListCheckedBookmarks():
+class ListCheckedBookmarks:
     def __init__(self, i_o, bookmark_service):
         """Initializes command with IO and BookmarkService objects.
 

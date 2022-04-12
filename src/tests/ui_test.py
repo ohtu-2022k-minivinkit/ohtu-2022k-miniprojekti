@@ -1,7 +1,9 @@
 import unittest
 from unittest.mock import Mock
 from entities.bookmark import Bookmark
-from services.bookmark_service import BookmarkService
+from services.bookmark_service import (
+        BOOKMARK_RANGE__CHECKED, BookmarkService
+)
 from services.network_service import NetworkService
 from ui.ui import UI
 from tests.stub_io import StubIO, STUBIO__CLEAR_OUTPUTS
@@ -172,3 +174,33 @@ class TestUI(unittest.TestCase):
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.bookmark_service_mock.set_bookmark_as_checked.assert_called_once_with(5)
+
+    def test_command_get_checked_bookmarks__calls_bookmark_service_with_correct_args(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.bookmark_service_mock.get_bookmarks_by_range.assert_called_with(BOOKMARK_RANGE__CHECKED)
+
+    def test_command_get_checked_bookmarks__lists_checked_bookmarks(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
+        bookmark1 = Bookmark("title1", "link1", True, database_id=2)
+        bookmark2 = Bookmark("title2", "link2", True, database_id=3)
+        self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("1: title1, link1", in_out.outputs)
+        self.assertIn("2: title2, link2", in_out.outputs)
+
+    def test_gives_message_when_asked_checked_bookmarks__without_checked_bookmarks_in_repository(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
+        self.bookmark_service_mock.get_bookmarks_by_range.return_value = []
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("Kirjastossa ei ole luettuja vinkkejä", in_out.outputs)
+
+    def test_gives_message_when_asked_bookmarks__without_bookmarks_in_repository(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "2", "x"])
+        self.bookmark_service_mock.get_bookmarks_by_range.return_value = []
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("Kirjastossa ei ole vinkkejä", in_out.outputs)

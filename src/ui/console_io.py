@@ -26,9 +26,14 @@ class ConsoleIO:
         table.add_column("#", style="green")
         table.add_column("otsikko", style="cyan")
         table.add_column("linkki", style="magenta")
+        table.add_column("luettu", style="black")
 
         for i, bookmark in enumerate(bookmarks):
-            table.add_row(str(i+1), str(bookmark.headline), str(bookmark.url))
+            if bookmark.checked == 1:
+                luettu = "luettu"
+            else:
+                luettu = "ei luettu"
+            table.add_row(str(i+1), str(bookmark.headline), str(bookmark.url), str(luettu))
 
         self._console.print(table)
 

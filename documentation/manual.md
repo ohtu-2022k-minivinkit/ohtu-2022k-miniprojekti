@@ -30,14 +30,21 @@ Method 2
   - 4 merkitse vinkki luetuksi
   - 5 hae otsikolla
 
-- Press 1 + enter if you want to add a bookmark. Follow instructions.
+- Press 1 + enter if you want to add a new bookmark.
+  - If you want to return to menu press x + enter.
+  - To add bookmark add url + press enter. 
+  - If url returns a title and you want to keep it press e + enter or press k + enter if you want to edit it.
+  - If url did not return a title or you chose to edit it add your title + press enter.
 
 - Press 2 + enter if you want to see all bookmarks you've saved.
 
-- Press 3 + enter if you want to see bookmarks that have been allready read.
+- Press 3 + enter if you want to see bookmarks that have been read already.
 
-- Press 4 + enter if you want to mark a bookmark as read. Follow instructions.
+- Press 4 + enter if you want to mark a bookmark as read.
+  - If you want to return to menu press x + enter.
+  - To mark a bookmark as read add its number + press enter.
 
-- Press 5 + enter if you want to search bookmarks by title. Follow instructions.
-
+- Press 5 + enter if you want to search bookmarks by title.
+  - To search add your search word + press enter.
+ 
 - Press x + enter if you want to quit running the program.

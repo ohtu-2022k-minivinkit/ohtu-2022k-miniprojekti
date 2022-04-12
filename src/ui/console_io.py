@@ -26,7 +26,7 @@ class ConsoleIO:
         table.add_column("#", style="green")
         table.add_column("otsikko", style="cyan")
         table.add_column("linkki", style="magenta")
-        table.add_column("luettu", style="black")
+        table.add_column("luettu", style="green")
 
         for i, bookmark in enumerate(bookmarks):
             if bookmark.checked == 1:

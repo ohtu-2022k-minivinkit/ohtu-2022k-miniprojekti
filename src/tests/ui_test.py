@@ -125,3 +125,24 @@ class TestUI(unittest.TestCase):
         self.assertIn(
             "\nMerkitse vinkki luetuksi antamalla vinkin numero (tai 'x' keskeyttääksesi): ",
             in_out.outputs)
+
+    def test_list_bookmarks_by_keyword_command_5_asks_for_keyword(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "x", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("Anna hakusana: ", in_out.outputs)
+
+    def test_list_bookmarks_by_keyword_gives_correct_error_message_when_zero_matches(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "hakusana", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("Hakusanalla 'hakusana' ei löytynyt yhtään vinkkiä", in_out.outputs)
+
+    def test_list_bookmarks_by_keyword_returns_correct_output_when_keyword_matches(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "title", "x"])
+        bookmark1 = Bookmark("title1", "link1")
+        bookmark2 = Bookmark("title2", "link2")
+        self.bookmark_service_mock.get_bookmarks_by_keyword.return_value = [bookmark1, bookmark2]
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("Vinkit, jotka sisälsivät hakusanan 'title':", in_out.outputs)

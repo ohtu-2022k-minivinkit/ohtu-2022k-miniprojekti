@@ -69,16 +69,6 @@ Message If Not List Of Checked Bookmarks
     Command Line Output Should Contain  Kirjastossa ei ole luettuja vinkkejä
     Amount Of Bookmarks In Output Should Be  1
 
-Bookmarks Can Be Marked As Read
-    Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False
-    Input Command  4
-    Input Command  1
-    Input Command  x
-    Run Commands
-    Output Should Contain Bookmark  1  Netti  http://www.netti.testi  False
-    Output Should Contain Bookmark  1  Netti  http://www.netti.testi  True
-    Amount Of Bookmarks In Output Should Be  2
-
 Show Correct Bookmarks When Proper Keyword Is Given To Search Function
     Create Bookmark Into Database  netti  http://www.netti.testi
     Create Bookmark Into Database  Vinkki  http://www.vinkki.testi

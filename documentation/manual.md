@@ -12,7 +12,7 @@ Method 1
 
 Method 2
 
-- Download the newest [release](https://github.com/ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti/archive/refs/tags/sprint2_test_realease.zip).
+- Download the newest release from [releases](https://github.com/ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti/releases).
 
 - Unzip the file to a location of your choosing and navigate to the folder.
 
@@ -34,9 +34,9 @@ Method 2
 
 - Press 1 + enter if you want to add a new bookmark.
   - If you want to return to menu press x + enter.
-  - To add bookmark add url + press enter. 
+  - To add bookmark add url + enter. 
   - If url returns a title and you want to keep it press e + enter or press k + enter if you want to edit it.
-  - If url did not return a title or you chose to edit it add your title + press enter.
+  - If url did not return a title or you chose to edit it add your title + enter.
 
 - Press 2 + enter if you want to see all bookmarks you've saved.
 

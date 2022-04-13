@@ -13,6 +13,7 @@ Method 1
 Method 2
 
 - Download the newest release from [releases](https://github.com/ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti/releases).
+  - Source files are under assets.
 
 - Unzip the file to a location of your choosing and navigate to the folder.
 

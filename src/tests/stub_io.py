@@ -1,5 +1,30 @@
-STUBIO__CLEAR_OUTPUTS = "__clear_outputs"
+# Siirä heittomerkit Capturing -luokan ja uuden write tablen ympäriltä
+# nykyisen write tablen ympärille
+# Aja testit niin näkee mitä muutoksia täytyisi tehdä
 
+STUBIO__CLEAR_OUTPUTS = "__clear_outputs"
+'''from typing_extensions import Self
+import unittest
+from unittest.mock import Mock
+from entities.bookmark import Bookmark
+from services.bookmark_service import BookmarkService
+from ui.ui import UI
+from rich.console import Console
+from rich.table import Table
+from io import StringIO
+import sys
+
+class Capturing(list):
+    def __enter__(self):
+        self._stdout = sys.stdout
+        sys.stdout = self._stringio = StringIO()
+        return self
+
+    def __exit__(self, *args):
+        self.extend(self._stringio.getvalue().splitlines())
+        del self._stringio
+        sys.stdout = self._stdout
+'''
 
 class StubIO:
     """Stub class to be used instead of ConsoleIO in tests.
@@ -57,3 +82,32 @@ class StubIO:
         for i, bookmark in enumerate(bookmarks):
             self.outputs.append(
                 f"{str(i+1)}: {bookmark.headline}, {bookmark.url}")
+
+    '''
+    def write_table(self, bookmarks):
+        id = 0
+        """Write table to user"""
+        self.bookmarks = bookmarks
+        table = Table(title="Bookmarks")
+        table.add_column("id", style="green")
+        table.add_column("title", style="cyan")
+        table.add_column("link", style="magenta")
+
+        for bookmark in self.bookmarks:
+            id += 1
+            table.add_row(str(id), bookmark.headline, bookmark.url)
+            with Capturing(self.outputs) as self.outputs:
+                print(str(id), bookmark.headline, bookmark.url)
+
+        for i, bookmark in enumerate(bookmarks):
+            if bookmark.checked == 1:
+                luettu = "luettu"
+            else:
+                luettu = "ei luettu"
+            table.add_row(str(i+1), str(bookmark.headline), str(bookmark.url), str(luettu))
+            with Capturing(self.outputs) as self.outputs:
+                print(str(i+1), str(bookmark.headline), str(bookmark.url), str(luettu))
+
+        console = Console()
+        console.print(table)
+    '''

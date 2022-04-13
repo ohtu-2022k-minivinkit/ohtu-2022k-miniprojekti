@@ -1,7 +1,7 @@
 # pylint: skip-file
 from robot.api.deco import keyword
 from ui.ui import UI
-from tests.stub_io import StubIO
+from tests.stub_io import StubIO, STUBIO__CLEAR_OUTPUTS
 from tests.stub_network_service import StubNetworkService
 from services.bookmark_service import BookmarkService
 from services.network_service import NetworkService
@@ -55,6 +55,10 @@ class RobotLibrary:
     @keyword
     def command_line_clear_input(self):
         self._io.inputs.clear()
+
+    @keyword
+    def command_line_clear_output_with_stubio_input(self):
+        self._io.inputs += [STUBIO__CLEAR_OUTPUTS]
 
     @keyword
     def command_line_output_should_contain(self, value):

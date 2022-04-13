@@ -16,6 +16,9 @@ Clear Outputs
 Clear Inputs
     Command Line Clear Input
 
+Clear Output With Stubio Input
+    Command Line Clear Output With Stubio Input
+
 Output Should Contain Bookmark
     [Arguments]  ${index}  ${headline}  ${url}  ${checked}
     Command Line Output Should Contain  ${index}: ${headline}, ${url}

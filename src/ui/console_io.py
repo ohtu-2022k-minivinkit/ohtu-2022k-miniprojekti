@@ -29,11 +29,8 @@ class ConsoleIO:
         table.add_column("luettu", style="green")
 
         for i, bookmark in enumerate(bookmarks):
-            if bookmark.checked == 1:
-                luettu = "luettu"
-            else:
-                luettu = "ei luettu"
-            table.add_row(str(i+1), str(bookmark.headline), str(bookmark.url), str(luettu))
+            luettu = "luettu" if bookmark.checked == 1 else "ei luettu"
+            table.add_row(str(i+1), str(bookmark.headline), str(bookmark.url), luettu)
 
         self._console.print(table)
 

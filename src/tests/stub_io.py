@@ -1,9 +1,5 @@
-# Siirä heittomerkit Capturing -luokan ja uuden write tablen ympäriltä
-# nykyisen write tablen ympärille
-# Aja testit niin näkee mitä muutoksia täytyisi tehdä
-
 STUBIO__CLEAR_OUTPUTS = "__clear_outputs"
-'''from typing_extensions import Self
+from typing_extensions import Self
 import unittest
 from unittest.mock import Mock
 from entities.bookmark import Bookmark
@@ -24,7 +20,7 @@ class Capturing(list):
         self.extend(self._stringio.getvalue().splitlines())
         del self._stringio
         sys.stdout = self._stdout
-'''
+
 
 class StubIO:
     """Stub class to be used instead of ConsoleIO in tests.
@@ -74,6 +70,7 @@ class StubIO:
             return self.inputs.pop(0) if self.inputs else ""
         return current_input
 
+    '''
     def write_table(self, bookmarks: list):
         """Appends table rows to self.outputs as strings.
 
@@ -93,11 +90,11 @@ class StubIO:
         table.add_column("title", style="cyan")
         table.add_column("link", style="magenta")
 
-        for bookmark in self.bookmarks:
-            id += 1
-            table.add_row(str(id), bookmark.headline, bookmark.url)
-            with Capturing(self.outputs) as self.outputs:
-                print(str(id), bookmark.headline, bookmark.url)
+        #for bookmark in self.bookmarks:
+        #    id += 1
+        #    table.add_row(str(id), bookmark.headline, bookmark.url)
+        #    with Capturing(self.outputs) as self.outputs:
+        #        print(str(id), bookmark.headline, bookmark.url)
 
         for i, bookmark in enumerate(bookmarks):
             if bookmark.checked == 1:
@@ -105,9 +102,9 @@ class StubIO:
             else:
                 luettu = "ei luettu"
             table.add_row(str(i+1), str(bookmark.headline), str(bookmark.url), str(luettu))
-            with Capturing(self.outputs) as self.outputs:
-                print(str(i+1), str(bookmark.headline), str(bookmark.url), str(luettu))
+            #with Capturing(self.outputs) as self.outputs:
+            #    print(str(i+1), str(bookmark.headline), str(bookmark.url), str(luettu))
 
         console = Console()
-        console.print(table)
-    '''
+        with Capturing(self.outputs) as self.outputs:
+            console.print(table)

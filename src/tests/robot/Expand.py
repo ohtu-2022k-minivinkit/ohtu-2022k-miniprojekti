@@ -1,7 +1,8 @@
-import pyshorteners as sh
+# pylint: skip-file
+import pyshorteners
 
 class Expand:
   def expand_url(self, url):
-    s = sh.Shortener()
-    expanded = s.tinyurl.expand(url)
+    url_shortener = pyshorteners.Shortener()
+    expanded = url_shortener.tinyurl.expand(url)
     return expanded

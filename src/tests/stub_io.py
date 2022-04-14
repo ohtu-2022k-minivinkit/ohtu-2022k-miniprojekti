@@ -1,7 +1,14 @@
+from io import StringIO
+from collections import deque
+from rich.console import Console
+from rich.table import Table
+from ui.console_io import ConsoleIO
+
+
 STUBIO__CLEAR_OUTPUTS = "__clear_outputs"
 
 
-class StubIO:
+class StubIO(ConsoleIO):
     """Stub class to be used instead of ConsoleIO in tests.
 
     See ConsoleIO for more information.
@@ -12,9 +19,15 @@ class StubIO:
     """
 
     def __init__(self, inputs=None):
-        """Initializes StubIO with fake input."""
-        self.inputs = inputs or []
-        self.outputs = []
+        """Initializes StubIO with fake input.
+
+        Initializes object with list of fake input strings and Rich library
+        console object self._console with StringIO. Latter makes rich console
+        output readable as plain strings.
+        """
+        self.inputs = deque(inputs) or deque()
+        self.outputs = deque()
+        self._console = Console(file=StringIO())
 
     def write(self, value):
         """Captures output from program under test to self.outputs.
@@ -43,10 +56,10 @@ class StubIO:
             str: String faking input from user.
         """
         self.outputs.append(prompt)
-        current_input = self.inputs.pop(0) if self.inputs else ""
+        current_input = self.inputs.popleft() if self.inputs else ""
         if current_input == STUBIO__CLEAR_OUTPUTS:
             self.outputs = []
-            return self.inputs.pop(0) if self.inputs else ""
+            return self.inputs.popleft() if self.inputs else ""
         return current_input
 
     def write_table(self, bookmarks: list):
@@ -54,6 +67,7 @@ class StubIO:
 
         See ConsoleIO.write_table().
         """
-        for i, bookmark in enumerate(bookmarks):
-            self.outputs.append(
-                f"{str(i+1)}: {bookmark.headline}, {bookmark.url}")
+        super().write_table(bookmarks)
+        line_list = self._console.file.getvalue().splitlines()
+        for line_str in line_list:
+            self.outputs.append(" ".join(line_str.split()))

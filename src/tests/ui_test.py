@@ -107,8 +107,8 @@ class TestUI(unittest.TestCase):
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
-        self.assertIn("1: title1, link1", in_out.outputs)
-        self.assertIn("2: title2, link2", in_out.outputs)
+        self.assertIn("1 title1 link1 ei luettu", in_out.outputs)
+        self.assertIn("2 title2 link2 ei luettu", in_out.outputs)
 
     def test_set_bookmark_checked__lists_unchecked_bookmarks(self):
         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "x", "x"])
@@ -117,8 +117,8 @@ class TestUI(unittest.TestCase):
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
-        self.assertIn("1: title1, link1", in_out.outputs)
-        self.assertIn("2: title2, link2", in_out.outputs)
+        self.assertIn("1 title1 link1 ei luettu", in_out.outputs)
+        self.assertIn("2 title2 link2 ei luettu", in_out.outputs)
 
     def test_set_bookmark_checked__asks_for_bookmark_number(self):
         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "x", "x"])
@@ -190,8 +190,8 @@ class TestUI(unittest.TestCase):
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
-        self.assertIn("1: title1, link1", in_out.outputs)
-        self.assertIn("2: title2, link2", in_out.outputs)
+        self.assertIn("1 title1 link1 luettu", in_out.outputs)
+        self.assertIn("2 title2 link2 luettu", in_out.outputs)
 
     def test_gives_message_when_asked_checked_bookmarks__if_not_bookmarks_in_repository(self):
         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])

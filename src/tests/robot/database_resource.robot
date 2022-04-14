@@ -1,6 +1,7 @@
 *** Settings ***
 Library  DatabaseLibrary
 Library  OperatingSystem
+Library  Expand.py
 
 *** Variables ***
 ${database_name}  test-database.sqlite
@@ -44,9 +45,24 @@ Bookmarks Table Should Not Contain
     Disconnect From Database
 
 Bookmarks Table Should Contain Only One
+    [Arguments]  ${headline}
+    Connect To Test Database
+    Row Count Is Equal To X  SELECT * FROM bookmarks WHERE headline = "${headline}";  1
+    Disconnect From Database
+
+Url Connected To Headline Should Contain Tiny
+    [Arguments]  ${headline}
+    Connect To Test Database
+    @{queryResults}  Query  SELECT url FROM bookmarks WHERE headline = "${headline}"
+    Should Contain    @{queryResults[0]}    tiny
+    Disconnect From Database
+
+Expanded Tinyurl Should Match Original Url
     [Arguments]  ${headline}  ${url}
     Connect To Test Database
-    Row Count Is Equal To X  SELECT * FROM bookmarks WHERE headline = "${headline}" AND url = "${url}";  1
+    @{queryResults}  Query  SELECT url FROM bookmarks WHERE headline = "${headline}"
+    ${Expand}=    Expand url    @{queryResults[0]}
+    Should Be Equal    ${Expand}    ${url}
     Disconnect From Database
 
 Create Bookmark Into Database

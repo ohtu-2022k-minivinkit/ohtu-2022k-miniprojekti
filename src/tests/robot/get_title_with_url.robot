@@ -2,7 +2,6 @@
 Library  ../../RobotLibrary.py  network
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
-Suite Teardown  Empty Bookmarks Table
 Test Timeout  5 second
 
 *** Test Cases ***

@@ -16,7 +16,8 @@ def robot(ctx):
 @task
 def robot_debug(ctx):
     os.environ["ENV"] = "test"
-    ctx.run("robot --exitonfailure --skipteardownonexit src/tests", pty=True)
+    # Muistutukseksi: Kätevä asetus on myös --skipteardownonexit.
+    ctx.run("robot --exitonfailure src/tests", pty=True)
     del os.environ["ENV"]
 
 @task(coverage, robot)

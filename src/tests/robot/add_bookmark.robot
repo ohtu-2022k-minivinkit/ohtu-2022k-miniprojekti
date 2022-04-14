@@ -3,6 +3,8 @@ Library  ../../RobotLibrary.py  no_network  ${title_returning_urls}
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
 Test Timeout  1 second
+#Timeout to ensure aplication closure. 
+#If the ui does not recieve the x-command at the right place tests won´t finnish properly and it can lead to unpredictable behaviour
 
 *** Variables ***
 ${type}  url_title_pairs

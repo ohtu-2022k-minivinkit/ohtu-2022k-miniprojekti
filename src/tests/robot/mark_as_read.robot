@@ -2,8 +2,6 @@
 Library  ../../RobotLibrary.py
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
-Suite Teardown  Empty Bookmarks Table
-Test Timeout  1 second
 
 *** Test Cases ***
 Main Menu Contains Command To Mark The Bookmark As Read
@@ -11,31 +9,28 @@ Main Menu Contains Command To Mark The Bookmark As Read
     Run Commands
     Command Line Output Should Contain  4 merkitse vinkki luetuksi
 
-Checking Bookmark Using Serial Number Moves Bookmark To Checked Bookmarks
-    Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False
+Setting Bookmark As Checked Using Correct Index Number Sets Bookmark As Checked
     Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False
     Create Bookmark Into Database With Status  Vinkki  http://www.vinkki.testi  True
     Input Command  4
-    Clear Output With Stubio Input
-    Input Command  2
+    Clear Output Record
+    Input Command  1
     Input command  3
     Input Command  x
     Run Commands
     Amount Of Bookmarks In Output Should Be  2
-    Output Should Contain Bookmark  1  Netti  http://www.netti.testi  True
+    Output Should Contain Bookmark  1  Netti  http://www.netti.testi  luettu
 
-Error Message And List Of Unchecked Bookmarks If InValid Serial Number Is Given
+Gives Error If Invalid Index Number Is Used
     Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False
-    Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False
-    Create Bookmark Into Database With Status  Vinkki  http://www.vinkki.testi  True
+    Create Bookmark Into Database With Status  Vinkki  http://www.vinkki.testi  False
     Input Command  4
-    Clear Output With Stubio Input
-    Input Command  55
+    Clear Output Record
+    Input Command  3
     Input Command  x
     Input Command  x
     Run Commands
-    Command Line Output Should Contain  \nVIRHE: Vinkkiä 55 ei ole!\n
-    Amount Of Bookmarks In Output Should Be  2
+    Command Line Output Should Contain  \nVIRHE: Vinkkiä 3 ei ole!\n
 
 *** Keywords ***
 Empty Bookmarks Table And Clear IO

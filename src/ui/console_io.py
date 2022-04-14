@@ -12,9 +12,9 @@ class ConsoleIO:
         print(output)
 
     @classmethod
-    def read(cls, input_command):
+    def read(cls, prompt) -> str:
         """Read input from stdin."""
-        return input(input_command)
+        return input(prompt)
 
     def write_table(self, bookmarks: list):
         """Prints list of Bookmarks to stdout as a Rich.Table.

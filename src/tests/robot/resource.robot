@@ -16,16 +16,16 @@ Clear Outputs
 Clear Inputs
     Command Line Clear Input
 
-Clear Output With Stubio Input
+Clear Output Record
     Command Line Clear Output With Stubio Input
 
 Output Should Contain Bookmark
     [Arguments]  ${index}  ${headline}  ${url}  ${checked}
-    Command Line Output Should Contain  ${index}: ${headline}, ${url}
+    Command Line Output Should Contain  ${index} ${headline} ${url} ${checked}
 
 Output Should Not Contain Bookmark
     [Arguments]  ${index}  ${headline}  ${url}  ${checked}
-    Command Line Output Should Not Contain  ${index}: ${headline}, ${url}
+    Command Line Output Should Not Contain  ${index} ${headline} ${url} ${checked}
 
 Output Should Be Standard Output
     Command Line Output Should Be  ${standard_output}${standard_output_ending}

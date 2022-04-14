@@ -1,7 +1,7 @@
+# pylint: skip-file
 from io import StringIO
 from collections import deque
 from rich.console import Console
-from rich.table import Table
 from ui.console_io import ConsoleIO
 
 
@@ -25,7 +25,9 @@ class StubIO(ConsoleIO):
         console object self._console with StringIO. Latter makes rich console
         output readable as plain strings.
         """
-        self.inputs = deque(inputs) or deque()
+        self.inputs = inputs or deque()
+        if not isinstance(self.inputs, deque):
+            self.inputs = deque(self.inputs)
         self.outputs = deque()
         self._console = Console(file=StringIO())
 
@@ -58,7 +60,9 @@ class StubIO(ConsoleIO):
         self.outputs.append(prompt)
         current_input = self.inputs.popleft() if self.inputs else ""
         if current_input == STUBIO__CLEAR_OUTPUTS:
-            self.outputs = []
+            self.outputs = deque()
+            self._console.file.truncate(0)
+            self._console.file.seek(0)
             return self.inputs.popleft() if self.inputs else ""
         return current_input
 

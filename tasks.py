@@ -13,6 +13,12 @@ def robot(ctx):
     ctx.run("robot src/tests", pty=True)
     del os.environ["ENV"]
 
+@task
+def robot_debug(ctx):
+    os.environ["ENV"] = "test"
+    ctx.run("robot --exitonfailure --skipteardownonexit src/tests", pty=True)
+    del os.environ["ENV"]
+
 @task(coverage, robot)
 def tests(ctx):
     ctx.run("pylint src", pty=True)

@@ -2,7 +2,7 @@
 Library  ../../RobotLibrary.py  no_network  ${title_returning_urls}
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
-Test Timeout  1 second
+Test Timeout  10 second
 
 *** Variables ***
 ${type}  url_title_pairs
@@ -36,7 +36,8 @@ Add One Valid Non Title Returning Bookmark
     Input Command  Not Returning
     Input Command  x
     Run Commands
-    Bookmarks Table Should Contain Only One  Not Returning  http://www.notreturning.com
+    Bookmarks Table Should Contain Only One  Not Returning
+    Url Connected To Headline Should Contain Tiny  Not Returning
 
 Add Two Valid Non Title Returning Bookmarks With Different Data
     Input Command  1
@@ -47,8 +48,10 @@ Add Two Valid Non Title Returning Bookmarks With Different Data
     Input Command  Not Returning2
     Input Command  x
     Run Commands
-    Bookmarks Table Should Contain Only One  Not Returning  http://www.notreturning.com
-    Bookmarks Table Should Contain Only One  Not Returning2  http://www.notreturning2.com
+    Bookmarks Table Should Contain Only One  Not Returning
+    Bookmarks Table Should Contain Only One  Not Returning2
+    Url Connected To Headline Should Contain Tiny  Not Returning
+    Url Connected To Headline Should Contain Tiny  Not Returning2
 
 Add One Valid Title Returning Bookmark And Do Not Edit Name
     Input Command  1
@@ -56,7 +59,8 @@ Add One Valid Title Returning Bookmark And Do Not Edit Name
     Input Command  e
     Input Command  x
     Run Commands
-    Bookmarks Table Should Contain Only One  Returning  http://www.returning.com
+    Bookmarks Table Should Contain Only One  Returning
+    Url Connected To Headline Should Contain Tiny  Returning
 
 Add One Valid Title Returning Bookmark And Edit Name
     Input Command  1
@@ -65,7 +69,8 @@ Add One Valid Title Returning Bookmark And Edit Name
     Input Command  Edited
     Input Command  x
     Run Commands
-    Bookmarks Table Should Contain Only One  Edited  http://www.returning.com
+    Bookmarks Table Should Contain Only One  Edited
+    Url Connected To Headline Should Contain Tiny  Edited
 
 *** Keywords ***
 Empty Bookmarks Table And Clear IO

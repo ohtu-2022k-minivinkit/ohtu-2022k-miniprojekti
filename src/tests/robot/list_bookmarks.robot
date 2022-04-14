@@ -2,9 +2,9 @@
 Library  ../../RobotLibrary.py
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
-Test Timeout  1 second
-#Timeout to ensure aplication closure. 
+#Timeout to ensure application closure.
 #If the ui does not recieve the x-command at the right place tests won´t finnish properly and it can lead to unpredictable behaviour.
+Test Timeout  1 second
 
 *** Test Cases ***
 List Bookmarks With No Bookmarks

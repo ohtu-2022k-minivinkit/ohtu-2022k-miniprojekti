@@ -2,6 +2,8 @@
 Library  ../../RobotLibrary.py  network
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
+#Timeout to ensure application closure.
+#If the ui does not recieve the x-command at the right place tests won´t finnish properly and it can lead to unpredictable behaviour.
 Test Timeout  5 second
 
 *** Test Cases ***

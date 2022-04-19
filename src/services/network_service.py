@@ -29,5 +29,14 @@ class NetworkService():
 
         return html[title_start:title_end]
 
+    def get_book_by_isbn(self, isbn):
+        url = f"https://openlibrary.org/isbn/{isbn}.json"
+
+        try:
+            book = requests.get(url).json()
+        except requests.exceptions.RequestException:
+            return None
+
+        return book
 
 network_service = NetworkService()

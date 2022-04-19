@@ -94,3 +94,21 @@ class RobotLibrary:
             raise AssertionError(
                 f"\"{value}\" is not {bookmarks_count}"
             )
+
+    @keyword
+    def file_should_contain(self, file_path, value):
+        with open(file_path) as file:
+            content = file.read()
+        if value not in content:
+            raise AssertionError(
+                f"\"{value}\" is not in {content}"
+            )
+
+    @keyword
+    def file_should_not_contain(self, file_path, value):
+        with open(file_path) as file:
+            content = file.read()
+        if value in content:
+            raise AssertionError(
+                f"\"{value}\" is in {content}"
+            )

@@ -33,6 +33,14 @@ Output Should Be Standard Output
 Output Should Be Standard Output And Empty Output Line
     Command Line Output Should Be  ${standard_output}${empty_output_line}${standard_output_ending}
 
+File Should Contain Headline And Url
+    [Arguments]  ${DIRPATH}  ${FILENAME}  ${headline}  ${url}
+    File Should Contain  ${DIRPATH}${FILENAME}  ${headline};${url}
+
+File Should Not Contain Headline And Url
+    [Arguments]  ${DIRPATH}  ${FILENAME}  ${headline}  ${url}
+    File Should Not Contain  ${DIRPATH}${FILENAME}  ${headline};${url}
+
 Input Command 
     [Arguments]  ${text}
     Command Line Input  ${text}

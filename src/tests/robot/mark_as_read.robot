@@ -1,4 +1,5 @@
 *** Settings ***
+Library  OperatingSystem
 Library  ../../RobotLibrary.py
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO

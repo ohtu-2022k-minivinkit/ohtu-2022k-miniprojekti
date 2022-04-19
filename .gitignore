@@ -9,4 +9,4 @@ __pycache__/
 database.sqlite
 test-database.sqlite
 data/**
-#csv_files/**
+csv_files/**

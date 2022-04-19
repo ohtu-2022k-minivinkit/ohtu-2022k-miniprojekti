@@ -30,6 +30,16 @@ class NetworkService():
         return html[title_start:title_end]
 
     def get_book_by_isbn(self, isbn):
+        """Returns the book with the given isbn.
+            If the isbn is invalid or no book is found, returns None.
+           Uses the Open Library API.
+
+        Args:
+            isbn (string): ISBN of the book.
+
+        Returns:
+            dictionary: Book with the given isbn.
+        """
         url = f"https://openlibrary.org/isbn/{isbn}.json"
 
         try:

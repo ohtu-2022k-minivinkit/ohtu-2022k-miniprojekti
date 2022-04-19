@@ -53,3 +53,20 @@ class TestBookmarkService(unittest.TestCase):
     def test_calls_bookmark_repository_to_check_bookmark(self):
         self.bookmark_service.set_bookmark_as_checked(2)
         self.repository_mock.set_as_checked.assert_called_with(2)
+
+    def test_calls_bookmark_repository_to_create_file_with_correct_args(self):
+        self.bookmark_service.create_file("filepath")
+        self.repository_mock.create_csv_file.assert_called_with("filepath")
+
+    def test_creates_default_filename(self):
+        filename = self.bookmark_service.create_default_filename()
+        self.assertIn("vinkit_", filename)
+
+    def test_correct_filename_adds_file_extension_and_underscores(self):
+        filename = "file name"
+        correct_filename = self.bookmark_service.correct_filename(filename)
+        self.assertEqual("file_name.csv", correct_filename)
+
+    def test_create_filepath_creates_file_path(self):
+        file_path = self.bookmark_service.create_default_filepath("filename")
+        self.assertIn("/csv_files/filename", file_path)

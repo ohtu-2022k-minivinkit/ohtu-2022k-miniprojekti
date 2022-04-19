@@ -1,5 +1,6 @@
 import unittest
 from repositories.bookmark_repository import bookmark_repository
+from services.bookmark_service import bookmark_service
 from entities.bookmark import Bookmark
 
 class TestBookmarkRepository(unittest.TestCase):
@@ -71,3 +72,18 @@ class TestBookmarkRepository(unittest.TestCase):
         bookmarks = bookmark_repository.get_by_checked(1)
         self.assertEqual(len(bookmarks), 1)
         self.assertEqual(bookmarks[0].database_id, 2)
+
+    def test_create_csv_file__writes_all_headlines_and_links_in_file(self):
+        bookmark_repository.create(Bookmark("headline1", "url1", False))
+        bookmark_repository.create(Bookmark("headline2", "url2", False))
+        bookmark_repository.create(Bookmark("headline3", "url3", True))
+        file_path = bookmark_service.create_default_filepath("test-file.csv").replace(
+            "csv_files","data"
+            )
+        bookmark_repository.create_csv_file(file_path)
+
+        self.assertTrue(bookmark_service.exists(file_path))
+        content = bookmark_repository.read_file(file_path)
+        self.assertIn("headline1", content)
+        self.assertIn("url3", content)
+        bookmark_repository.delete_all_file_content(file_path)

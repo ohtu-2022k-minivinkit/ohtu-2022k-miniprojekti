@@ -206,3 +206,31 @@ class TestUI(unittest.TestCase):
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("Kirjastossa ei ole vinkkejä", in_out.outputs)
+
+    def test_command_to_create_file_asks_filename(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "x", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("tiedostonimi: ", in_out.outputs)
+#
+    def test_create_csv_file_calls_to_create_file_path(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "", "", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.bookmark_service_mock.create_default_filepath.assert_called()
+
+    def test_answer_not_overwrite_csv_file_asks_name_of_file_again(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "file.csv", "", "e", "x", "x"])
+        self.bookmark_service_mock.correct_filename.return_value = True
+        self.bookmark_service_mock.create_default_filepath.return_value = "filepath/file.csv"
+        self.bookmark_service_mock.exists.return_value = True
+
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("kirjoita tiedostolle uusi nimi: ", in_out.outputs)
+#
+    def test_create_csv_file_calls_bookmark_service_to_create_file(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "", "", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.bookmark_service_mock.create_file.assert_called()

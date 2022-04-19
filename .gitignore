@@ -8,3 +8,5 @@ __pycache__/
 /output.xml
 database.sqlite
 test-database.sqlite
+data/**
+#csv_files/**

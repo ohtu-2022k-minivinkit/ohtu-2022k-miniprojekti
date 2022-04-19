@@ -6,6 +6,7 @@ from ui.commands.list_bookmarks import (
     ListAllBookmarks, ListBookmarksByKeyword, ListUnreadBookmarks, ListCheckedBookmarks
 )
 from ui.commands.mark_bookmark_checked import MarkBookmarkChecked
+from ui.commands.csv_file_transactions import CreateCsvFile
 from ui.bookmark_validation import BookmarkValidation
 from services.bookmark_service import (
     bookmark_service as default_bookmark_service
@@ -46,7 +47,8 @@ class UI:
             "2": ListAllBookmarks(self._console_io, self._bookmark_service),
             "3": ListCheckedBookmarks(self._console_io, self._bookmark_service),
             "4": MarkBookmarkChecked(self._console_io, self._bookmark_service, self),
-            "5": ListBookmarksByKeyword(self._console_io, self._bookmark_service)
+            "5": ListBookmarksByKeyword(self._console_io, self._bookmark_service),
+            "6": CreateCsvFile(self._console_io, self._bookmark_service)
         }
 
     def start(self):

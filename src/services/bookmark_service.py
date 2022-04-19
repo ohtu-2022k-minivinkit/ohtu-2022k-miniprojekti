@@ -1,3 +1,5 @@
+import os
+from datetime import datetime
 from repositories.bookmark_repository import (
     bookmark_repository as default_bookmark_repository
 )
@@ -64,5 +66,69 @@ class BookmarkService():
         """Sets bookmark with given id as checked."""
         self._bookmark_repository.set_as_checked(bookmark_id)
 
+    def create_file(self, file_path):
+        """Calls bookmark repository to write bookmarks into the file provided by user.
+
+        Args:
+            file_path (string): path to the file provided by user
+        """
+        self._bookmark_repository.create_csv_file(file_path)
+
+    @classmethod
+    def create_default_filename(cls):
+        """Creates default filename"""
+        return f"vinkit_{datetime.now().strftime('%d.%m.%Y')}.csv"
+
+    @classmethod
+    def correct_filename(cls, filename):
+        """Checks correctness of the filename provided by the user.
+
+        Checks file extension and underscores, and corrects them if necessary.
+
+        Args:
+            filename (string):  filename given by user as input
+
+        Returns:    corrected filename as a string
+        """
+        filename = filename if " " not in filename else filename.replace(" ", "_")
+        filename = filename if filename[-4:] == ".csv" else filename + ".csv"
+        return filename
+
+    @classmethod
+    def create_default_filepath(cls, filename):
+        """Creates an absolute file path to the file in the application data directory.
+
+        Args:
+            filename (string):  filename provided by user
+
+        Returns:    absolute file path to the file as a string
+        """
+        dirname = os.path.dirname(__file__)
+        file_path = os.path.join(dirname, "..", "..", "csv_files", filename)
+        return str(file_path).replace("/src/services/../..", "")
+
+    @classmethod
+    def exists(cls, path):
+        """Checks if the file or the directory already exists.
+
+        Args:
+            path (string): an absolute path to the file or directory
+
+        Returns:    boolean value depending on the existence of the file or directory
+        """
+        return os.path.exists(path)
+
+    @classmethod
+    def correct_dir_path(cls, new_dir_path):
+        """Checks trailing slashes from begin and the end of the path
+
+        Args:
+            new_dir_path (string): an absolute path to the directory
+
+        Returns:    an absolute path to the directory with trailing lashes
+        """
+        new_dir_path = new_dir_path + "/" if new_dir_path[-1] != "/" else new_dir_path
+        new_dir_path = "/" + new_dir_path if new_dir_path[0] != "/" else new_dir_path
+        return new_dir_path
 
 bookmark_service = BookmarkService()

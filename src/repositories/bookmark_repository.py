@@ -73,5 +73,28 @@ class BookmarkRepository:
         cursor.execute("DELETE FROM bookmarks")
         self._connection.commit()
 
+    def create_csv_file(self, file_path):
+        """Creates csv file containing headline and url columns."""
+
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT headline, url FROM bookmarks")
+        data = cursor.fetchall()
+
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write("otsikko;linkki\n")
+            for row in data:
+                file.write(";".join(row)+"\n")
+
+    @classmethod
+    def read_file(cls, file_path):
+        """For testing, reads content of the file."""
+        with open(file_path, encoding="utf-8") as file:
+            return file.read()
+
+    @classmethod
+    def delete_all_file_content(cls, file_path):
+        """For testing, deletes content of the file."""
+        with open (file_path, "w", encoding="utf-8"):
+            pass
 
 bookmark_repository = BookmarkRepository(get_database_connection())

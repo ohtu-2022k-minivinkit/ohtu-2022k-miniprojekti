@@ -2,6 +2,7 @@ from ui.console_io import (
     console_io as default_console_io
 )
 from ui.commands.add_bookmark import AddBookmark
+from ui.commands.add_book_with_isbn import AddBookWithISBN
 from ui.commands.list_bookmarks import (
     ListAllBookmarks, ListBookmarksByKeyword, ListUnreadBookmarks, ListCheckedBookmarks
 )
@@ -48,7 +49,8 @@ class UI:
             "3": ListCheckedBookmarks(self._console_io, self._bookmark_service),
             "4": MarkBookmarkChecked(self._console_io, self._bookmark_service, self),
             "5": ListBookmarksByKeyword(self._console_io, self._bookmark_service),
-            "6": CreateCsvFile(self._console_io, self._bookmark_service)
+            "6": CreateCsvFile(self._console_io, self._bookmark_service),
+            "7": AddBookWithISBN(self._console_io, self._bookmark_service, self._network_service)
         }
 
     def start(self):

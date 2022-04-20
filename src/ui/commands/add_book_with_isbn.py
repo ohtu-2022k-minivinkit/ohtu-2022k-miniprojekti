@@ -21,7 +21,8 @@ class AddBookWithISBN:
 
     def execute(self):
         """Executes command."""
-        isbn = self._io.read("\nAnna ISBN-tunnus: ")
+        self._io.write("\nLisätään uusi kirja, jos haluat palata valikkoon syötä x")
+        isbn = self._io.read("Anna ISBN-tunnus: ")
 
         if isbn == "x":
             return

@@ -47,6 +47,9 @@ class NetworkService():
         except requests.exceptions.RequestException:
             return None
 
+        if "error" in book:
+            return None
+
         book["link"] = url[:-5]
 
         return book

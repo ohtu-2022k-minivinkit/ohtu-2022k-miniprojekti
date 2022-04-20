@@ -12,7 +12,11 @@ from ui.ui import UI
 class TestUI(unittest.TestCase):
     def setUp(self):
         self.bookmark_service_mock = Mock(wraps=BookmarkService())
-        self.network_service_mock = Mock(wraps=StubNetworkService({"https://stub_url.fi": "otsikko"}))
+        self.network_service_mock = Mock(wraps=StubNetworkService(
+            {"https://stub_url.fi": "otsikko"},
+            {"12345": {"title": "kirja", "link": "https://stub_url.fi"}}
+            )
+        )
 
     def test_info_is_printed_when_started(self):
         in_out = StubIO(["x"])

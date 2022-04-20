@@ -104,7 +104,12 @@ class BookmarkService():
         Returns:    absolute file path to the file as a string
         """
         dirname = os.path.dirname(__file__)
-        file_path = os.path.join(dirname, "..", "..", "csv_files", filename)
+        dir_path = os.path.join(dirname, "..", "..", "csv_files")
+        if BookmarkService.exists(dir_path):
+            file_path = os.path.join(dirname, "..", "..", "csv_files", filename)
+        else:
+            file_path = os.mkdir(dir_path)
+            file_path = os.path.join(dirname, "..", "..", "csv_files", filename)
         return str(file_path).replace("/src/services/../..", "")
 
     @classmethod

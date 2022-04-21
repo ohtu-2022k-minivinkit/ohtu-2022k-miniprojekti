@@ -6,3 +6,5 @@
 - [While adding a bookmark the title is fetched automatically from the link url](../src/tests/robot/get_title_with_url.robot)
 - [Unread bookmarks are listed, when the application opens. User can also list read boomarks](../src/tests/robot/list_bookmarks.robot#L31)
 - [User can search from bookmarks by entering a keyword. If bookmark's title contains keyword, bookmark is displayed to the user](../src/tests/robot/list_bookmarks.robot#L72)
+## Sprint 3 User stories
+- [User can add a book with the book's ISBN code](../src/tests/robot/add_book_with_isbn.robot)

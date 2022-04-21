@@ -13,7 +13,6 @@ Add Book With Working ISBN
     Run Commands
     Bookmarks Table Should Contain Only One  Structure and Interpretation of Computer Programs
     Url Connected To Headline Should Contain Tiny  Structure and Interpretation of Computer Programs
-    Expanded Tinyurl Should Match Original Url  Structure and Interpretation of Computer Programs  https://openlibrary.org/books/OL25083118M/Structure_and_Interpretation_of_Computer_Programs
 
 Add Book With Incorrect ISBN
     Input Command  7

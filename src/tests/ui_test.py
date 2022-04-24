@@ -234,12 +234,12 @@ class TestUI(unittest.TestCase):
         self.assertIn("kirjoita tiedostolle uusi nimi: ", in_out.outputs)
 
     def test_create_csv_file_calls_bookmark_service_to_create_file(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "", "", "x"])
-        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
-        user_interface.start()
-        self.bookmark_service_mock.create_file.assert_called()
+         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "", "", "x"])
+         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+         user_interface.start()
+         self.bookmark_service_mock.create_file.assert_called()
 
-    def test_add_book_with_isbn_commands_7_begins_adding_a_book(self):
+    def test_add_book_with_isbn_commands_2_begins_adding_a_book(self):
         in_out = StubIO(["2", "x", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()

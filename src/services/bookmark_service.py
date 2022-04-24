@@ -115,14 +115,20 @@ class BookmarkService():
 
         Returns:    absolute file path to the file as a string
         """
+
+        BookmarkService.create_default_csv_directory_if_missing()
+        dirname = os.path.dirname(__file__)
+        file_path = os.path.join(dirname, "..", "..", "csv_files", filename)
+        return str(file_path).replace("/src/services/../..", "")
+
+    @classmethod
+    def create_default_csv_directory_if_missing(cls):
+        """Creates the default csv-directory if missing."""
+
         dirname = os.path.dirname(__file__)
         dir_path = os.path.join(dirname, "..", "..", "csv_files")
-        if BookmarkService.exists(dir_path):
-            file_path = os.path.join(dirname, "..", "..", "csv_files", filename)
-        else:
-            file_path = os.mkdir(dir_path)
-            file_path = os.path.join(dirname, "..", "..", "csv_files", filename)
-        return str(file_path).replace("/src/services/../..", "")
+        if not BookmarkService.exists(dir_path):
+            os.mkdir(dir_path)
 
     @classmethod
     def exists(cls, path):

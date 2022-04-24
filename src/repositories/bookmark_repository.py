@@ -85,6 +85,7 @@ class BookmarkRepository:
             for row in data:
                 file.write(";".join(row)+"\n")
 
+
     def load_csv_file(self, file_path):
         """Reads csv file containing headline;url rows and creates bookmarks out of them.
         Returns True if successful and False otherwise.
@@ -99,8 +100,6 @@ class BookmarkRepository:
             for row in file:
                 row_parts = row.split(";")
                 self.create(Bookmark(row_parts[0],row_parts[1]))
-
-        file.close()
         return True
 
     @classmethod

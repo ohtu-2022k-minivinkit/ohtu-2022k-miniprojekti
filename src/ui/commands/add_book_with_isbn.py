@@ -39,10 +39,11 @@ class AddBookWithISBN:
         if edit == "k":
             title = self._io.read("otsikko: ")
 
-        link = book["link"]
-        shortened_link = self._network_service.shorten_url(link)
+        shortened_link = self._network_service.shorten_url(book["link"])
 
         if shortened_link:
             link = shortened_link
+        else:
+            link = book["link"]
 
         self._bookmark_service.create_bookmark(title, link)

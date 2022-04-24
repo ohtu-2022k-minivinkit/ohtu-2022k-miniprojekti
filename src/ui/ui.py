@@ -38,6 +38,7 @@ class UI:
         """
         self._console_io = input_output
         self._bookmark_service = bookmark_service
+        self._bookmark_service.create_default_csv_directory_if_missing()
         self._network_service = network_service
         self._list_unread_bookmarks = ListUnreadBookmarks(
             self._console_io, self._bookmark_service)

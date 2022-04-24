@@ -1,3 +1,4 @@
+import os
 class CreateCsvFile:
     def __init__(self, i_o, bookmark_service):
         """Initializes command with IO and BookmarkService object.
@@ -36,6 +37,10 @@ class CreateCsvFile:
         if new_filename == "x":
             self._change_filename = False
             return
+
+        self._io.write(
+                "\n" + "Nykyisen työkansion polku: " + str(os.getcwd())
+                )
 
         new_dir_path = self._io.read(
             "sijoituskansion absoluuttinen polku: "

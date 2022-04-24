@@ -1,5 +1,3 @@
-import pyshorteners
-
 class AddBookWithISBN:
     def __init__(self, i_o, bookmark_service, network_service):
         """Initializes command with IO, BookmarkService and NetworkService.
@@ -33,8 +31,6 @@ class AddBookWithISBN:
             self._io.write("Kirjaa ei löytynyt.")
             return
 
-        url_shortener = pyshorteners.Shortener()
-
         title = book["title"]
 
         self._io.write(f"otsikko: {title}")
@@ -43,6 +39,10 @@ class AddBookWithISBN:
         if edit == "k":
             title = self._io.read("otsikko: ")
 
-        link = url_shortener.tinyurl.short(book["link"])
+        link = book["link"]
+        shortened_link = self._network_service.shorten_url(link)
+
+        if shortened_link:
+            link = shortened_link
 
         self._bookmark_service.create_bookmark(title, link)

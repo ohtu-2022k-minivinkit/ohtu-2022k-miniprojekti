@@ -1,4 +1,5 @@
 import requests
+import pyshorteners
 
 # pylint: disable=no-self-use
 class NetworkService():
@@ -28,6 +29,23 @@ class NetworkService():
             return None
 
         return html[title_start:title_end]
+
+    def shorten_url(self, url):
+        """Returns the shortened url of the given url.
+        If shortening is unsuccessful, returns None.
+
+        Args:
+            url (string): URL of the webpage.
+
+        Returns:
+            string: Shortened url of the webpage.
+        """
+        try:
+            shortened_url = pyshorteners.Shortener().tinyurl.short(url)
+        except requests.exceptions.RequestException:
+            return None
+
+        return shortened_url
 
     def get_book_by_isbn(self, isbn):
         """Returns the book with the given isbn.

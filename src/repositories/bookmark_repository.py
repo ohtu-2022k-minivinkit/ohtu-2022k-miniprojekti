@@ -85,6 +85,24 @@ class BookmarkRepository:
             for row in data:
                 file.write(";".join(row)+"\n")
 
+    def load_csv_file(self, file_path):
+        """Reads csv file containing headline;url rows and creates bookmarks out of them.
+        Returns True if successful and False otherwise.
+        """
+
+        with open(file_path, encoding="utf-8") as file:
+            first_row = next(file)
+
+            if first_row != "otsikko;linkki":
+                return False
+
+            for row in file:
+                row_parts = row.split(";")
+                self.create(Bookmark(row_parts[0],row_parts[1]))
+
+        file.close()
+        return True
+
     @classmethod
     def read_file(cls, file_path):
         """For testing, reads content of the file."""

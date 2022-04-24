@@ -8,14 +8,14 @@ Test Timeout  1 second
 
 *** Test Cases ***
 List Bookmarks With No Bookmarks
-    Input Command  2
+    Input Command  3
     Input Command  x
     Run Commands
     Command Line Output Should Contain  Kirjastossa ei ole vinkkejä
 
 Create One Bookmark Into Database And List Bookmarks
     Create Bookmark Into Database  Netti  http://www.netti.testi
-    Input Command  2
+    Input Command  3
     Input Command  x
     Run Commands
     Output Should Contain Bookmark  1  Netti  http://www.netti.testi  ei luettu
@@ -23,7 +23,7 @@ Create One Bookmark Into Database And List Bookmarks
 Create Two Bookmarks Into Database And List Bookmarks
     Create Bookmark Into Database  Netti  http://www.netti.testi
     Create Bookmark Into Database  Vinkki  http://www.vinkki.testi
-    Input Command  2
+    Input Command  3
     Input Command  x
     Run Commands
     Output Should Contain Bookmark  1  Netti  http://www.netti.testi  ei luettu
@@ -55,7 +55,7 @@ Lists Checked Bookmarks Using Separate Command
     Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False
     Create Bookmark Into Database With Status  Vinkki  http://www.vinkki.testi  True
     Clear Output Record
-    Input Command  3
+    Input Command  4
     Input Command  x
     Run Commands
     Output Should Contain Bookmark  1  Vinkki  http://www.vinkki.testi  luettu
@@ -64,7 +64,7 @@ Lists Checked Bookmarks Using Separate Command
 
 Message If Not List Of Checked Bookmarks
     Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False
-    Input Command  3
+    Input Command  4
     Input Command  x
     Run Commands
     Command Line Output Should Contain  Kirjastossa ei ole luettuja vinkkejä
@@ -75,7 +75,7 @@ Show Correct Bookmarks When Proper Keyword Is Given To Search Function
     Create Bookmark Into Database  Vinkki  http://www.vinkki.testi
     Create Bookmark Into Database  NETti  http://www.testi.testi
     Clear Output Record
-    Input Command  5
+    Input Command  6
     Input Command  net
     Input Command  x
     Run Commands
@@ -88,7 +88,7 @@ Show No Bookmarks And Display Correct Error Message When Keyword Doesnt Match An
     Create Bookmark Into Database  netti  http://www.netti.testi
     Create Bookmark Into Database  Vinkki  http://www.vinkki.testi
     Create Bookmark Into Database  NETti  http://www.netti.testi
-    Input Command  5
+    Input Command  6
     Input Command  abc
     Input Command  x
     Run Commands

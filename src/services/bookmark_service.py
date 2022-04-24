@@ -70,9 +70,21 @@ class BookmarkService():
         """Calls bookmark repository to write bookmarks into the file provided by user.
 
         Args:
-            file_path (string): path to the file provided by user
+            file_path (string): path to the file provided by user.
         """
         self._bookmark_repository.create_csv_file(file_path)
+
+    def load_file(self, file_path):
+        """Calls bookmark repository to read bookmarks from the file provided by user
+        and add them to the repository.
+
+        Args:
+            file_path (string): path to the file provided by user.
+
+        Returns:
+            boolean: True if successful, False otherwise.
+        """
+        self._bookmark_repository.load_csv_file(file_path)
 
     @classmethod
     def create_default_filename(cls):

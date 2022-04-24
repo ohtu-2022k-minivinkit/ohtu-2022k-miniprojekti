@@ -1,5 +1,3 @@
-import pyshorteners
-
 class AddBookmark:
     def __init__(self, i_o, bookmark_service, network_service, validator):
         """Initializes command with IO, BookmarkService, NetworkService and validator object.
@@ -33,8 +31,6 @@ class AddBookmark:
                 self.execute()
                 return
 
-            url_shortener = pyshorteners.Shortener()
-
             title = self._network_service.get_url_title(link)
 
             if not title:
@@ -50,6 +46,9 @@ class AddBookmark:
                 self.execute()
                 return
 
-            link = url_shortener.tinyurl.short(link)
+            shortened_link = self._network_service.shorten_url(link)
+
+            if shortened_link:
+                link = shortened_link
 
             self._bookmark_service.create_bookmark(title, link)

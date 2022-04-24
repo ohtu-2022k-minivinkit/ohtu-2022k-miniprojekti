@@ -8,6 +8,7 @@ from ui.commands.list_bookmarks import (
 )
 from ui.commands.mark_bookmark_checked import MarkBookmarkChecked
 from ui.commands.csv_file_transactions import CreateCsvFile
+from ui.commands.csv_file_load import LoadCsvFile
 from ui.bookmark_validation import BookmarkValidation
 from services.bookmark_service import (
     bookmark_service as default_bookmark_service
@@ -45,12 +46,13 @@ class UI:
             "1": AddBookmark(
                 self._console_io, self._bookmark_service, self._network_service,
                 BookmarkValidation(self._console_io)),
-            "2": ListAllBookmarks(self._console_io, self._bookmark_service),
-            "3": ListCheckedBookmarks(self._console_io, self._bookmark_service),
-            "4": MarkBookmarkChecked(self._console_io, self._bookmark_service, self),
-            "5": ListBookmarksByKeyword(self._console_io, self._bookmark_service),
-            "6": CreateCsvFile(self._console_io, self._bookmark_service),
-            "7": AddBookWithISBN(self._console_io, self._bookmark_service, self._network_service)
+            "2": AddBookWithISBN(self._console_io, self._bookmark_service, self._network_service),
+            "3": ListAllBookmarks(self._console_io, self._bookmark_service),
+            "4": ListCheckedBookmarks(self._console_io, self._bookmark_service),
+            "5": MarkBookmarkChecked(self._console_io, self._bookmark_service, self),
+            "6": ListBookmarksByKeyword(self._console_io, self._bookmark_service),
+            "7": CreateCsvFile(self._console_io, self._bookmark_service),
+            "8": LoadCsvFile(self._console_io, self._bookmark_service)
         }
 
     def start(self):

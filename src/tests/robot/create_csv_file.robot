@@ -3,6 +3,9 @@ Library  OperatingSystem
 Library  ../../RobotLibrary.py
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table Create Csv File And Clear IO
+#Timeout to ensure application closure.
+#If the ui does not recieve the x-command at the right place tests won´t finnish properly and it can lead to unpredictable behaviour.
+Test Timeout  1 second
 
 ***Variables***
 ${FILENAME}     robot-test_file.csv
@@ -15,7 +18,7 @@ Not existing Csv File Is Created Containing All Headlines And Links From Bookmar
     Create Bookmark Into Database With Status  Netti13  http://www.netti.testi  False
     Create Bookmark Into Database With Status  Vinkki14  http://www.vinkki.testi  True
     Remove File  ${DIRPATH}${FILENAME}
-    Input Command  6
+    Input Command  7
     Input Command  ${FILENAME}
     Input Command  ${DIRPATH}
     Input Command  x
@@ -29,7 +32,7 @@ Existing Csv File Is Not Overwrited
     Create Bookmark Into Database With Status  Netti13  http://www.netti.testi  False
     Create Bookmark Into Database With Status  Vinkki14  http://www.vinkki.testi  True
     Touch  ${DIRPATH}${FILENAME}
-    Input Command  6
+    Input Command  7
     Input Command  ${FILENAME}
     Input Command  ${DIRPATH}
     Input Command  e
@@ -45,7 +48,7 @@ Existing Csv File Is Overwrited if asked
     Create Bookmark Into Database With Status  Netti13  http://www.netti.testi  False
     Create Bookmark Into Database With Status  Vinkki14  http://www.vinkki.testi  True
     Touch  ${DIRPATH}${FILENAME}
-    Input Command  6
+    Input Command  7
     Input Command  ${FILENAME}
     Input Command  ${DIRPATH}
     Input Command  k

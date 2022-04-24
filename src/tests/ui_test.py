@@ -105,7 +105,7 @@ class TestUI(unittest.TestCase):
         self.assertIn("linkki: ", in_out.outputs)
 
     def test_list_all_bookmarks__command_2_shows_list_of_bookmarks(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "2", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
         bookmark1 = Bookmark("title1", "link1")
         bookmark2 = Bookmark("title2", "link2")
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
@@ -115,7 +115,7 @@ class TestUI(unittest.TestCase):
         self.assertIn("2 title2 link2 ei luettu", in_out.outputs)
 
     def test_set_bookmark_checked__lists_unchecked_bookmarks(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "x", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "x", "x"])
         bookmark1 = Bookmark("title1", "link1")
         bookmark2 = Bookmark("title2", "link2")
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
@@ -125,7 +125,7 @@ class TestUI(unittest.TestCase):
         self.assertIn("2 title2 link2 ei luettu", in_out.outputs)
 
     def test_set_bookmark_checked__asks_for_bookmark_number(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "x", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "x", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn(
@@ -133,19 +133,19 @@ class TestUI(unittest.TestCase):
             in_out.outputs)
 
     def test_list_bookmarks_by_keyword_command_5_asks_for_keyword(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "x", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "x", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("Anna hakusana: ", in_out.outputs)
 
     def test_list_bookmarks_by_keyword_gives_correct_error_message_when_zero_matches(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "hakusana", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "hakusana", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("Hakusanalla 'hakusana' ei löytynyt yhtään vinkkiä", in_out.outputs)
 
     def test_list_bookmarks_by_keyword_returns_correct_output_when_keyword_matches(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "title", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "title", "x"])
         bookmark1 = Bookmark("title1", "link1")
         bookmark2 = Bookmark("title2", "link2")
         self.bookmark_service_mock.get_bookmarks_by_keyword.return_value = [bookmark1, bookmark2]
@@ -154,7 +154,7 @@ class TestUI(unittest.TestCase):
         self.assertIn("Vinkit, jotka sisälsivät hakusanan 'title':", in_out.outputs)
 
     def test_set_bookmark_checked__too_small_number_gives_error_message(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "0", "x", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "0", "x", "x"])
         bookmark1 = Bookmark("title1", "link1")
         bookmark2 = Bookmark("title2", "link2")
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
@@ -163,7 +163,7 @@ class TestUI(unittest.TestCase):
         self.assertIn("\nVIRHE: Vinkkiä 0 ei ole!\n", in_out.outputs)
 
     def test_set_bookmark_checked__too_big_number_gives_error_message(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "3", "x", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "3", "x", "x"])
         bookmark1 = Bookmark("title1", "link1")
         bookmark2 = Bookmark("title2", "link2")
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
@@ -172,7 +172,7 @@ class TestUI(unittest.TestCase):
         self.assertIn("\nVIRHE: Vinkkiä 3 ei ole!\n", in_out.outputs)
 
     def test_set_bookmark_checked__calls_bookmark_service_function_with_correct_id(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "1", "x", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "5", "1", "x", "x"])
         bookmark1 = Bookmark("title1", "link1", False, database_id=5)
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1]
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
@@ -180,7 +180,7 @@ class TestUI(unittest.TestCase):
         self.bookmark_service_mock.set_bookmark_as_checked.assert_called_once_with(5)
 
     def test_command_get_checked_bookmarks__calls_bookmark_service_with_correct_args(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.bookmark_service_mock.get_bookmarks_by_range.assert_called_with(
@@ -188,7 +188,7 @@ class TestUI(unittest.TestCase):
             )
 
     def test_command_get_checked_bookmarks__lists_checked_bookmarks(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "x"])
         bookmark1 = Bookmark("title1", "link1", True, database_id=2)
         bookmark2 = Bookmark("title2", "link2", True, database_id=3)
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = [bookmark1, bookmark2]
@@ -198,33 +198,33 @@ class TestUI(unittest.TestCase):
         self.assertIn("2 title2 link2 luettu", in_out.outputs)
 
     def test_gives_message_when_asked_checked_bookmarks__if_not_bookmarks_in_repository(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "4", "x"])
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = []
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("Kirjastossa ei ole luettuja vinkkejä", in_out.outputs)
 
     def test_gives_message_when_asked_bookmarks__without_bookmarks_in_repository(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "2", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "3", "x"])
         self.bookmark_service_mock.get_bookmarks_by_range.return_value = []
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("Kirjastossa ei ole vinkkejä", in_out.outputs)
 
     def test_command_to_create_file_asks_filename(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "x", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "x", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("tiedostonimi: ", in_out.outputs)
 
     def test_create_csv_file_calls_to_create_file_path(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "", "", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "", "", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.bookmark_service_mock.create_default_filepath.assert_called()
 
     def test_answer_not_overwrite_csv_file_asks_name_of_file_again(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "file.csv", "", "e", "x", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "file.csv", "", "e", "x", "x"])
         self.bookmark_service_mock.correct_filename.return_value = True
         self.bookmark_service_mock.create_default_filepath.return_value = "filepath/file.csv"
         self.bookmark_service_mock.exists.return_value = True
@@ -234,32 +234,32 @@ class TestUI(unittest.TestCase):
         self.assertIn("kirjoita tiedostolle uusi nimi: ", in_out.outputs)
 
     def test_create_csv_file_calls_bookmark_service_to_create_file(self):
-        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "6", "", "", "x"])
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "", "", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.bookmark_service_mock.create_file.assert_called()
 
     def test_add_book_with_isbn_commands_7_begins_adding_a_book(self):
-        in_out = StubIO(["7", "x", "x"])
+        in_out = StubIO(["2", "x", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("\nLisätään uusi kirja, jos haluat palata valikkoon syötä x", in_out.outputs)
         self.assertIn("Anna ISBN-tunnus: ", in_out.outputs)
 
     def test_add_book_with_isbn_gets_title_with_working_isbn(self):
-        in_out = StubIO(["7", "12345", "e", "x"])
+        in_out = StubIO(["2", "12345", "e", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("otsikko: kirja", in_out.outputs)
 
     def test_add_book_with_isbn_title_can_be_edited(self):
-        in_out = StubIO(["7", "12345", "k", "muokattu", "x"])
+        in_out = StubIO(["2", "12345", "k", "muokattu", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("otsikko: ", in_out.outputs)
 
     def test_add_book_with_isbn_fails_correctly_if_given_incorrect_isbn(self):
-        in_out = StubIO(["7", "isbn", "x"])
+        in_out = StubIO(["2", "isbn", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("Kirjaa ei löytynyt.", in_out.outputs)

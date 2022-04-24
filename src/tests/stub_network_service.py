@@ -10,6 +10,9 @@ class StubNetworkService():
         else:
             return self._title_returning_urls.get(url)
 
+    def shorten_url(self, url):
+        return "https://tinyurl.com/" + str(hash(url))
+
     def get_book_by_isbn(self, isbn):
         if not self.book_returning_isbns.get(isbn, False):
             return None

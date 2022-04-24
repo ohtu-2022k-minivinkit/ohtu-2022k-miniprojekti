@@ -15,12 +15,6 @@ Empty Bookmarks Table
     Execute SQL String  DELETE FROM bookmarks;
     Disconnect From Database
 
-# POISTETTAVA? PITÄISI VARMAAN NOJATA TOTEUTETTUIHIN TIETOKANTAFUNKTIOIHIN, EIKÄ ALUSTAA TIETOKANTAA TÄÄLLÄ. NÄYTTÄISI, ETTÄ TÄTÄ EI MYÖSKÄÄN KÄYTETÄ.
-#Create Bookmarks Table If Missing
-#    Connect To Test Database
-#    Execute SQL String  CREATE TABLE IF NOT EXISTS bookmarks (id INTEGER PRIMARY KEY, headline TEXT, url TEXT, checked INTEGER DEFAULT FALSE);
-#    Disconnect From Database
-
 Bookmarks Table Should Be Empty
     Connect To Test Database
     Row Count Is 0  SELECT * FROM bookmarks;

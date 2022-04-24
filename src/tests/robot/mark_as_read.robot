@@ -3,17 +3,20 @@ Library  OperatingSystem
 Library  ../../RobotLibrary.py
 Resource  resource.robot
 Test Setup  Empty Bookmarks Table And Clear IO
+#Timeout to ensure application closure.
+#If the ui does not recieve the x-command at the right place tests won´t finnish properly and it can lead to unpredictable behaviour.
+Test Timeout  1 second
 
 *** Test Cases ***
 Main Menu Contains Command To Mark The Bookmark As Read
     Input Command  x
     Run Commands
-    Command Line Output Should Contain  4 merkitse vinkki luetuksi
+    Command Line Output Should Contain  5 merkitse vinkki luetuksi
 
 Setting Bookmark As Checked Using Correct Index Number Sets Bookmark As Checked
     Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False
     Create Bookmark Into Database With Status  Vinkki  http://www.vinkki.testi  True
-    Input Command  4
+    Input Command  5
     Clear Output Record
     Input Command  1
     Input command  3
@@ -25,7 +28,7 @@ Setting Bookmark As Checked Using Correct Index Number Sets Bookmark As Checked
 Gives Error If Invalid Index Number Is Used
     Create Bookmark Into Database With Status  Netti  http://www.netti.testi  False
     Create Bookmark Into Database With Status  Vinkki  http://www.vinkki.testi  False
-    Input Command  4
+    Input Command  5
     Clear Output Record
     Input Command  3
     Input Command  x

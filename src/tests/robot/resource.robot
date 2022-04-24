@@ -1,11 +1,6 @@
 *** Settings ***
 Resource  database_resource.robot
 
-*** Variables ***
-${standard_output}  ['', 'Lukemattomat vinkit:', '', 'Bookmarks komennot:', 'x lopeta', '1 lisää vinkki', '2 näytä kaikki vinkit', '3 näytä luetut vinkit', ''
-${standard_output_ending}  ]
-${empty_output_line}  , ''
-
 *** Keywords ***
 Run Commands
     Ui Start
@@ -26,12 +21,6 @@ Output Should Contain Bookmark
 Output Should Not Contain Bookmark
     [Arguments]  ${index}  ${headline}  ${url}  ${checked}
     Command Line Output Should Not Contain  ${index} ${headline} ${url} ${checked}
-
-Output Should Be Standard Output
-    Command Line Output Should Be  ${standard_output}${standard_output_ending}
-
-Output Should Be Standard Output And Empty Output Line
-    Command Line Output Should Be  ${standard_output}${empty_output_line}${standard_output_ending}
 
 File Should Contain Headline And Url
     [Arguments]  ${DIRPATH}  ${FILENAME}  ${headline}  ${url}

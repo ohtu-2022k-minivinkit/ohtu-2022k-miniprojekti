@@ -60,6 +60,7 @@ class CreateCsvFile:
             if new_dir_path:
                 file_path = new_dir_path + filename
             else:
+                self._bookmark_service.create_default_csv_directory_if_missing()
                 file_path = self._bookmark_service.create_default_filepath(filename)
 
             if self._bookmark_service.exists(file_path):

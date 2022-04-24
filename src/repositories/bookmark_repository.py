@@ -94,10 +94,11 @@ class BookmarkRepository:
         with open(file_path, encoding="utf-8") as file:
             first_row = next(file)
 
-            if first_row != "otsikko;linkki":
+            if first_row != "otsikko;linkki\n":
                 return False
 
             for row in file:
+                row = row.strip()
                 row_parts = row.split(";")
                 self.create(Bookmark(row_parts[0],row_parts[1]))
         return True

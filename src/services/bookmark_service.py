@@ -107,6 +107,17 @@ class BookmarkService():
         return filename
 
     @classmethod
+    def create_default_directory_path(cls):
+        """Creates an absolute file path the application data directory.
+
+        Returns:    absolute file path to the directory as a string
+        """
+
+        dirname = os.path.dirname(__file__)
+        file_path = os.path.join(dirname, "..", "..", "csv_files")
+        return str(file_path).replace("/src/services/../..", "")
+
+    @classmethod
     def create_default_filepath(cls, filename):
         """Creates an absolute file path to the file in the application data directory.
 
@@ -116,10 +127,9 @@ class BookmarkService():
         Returns:    absolute file path to the file as a string
         """
 
-        BookmarkService.create_default_csv_directory_if_missing()
-        dirname = os.path.dirname(__file__)
-        file_path = os.path.join(dirname, "..", "..", "csv_files", filename)
-        return str(file_path).replace("/src/services/../..", "")
+        dir_path = BookmarkService.create_default_directory_path()
+        file_path = os.path.join(dir_path, filename)
+        return file_path
 
     @classmethod
     def create_default_csv_directory_if_missing(cls):

@@ -9,3 +9,4 @@
 - [User Stories Acceptance Criteria Files](./documentation/definition_of_done_user_stories.md)
 - [Test Coverage Report](https://app.codecov.io/gh/ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti)
 - [Manual](./documentation/manual.md)
+- [Final report](https://docs.google.com/document/d/1i9ZnWyJO6Gh3_AINtOnOLDKE35i96z1aC3uNBXuax2c/edit)

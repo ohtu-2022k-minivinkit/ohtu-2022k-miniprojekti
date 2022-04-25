@@ -62,4 +62,3 @@ class LoadCsvFile:
                 self._io.write("\n""kirjanmerkit ladattiin tiedostosta ""\n" +file_path)
             else:
                 self._io.write("\n""tiedosto on virheellinen")
-                return

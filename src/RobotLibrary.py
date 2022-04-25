@@ -112,3 +112,8 @@ class RobotLibrary:
             raise AssertionError(
                 f"\"{value}\" is in {content}"
             )
+
+    @keyword
+    def create_test_csv_file(self, file_path, data):
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write(data)

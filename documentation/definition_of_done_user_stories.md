@@ -9,3 +9,5 @@
 ## Sprint 3 User stories
 - [Bookmarks are listed in table form, first column is the title and second is the url](../src/tests/robot/list_bookmarks.robot#L16)
 - [User can add a book with the book's ISBN code](../src/tests/robot/add_book_with_isbn.robot)
+- [User can output bookmarks to a csv-file](../src/tests/robot/create_csv_file.robot)
+- [User can load bookmarks from a csv-file](../src/tests/robot/load_csv_file.robot)

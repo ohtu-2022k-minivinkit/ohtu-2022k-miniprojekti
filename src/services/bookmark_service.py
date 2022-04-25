@@ -84,7 +84,7 @@ class BookmarkService():
         Returns:
             boolean: True if successful, False otherwise.
         """
-        self._bookmark_repository.load_csv_file(file_path)
+        return self._bookmark_repository.load_csv_file(file_path)
 
     @classmethod
     def create_default_filename(cls):

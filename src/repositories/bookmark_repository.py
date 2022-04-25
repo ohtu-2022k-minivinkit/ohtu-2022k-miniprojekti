@@ -88,7 +88,9 @@ class BookmarkRepository:
 
     def load_csv_file(self, file_path):
         """Reads csv file containing headline;url rows and creates bookmarks out of them.
-        Returns True if successful and False otherwise.
+
+        Returns:
+            boolean: True if successful, False otherwise.
         """
 
         with open(file_path, encoding="utf-8") as file:

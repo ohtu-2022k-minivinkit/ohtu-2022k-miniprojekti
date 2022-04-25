@@ -112,6 +112,12 @@ class BookmarkRepository:
             return file.read()
 
     @classmethod
+    def create_file(cls, file_path, data):
+        """For testing, creates test file."""
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write(data)
+
+    @classmethod
     def delete_all_file_content(cls, file_path):
         """For testing, deletes content of the file."""
         with open (file_path, "w", encoding="utf-8"):

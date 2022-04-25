@@ -58,6 +58,10 @@ class TestBookmarkService(unittest.TestCase):
         self.bookmark_service.create_file("filepath")
         self.repository_mock.create_csv_file.assert_called_with("filepath")
 
+    def test_calls_bookmark_repository_to_load_file_with_correct_args(self):
+        self.bookmark_service.load_file("filepath")
+        self.repository_mock.load_csv_file.assert_called_with("filepath")
+
     def test_creates_default_filename(self):
         filename = self.bookmark_service.create_default_filename()
         self.assertIn("vinkit_", filename)

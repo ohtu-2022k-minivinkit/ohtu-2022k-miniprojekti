@@ -38,7 +38,7 @@ class LoadCsvFile:
         if user_input  == "":
             self._bookmark_service.create_default_csv_directory_if_missing()
             dir_path = self._bookmark_service.create_default_directory_path()
-        elif user_input :
+        elif user_input:
             dir_path = self._bookmark_service.correct_dir_path(user_input )
 
         if not self._bookmark_service.exists(dir_path):
@@ -59,6 +59,7 @@ class LoadCsvFile:
 
             load = self._bookmark_service.load_file(file_path)
             if load:
-                self._io.write("\n""kirjanmerkit ladattiin tiedostosta ""\n" +file_path)
+                self._io.write("\n""kirjanmerkit ladattiin tiedostosta ""\n")
+                self._io.write(file_path)
             else:
                 self._io.write("\n""tiedosto on virheellinen")

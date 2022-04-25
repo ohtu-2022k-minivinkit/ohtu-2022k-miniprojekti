@@ -234,10 +234,10 @@ class TestUI(unittest.TestCase):
         self.assertIn("kirjoita tiedostolle uusi nimi: ", in_out.outputs)
 
     def test_create_csv_file_calls_bookmark_service_to_create_file(self):
-         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "", "", "x"])
-         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
-         user_interface.start()
-         self.bookmark_service_mock.create_file.assert_called()
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "", "", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.bookmark_service_mock.create_file.assert_called()
 
     def test_add_book_with_isbn_commands_2_begins_adding_a_book(self):
         in_out = StubIO(["2", "x", "x"])
@@ -263,3 +263,63 @@ class TestUI(unittest.TestCase):
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
         self.assertIn("Kirjaa ei löytynyt.", in_out.outputs)
+
+    def test_command_to_load_file_asks_for_directory(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "8", "x", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("csv-tiedoston hakemiston polku: ", in_out.outputs)
+
+    def test_command_to_load_file_asks_for_filename(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "8", "", "x", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("csv-tiedoston nimi: ", in_out.outputs)
+
+    def test_command_to_load_file_directory_not_found(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "8", "testi", "x", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        self.bookmark_service_mock.exists.return_value = False
+        user_interface.start()
+        self.assertIn("\npolkua ei löytynyt", in_out.outputs)
+
+    def test_command_to_load_file_directory_not_found(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "8", "testi", "x", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        
+        user_interface.start()
+        self.assertIn("\npolkua ei löytynyt", in_out.outputs)
+
+    def test_command_to_load_file_file_not_found(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "8", "", "not-found", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("\ntiedostoa ei löytynyt", in_out.outputs)
+
+    def test_command_to_load_file_file_loaded(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "8", "", "found", "x"])
+
+        def load_file(file_path):
+            return True
+        self.bookmark_service_mock.load_file.side_effect = load_file
+        self.bookmark_service_mock.exists.return_value = True
+
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+
+        user_interface.start()
+        self.assertIn("\nkirjanmerkit ladattiin tiedostosta \n", in_out.outputs)
+
+    def test_command_to_load_file_file_not_loaded(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "8", "", "found", "x"])
+
+        def load_file(file_path):
+            return False
+        self.bookmark_service_mock.load_file.side_effect = load_file
+        self.bookmark_service_mock.exists.return_value = True
+
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+
+        user_interface.start()
+        self.assertIn("\ntiedosto on virheellinen", in_out.outputs)
+        
+

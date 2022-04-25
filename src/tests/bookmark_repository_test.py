@@ -87,3 +87,44 @@ class TestBookmarkRepository(unittest.TestCase):
         self.assertIn("headline1", content)
         self.assertIn("url3", content)
         bookmark_repository.delete_all_file_content(file_path)
+
+    def test_load_csv_file_loads_all_bookmarks_in_file(self):
+        file_path = bookmark_service.create_default_filepath("test-file.csv").replace(
+            "csv_files","data"
+            )
+        data = ("otsikko;linkki""\n"
+            "headline1;url1""\n"
+            "headline2;url2""\n")
+        bookmark_repository.delete_all_file_content(file_path)
+        bookmark_repository.create_file(file_path, data)
+        self.assertTrue(bookmark_service.exists(file_path))
+        bookmark_repository.load_csv_file(file_path)
+
+        bookmarks = bookmark_repository.get_all()
+        self.assertEqual(len(bookmarks), 2)
+        self.assertEqual(bookmarks[0].headline, "headline1")
+        self.assertEqual(bookmarks[1].url, "url2")
+        bookmark_repository.delete_all_file_content(file_path)
+    
+    def test_load_csv_file_returns_true_when_successful(self):
+        file_path = bookmark_service.create_default_filepath("test-file.csv").replace(
+            "csv_files","data"
+            )
+        data = ("otsikko;linkki""\n")
+        bookmark_repository.delete_all_file_content(file_path)
+        bookmark_repository.create_file(file_path, data)
+        self.assertTrue(bookmark_service.exists(file_path))
+        self.assertTrue(bookmark_repository.load_csv_file(file_path))
+        bookmark_repository.delete_all_file_content(file_path)
+
+    def test_load_csv_file_returns_false_when_unsuccessful(self):
+        file_path = bookmark_service.create_default_filepath("test-file.csv").replace(
+            "csv_files","data"
+            )
+        data = ("unvalid")
+        bookmark_repository.delete_all_file_content(file_path)
+        bookmark_repository.create_file(file_path, data)
+        self.assertTrue(bookmark_service.exists(file_path))
+        self.assertFalse(bookmark_repository.load_csv_file(file_path))
+        bookmark_repository.delete_all_file_content(file_path)
+

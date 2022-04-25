@@ -350,5 +350,3 @@ class TestUI(unittest.TestCase):
 
         user_interface.start()
         self.assertIn("\ntiedosto on virheellinen", in_out.outputs)
-        
-

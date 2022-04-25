@@ -8,7 +8,7 @@ Method 1
 
 - There should now be a new directory called ’ohtu-2022k-miniprojekti’ – navigate there
 
-- Install dependencies with a command: poetry install (install Poetry first if you haven't done so already: https://python-poetry.org/docs/)
+- Install dependencies with a command: `poetry install --no-dev` (install Poetry first if you haven't done so already: https://python-poetry.org/docs/)
 
 Method 2
 

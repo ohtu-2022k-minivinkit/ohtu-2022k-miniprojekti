@@ -20,7 +20,7 @@ class LoadCsvFile:
         """Executes command."""
 
         self._io.write(
-                "Ladataan vinkit csv-tiedostosta, syötä:"
+                "Ladataan vinkit csv-tiedostosta, syötä:""\n"
                 "tiedoston hakemiston absoluutinen polku tai""\n"
                 "x, jos haluat palata valikkoon tai""\n"
                 "enter, jos tiedosto sijaitsee sovelluksen kansiossa csv_files""\n"

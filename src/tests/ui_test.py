@@ -211,6 +211,31 @@ class TestUI(unittest.TestCase):
         user_interface.start()
         self.assertIn("Kirjastossa ei ole vinkkejä", in_out.outputs)
 
+    def test_add_book_with_isbn_commands_2_begins_adding_a_book(self):
+        in_out = StubIO(["2", "x", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("\nLisätään uusi kirja, jos haluat palata valikkoon syötä x", in_out.outputs)
+        self.assertIn("Anna ISBN-tunnus: ", in_out.outputs)
+
+    def test_add_book_with_isbn_gets_title_with_working_isbn(self):
+        in_out = StubIO(["2", "12345", "e", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("otsikko: kirja", in_out.outputs)
+
+    def test_add_book_with_isbn_title_can_be_edited(self):
+        in_out = StubIO(["2", "12345", "k", "muokattu", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("otsikko: ", in_out.outputs)
+
+    def test_add_book_with_isbn_fails_correctly_if_given_incorrect_isbn(self):
+        in_out = StubIO(["2", "isbn", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.assertIn("Kirjaa ei löytynyt.", in_out.outputs)
+
     def test_command_to_create_file_asks_filename(self):
         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "x", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
@@ -239,30 +264,33 @@ class TestUI(unittest.TestCase):
         user_interface.start()
         self.bookmark_service_mock.create_file.assert_called()
 
-    def test_add_book_with_isbn_commands_2_begins_adding_a_book(self):
-        in_out = StubIO(["2", "x", "x"])
+    def test_create_csv_file_calls_to_create_file_path(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "", "", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
-        self.assertIn("\nLisätään uusi kirja, jos haluat palata valikkoon syötä x", in_out.outputs)
-        self.assertIn("Anna ISBN-tunnus: ", in_out.outputs)
+        self.bookmark_service_mock.create_default_filepath.assert_called()
 
-    def test_add_book_with_isbn_gets_title_with_working_isbn(self):
-        in_out = StubIO(["2", "12345", "e", "x"])
-        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
-        user_interface.start()
-        self.assertIn("otsikko: kirja", in_out.outputs)
+    def test_answer_not_overwrite_csv_file_asks_name_of_file_again(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "file.csv", "", "e", "x", "x"])
+        self.bookmark_service_mock.correct_filename.return_value = True
+        self.bookmark_service_mock.create_default_filepath.return_value = "filepath/file.csv"
+        self.bookmark_service_mock.exists.return_value = True
 
-    def test_add_book_with_isbn_title_can_be_edited(self):
-        in_out = StubIO(["2", "12345", "k", "muokattu", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
-        self.assertIn("otsikko: ", in_out.outputs)
+        self.assertIn("kirjoita tiedostolle uusi nimi: ", in_out.outputs)
 
-    def test_add_book_with_isbn_fails_correctly_if_given_incorrect_isbn(self):
-        in_out = StubIO(["2", "isbn", "x"])
+    def test_create_csv_file_wrong_path(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "", "not-found", "x"])
         user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
         user_interface.start()
-        self.assertIn("Kirjaa ei löytynyt.", in_out.outputs)
+        self.assertIn("\npolkua ei löytynyt, tiedosto sijoitetaan sovelluksen kansioon", in_out.outputs)
+
+    def test_create_csv_file_calls_bookmark_service_to_create_file(self):
+        in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "7", "", "", "x"])
+        user_interface = UI(self.bookmark_service_mock, self.network_service_mock, in_out)
+        user_interface.start()
+        self.bookmark_service_mock.create_file.assert_called()
 
     def test_command_to_load_file_asks_for_directory(self):
         in_out = StubIO([STUBIO__CLEAR_OUTPUTS, "8", "x", "x"])

@@ -4,7 +4,7 @@
 
 Method 1
 
-- Clone the project to your computer by first navigating to a desired directory and then giving a command: git clone git@github.com:ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti.git
+- Clone the project to your computer by first navigating to a desired directory and then giving a command: `git clone git@github.com:ohtu-2022k-minivinkit/ohtu-2022k-miniprojekti.git`
 
 - There should now be a new directory called ’ohtu-2022k-miniprojekti’ – navigate there
 
@@ -21,7 +21,7 @@ Method 2
 
 ## How to use the program
 
-- Launch the program with command: poetry run python3 src/index.py
+- Launch the program with command: `poetry run python3 src/index.py`
 
 - You can quit the program at any time by pressing control + c
 
